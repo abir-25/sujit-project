@@ -1,0 +1,23 @@
+.logo {
+  display: flex;
+  align-items: center;
+}
+.footer-logo {
+  display: flex;
+  justify-content: center;
+}
+.footer-logo-link {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center;
+  align-items: center;
+}
+.logo img {
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+}
+.logo span {
+  margin-right: 10px;
+  font-size: 15px;
+}
