@@ -20,13 +20,13 @@
         while($result = $getData->fetch_assoc()) 
         {
 ?>
-    <title><?php echo $result['title'];?></title>
+    <title><?php echo $result['name'];?></title>
 
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo $result['favicon'];?>">
     <!-- CSS 
     ============================================ -->
     <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
@@ -169,18 +169,38 @@
                     <div class="row row--30 align-items-center">
                         <div class="order-2 order-lg-1 col-lg-7 mt_md--50 mt_sm--50 mt_lg--30">
                             <div class="content">
+<?php
+    $query = "select * from tbl_bio where id = '1'";
+    $getData = $db->select($query);
+    if($getData)
+    {
+        while($result = $getData->fetch_assoc()) 
+        {
+?>
                                 <div class="inner">
                                     <span class="subtitle">Welcome to my world</span>
-                                    <h1 class="title">Hi, I’m <span>Jone Lee</span><br>
+                                    <h1 class="title">Hi, I’m <span><?php echo $result['name']?></span><br>
                                         <span class="header-caption" id="page-top">
                                             <!-- type headline start-->
                                             <span class="cd-headline clip is-full-width">
                                                 <span>a </span>
                                         <!-- ROTATING TEXT -->
                                         <span class="cd-words-wrapper">
-                                                    <b class="is-visible">Developer.</b>
-                                                    <b class="is-hidden">Professional Coder.</b>
-                                                    <b class="is-hidden">Developer.</b>
+<?php
+    $query1 = "select * from tbl_profession";
+    $getData1 = $db->select($query1);
+    if($getData1)
+    {
+        $i=0;
+        while($result1 = $getData1->fetch_assoc()) 
+        {
+            if($i==0)
+            {
+?>
+                                                    <b class="is-visible"><?php echo $result1['title']?>.</b>
+<?php } else {?>
+                                                    <b class="is-hidden"><?php echo $result1['title']?>.</b>
+<?php } $i++; } } ?>
                                                 </span>
                                         </span>
                                         <!-- type headline end -->
@@ -188,12 +208,10 @@
                                     </h1>
 
                                     <div>
-                                        <p class="description">I use animation as a third dimension by which to simplify
-                                            experiences and kuiding thro each and every interaction. I’m not adding
-                                            motion
-                                            just to spruce things up, but doing it in ways that.</p>
+                                        <p class="description"><?php echo $result['intro']?></p>
                                     </div>
                                 </div>
+
                                 <div class="row">
                                     <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12">
                                         <div class="social-share-inner-left">
@@ -225,10 +243,11 @@
                         <div class="order-1 order-lg-2 col-lg-5">
                             <div class="thumbnail">
                                 <div class="inner">
-                                    <img src="assets/images/slider/banner-01.png" alt="Personal Portfolio Images">
+                                    <img src="<?php echo $result['image']?>" alt="Personal Portfolio Images">
                                 </div>
                             </div>
                         </div>
+<?php } } ?>
                     </div>
                 </div>
             </div>
