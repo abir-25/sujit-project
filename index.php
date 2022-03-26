@@ -38,6 +38,7 @@
     <!-- Style css -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/custom.css">
+    <script src="https://kit.fontawesome.com/cfda84e28a.js" crossorigin="anonymous"></script>
 </head>
 
 <body class="template-color-1 spybody" data-spy="scroll" data-target=".navbar-example2" data-offset="70">
@@ -46,7 +47,7 @@
     <header class="rn-header haeder-default black-logo-version header--fixed header--sticky">
         <div class="header-wrapper rn-popup-mobile-menu m--0 row align-items-center">
             <!-- Start Header Left -->
-            <div class="col-lg-3 col-6">
+            <div class="col-lg-3 col-8">
                 <div class="header-left">
                     <div class="logo">
                         <a href="index.html">
@@ -68,7 +69,7 @@
 
             <!-- End Header Left -->
             <!-- Start Header Center -->
-            <div class="col-lg-9 col-6">
+            <div class="col-lg-9 col-4">
                 <div class="header-center">
                     <nav id="sideNav" class="mainmenu-nav navbar-example2 d-none d-xl-block">
                         <!-- Start Mainmanu Nav -->
@@ -126,7 +127,7 @@
                         <button class="close-menu-activation close"><i data-feather="x"></i></button>
                     </div>
                 </div>
-                <p class="discription">Customised is a personal portfolio template. You can customize all.</p>
+                <p class="discription">You will know very soon who I am 😎</p>
             </div>
             <div class="content">
                 <ul class="primary-menu nav nav-pills">
@@ -139,26 +140,90 @@
                     <li class="nav-item"><a class="nav-link smoth-animation" href="#blog">blog</a></li>
                     <li class="nav-item"><a class="nav-link smoth-animation" href="#contacts">Contact</a></li>
                 </ul>
-                <!-- social sharea area -->
+                <!-- social Media area -->
                 <div class="social-share-style-1 mt--40">
                     <span class="title">find with me</span>
                     <ul class="social-share d-flex liststyle">
-                        <li class="facebook"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook">
-                                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                                </svg></a>
+<?php
+    $query = "select * from tbl_social";
+    $getData = $db->select($query);
+    if($getData)
+    {
+        while($result = $getData->fetch_assoc()) 
+        {
+            $facebook       = $result["facebook"];
+            $youtube        = $result["youtube"];
+            $instagram      = $result["instagram"];
+            $linkedin       = $result["linkedin"];
+            $twitter        = $result["twitter"];
+            $github         = $result["github"];
+            $website        = $result["website"];
+            $pinterest      = $result["pinterest"];
+            $reddit         = $result["reddit"];
+            $tumblr         = $result["tumblr"];
+            $google_plus    = $result["google_plus"];
+            $twitch         = $result["twitch"];
+            $discord        = $result["discord"];
+            $vimeo          = $result["vimeo"];
+
+            if($facebook!=""){
+?>               
+                        <li class="facebook">
+                            <a href="" class="social-icon-link"><i class="fab fa-facebook-f"></i></a>
                         </li>
-                        <li class="instagram"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram">
-                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                                </svg></a>
+<?php } if($youtube!=""){?>
+                        <li class="facebook">
+                            <a href="" class="social-icon-link"><i class="fab fa-youtube"></i></a>
                         </li>
-                        <li class="linkedin"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin">
-                                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                                    <rect x="2" y="9" width="4" height="12"></rect>
-                                    <circle cx="4" cy="4" r="2"></circle>
-                                </svg></a>
+<?php } if($instagram!=""){?>
+                        <li class="facebook">
+                            <a href="" class="social-icon-link"><i class="fab fa-instagram"></i></a>
                         </li>
+<?php } if($linkedin!=""){?>
+                        <li class="facebook">
+                            <a href="" class="social-icon-link"><i class="fab fa-linkedin-in"></i></a>
+                        </li>
+<?php } if($twitter!=""){?>
+                        <li class="facebook">
+                            <a href="" class="social-icon-link"><i class="fab fa-twitter"></i></a>
+                        </li>
+<?php } if($github!=""){?>                       
+                        <li class="facebook">
+                            <a href="" class="social-icon-link"><i class="fab fa-github"></i></a>
+                        </li>
+<?php } if($website!=""){?>  
+                        <li class="facebook">
+                            <a href="" class="social-icon-link"><i class="fas fa-globe"></i></a>
+                        </li>
+<?php } if($pinterest!=""){?>  
+                        <li class="facebook">
+                            <a href="" class="social-icon-link"><i class="fab fa-pinterest-p"></i></a>
+                        </li>
+<?php } if($reddit!=""){?>  
+                        <li class="facebook">
+                            <a href="" class="social-icon-link"><i class="fab fa-reddit-alien"></i></a>
+                        </li>
+<?php } if($tumblr!=""){?>  
+                        <li class="facebook">
+                            <a href="" class="social-icon-link"><i class="fab fa-tumblr"></i></a>
+                        </li>
+ <?php } if($google_plus!=""){?>  
+                        <li class="facebook">
+                            <a href="" class="social-icon-link"><i class="fab fa-google-plus-g"></i></a>
+                        </li>
+<?php } if($twitch!=""){?>  
+                        <li class="facebook">
+                            <a href="" class="social-icon-link"><i class="fab fa-twitch"></i></a>
+                        </li>
+<?php } if($discord!=""){?>  
+                        <li class="facebook">
+                            <a href="" class="social-icon-link"><i class="fab fa-discord"></i></a>
+                        </li>
+<?php } if($vimeo!=""){?>  
+                        <li class="facebook">
+                            <a href="" class="social-icon-link"><i class="fab fa-vimeo-v"></i></a>
+                        </li>
+<?php } } }?>
                     </ul>
                 </div>
                 <!-- end -->
@@ -232,13 +297,87 @@
                                         <div class="social-share-inner-left">
                                             <span class="title">find with me</span>
                                             <ul class="social-share d-flex liststyle">
-                                                <li class="facebook"><a href="#"><i data-feather="facebook"></i></a>
-                                                </li>
-                                                <li class="instagram"><a href="#"><i data-feather="instagram"></i></a>
-                                                </li>
-                                                <li class="linkedin"><a href="#"><i data-feather="linkedin"></i></a>
-                                                </li>
-                                            </ul>
+<?php
+    $query = "select * from tbl_social";
+    $getData = $db->select($query);
+    if($getData)
+    {
+        while($result = $getData->fetch_assoc()) 
+        {
+            $facebook       = $result["facebook"];
+            $youtube        = $result["youtube"];
+            $instagram      = $result["instagram"];
+            $linkedin       = $result["linkedin"];
+            $twitter        = $result["twitter"];
+            $github         = $result["github"];
+            $website        = $result["website"];
+            $pinterest      = $result["pinterest"];
+            $reddit         = $result["reddit"];
+            $tumblr         = $result["tumblr"];
+            $google_plus    = $result["google_plus"];
+            $twitch         = $result["twitch"];
+            $discord        = $result["discord"];
+            $vimeo          = $result["vimeo"];
+
+            if($facebook!=""){
+?>               
+                        <li class="facebook">
+                            <a href="" class="social-icon-link"><i class="fab fa-facebook-f"></i></a>
+                        </li>
+<?php } if($youtube!=""){?>
+                        <li class="facebook">
+                            <a href="" class="social-icon-link"><i class="fab fa-youtube"></i></a>
+                        </li>
+<?php } if($instagram!=""){?>
+                        <li class="facebook">
+                            <a href="" class="social-icon-link"><i class="fab fa-instagram"></i></a>
+                        </li>
+<?php } if($linkedin!=""){?>
+                        <li class="facebook">
+                            <a href="" class="social-icon-link"><i class="fab fa-linkedin-in"></i></a>
+                        </li>
+<?php } if($twitter!=""){?>
+                        <li class="facebook">
+                            <a href="" class="social-icon-link"><i class="fab fa-twitter"></i></a>
+                        </li>
+<?php } if($github!=""){?>                       
+                        <li class="facebook">
+                            <a href="" class="social-icon-link"><i class="fab fa-github"></i></a>
+                        </li>
+<?php } if($website!=""){?>  
+                        <li class="facebook">
+                            <a href="" class="social-icon-link"><i class="fas fa-globe"></i></a>
+                        </li>
+<?php } if($pinterest!=""){?>  
+                        <li class="facebook">
+                            <a href="" class="social-icon-link"><i class="fab fa-pinterest-p"></i></a>
+                        </li>
+<?php } if($reddit!=""){?>  
+                        <li class="facebook">
+                            <a href="" class="social-icon-link"><i class="fab fa-reddit-alien"></i></a>
+                        </li>
+<?php } if($tumblr!=""){?>  
+                        <li class="facebook">
+                            <a href="" class="social-icon-link"><i class="fab fa-tumblr"></i></a>
+                        </li>
+ <?php } if($google_plus!=""){?>  
+                        <li class="facebook">
+                            <a href="" class="social-icon-link"><i class="fab fa-google-plus-g"></i></a>
+                        </li>
+<?php } if($twitch!=""){?>  
+                        <li class="facebook">
+                            <a href="" class="social-icon-link"><i class="fab fa-twitch"></i></a>
+                        </li>
+<?php } if($discord!=""){?>  
+                        <li class="facebook">
+                            <a href="" class="social-icon-link"><i class="fab fa-discord"></i></a>
+                        </li>
+<?php } if($vimeo!=""){?>  
+                        <li class="facebook">
+                            <a href="" class="social-icon-link"><i class="fab fa-vimeo-v"></i></a>
+                        </li>
+<?php } } }?>
+                    </ul>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-12 mt_mobile--30">
@@ -2890,9 +3029,89 @@
                             <div class="social-area">
                                 <div class="name">FIND WITH ME</div>
                                 <div class="social-icone">
-                                    <a href="#"><i data-feather="facebook"></i></a>
+                        
+<?php
+    $query = "select * from tbl_social";
+    $getData = $db->select($query);
+    if($getData)
+    {
+        while($result = $getData->fetch_assoc()) 
+        {
+            $facebook       = $result["facebook"];
+            $youtube        = $result["youtube"];
+            $instagram      = $result["instagram"];
+            $linkedin       = $result["linkedin"];
+            $twitter        = $result["twitter"];
+            $github         = $result["github"];
+            $website        = $result["website"];
+            $pinterest      = $result["pinterest"];
+            $reddit         = $result["reddit"];
+            $tumblr         = $result["tumblr"];
+            $google_plus    = $result["google_plus"];
+            $twitch         = $result["twitch"];
+            $discord        = $result["discord"];
+            $vimeo          = $result["vimeo"];
+
+            if($facebook!=""){
+?>               
+                       
+                            <a href="" class="social-icon-link"><i class="fab fa-facebook-f"></i></a>
+                        
+<?php } if($youtube!=""){?>
+                        
+                            <a href="" class="social-icon-link"><i class="fab fa-youtube"></i></a>
+                       
+<?php } if($instagram!=""){?>
+                        
+                            <a href="" class="social-icon-link"><i class="fab fa-instagram"></i></a>
+                        
+<?php } if($linkedin!=""){?>
+                        
+                            <a href="" class="social-icon-link"><i class="fab fa-linkedin-in"></i></a>
+                        
+<?php } if($twitter!=""){?>
+                        
+                            <a href="" class="social-icon-link"><i class="fab fa-twitter"></i></a>
+                       
+<?php } if($github!=""){?>                       
+                        
+                            <a href="" class="social-icon-link"><i class="fab fa-github"></i></a>
+                        
+<?php } if($website!=""){?>  
+                    
+                            <a href="" class="social-icon-link"><i class="fas fa-globe"></i></a>
+                        
+<?php } if($pinterest!=""){?>  
+                        
+                            <a href="" class="social-icon-link"><i class="fab fa-pinterest-p"></i></a>
+                        
+<?php } if($reddit!=""){?>  
+                        
+                            <a href="" class="social-icon-link"><i class="fab fa-reddit-alien"></i></a>
+                        
+<?php } if($tumblr!=""){?>  
+                       
+                            <a href="" class="social-icon-link"><i class="fab fa-tumblr"></i></a>
+                        
+ <?php } if($google_plus!=""){?>  
+                       
+                            <a href="" class="social-icon-link"><i class="fab fa-google-plus-g"></i></a>
+                        
+<?php } if($twitch!=""){?>  
+                        
+                            <a href="" class="social-icon-link"><i class="fab fa-twitch"></i></a>
+                        
+<?php } if($discord!=""){?>  
+                       
+                            <a href="" class="social-icon-link"><i class="fab fa-discord"></i></a>
+
+<?php } if($vimeo!=""){?>  
+                            <a href="" class="social-icon-link"><i class="fab fa-vimeo-v"></i></a>
+<?php } } }?>
+                    </ul>
+                                    <!-- <a href="#"><i data-feather="facebook"></i></a>
                                     <a href="#"><i data-feather="linkedin"></i></a>
-                                    <a href="#"><i data-feather="instagram"></i></a>
+                                    <a href="#"><i data-feather="instagram"></i></a> -->
                                 </div>
                             </div>
                         </div>

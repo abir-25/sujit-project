@@ -4,7 +4,7 @@
           <!-- Page Header-->
           <header class="page-header">
             <div class="container-fluid">
-              <h2 class="no-margin-bottom">Edit Admin Dashboard</h2>
+              <h2 class="no-margin-bottom">Admin Dashboard</h2>
             </div>
           </header>
           <!-- Breadcrumb-->
@@ -75,8 +75,7 @@
 					else{
                         $query = "UPDATE tbl_dashboard 
 						  SET 
-						  image = '$uploaded_image',
-						  WHERE id = '1'";
+						  image = '$uploaded_image'";
 				
 				        $updated_rows = $db->update($query);
                         if ($updated_rows) 
@@ -114,6 +113,11 @@
                             <input type="file" name="image" class="form-control">
                           </div>
                         </div>  
+                        <div class="form-group row">
+                          <div class="col-sm-4 offset-sm-3">
+                            <button type="submit" class="btn btn-primary">Update</button>
+                          </div>
+                        </div>
 <?php } } else { ?>
                         <div class="form-group row">
                           <label class="col-sm-3 form-control-label">Upload Image</label>
@@ -121,13 +125,13 @@
                             <input type="file" name="image" class="form-control">
                           </div>
                         </div> 
-<?php } ?>						
-     
                         <div class="form-group row">
                           <div class="col-sm-4 offset-sm-3">
-                            <button type="submit" class="btn btn-primary">Update</button>
+                            <button type="submit" class="btn btn-primary">Add</button>
                           </div>
                         </div>
+<?php } ?>						
+     
                       </form>
                     </div>
                   </div>

@@ -116,8 +116,7 @@
 							  nickname = '$nickname',
 							  logo = '$uploaded_image',
 							  favicon = '$uploaded_image2',
-							  copyright = '$copyright'
-							  WHERE id = '1'";
+							  copyright = '$copyright'";
 					
 					$updated_rows = $db->update($query);
 					if ($updated_rows) 
@@ -146,8 +145,7 @@
 							  name = '$name',
 							  nickname = '$nickname',
 							  logo = '$uploaded_image',
-							  copyright = '$copyright'
-							  WHERE id = '1'";
+							  copyright = '$copyright'";
 					
 					$updated_rows = $db->update($query);
 					if ($updated_rows) 
@@ -176,8 +174,7 @@
 							  name = '$name',
 							  nickname = '$nickname',
 							  favicon = '$uploaded_image2',
-							  copyright = '$copyright'
-							  WHERE id = '1'";
+							  copyright = '$copyright'";
 					
 					$updated_rows = $db->update($query);
 					if ($updated_rows) 
@@ -196,8 +193,7 @@
 							  SET 
 							  name = '$name',
 							  nickname = '$nickname',
-							  copyright = '$copyright'
-							  WHERE id = '1'";
+							  copyright = '$copyright'";
 					
 					$updated_rows = $db->update($query);
 					if ($updated_rows) 
@@ -261,6 +257,11 @@
                             <input type="text" name="copyright" required class="form-control" value="<?php echo $postresult['copyright']; ?>">
                           </div>
                         </div>
+						<div class="form-group row">
+                          <div class="col-sm-4 offset-sm-3">
+                            <button type="submit" class="btn btn-primary">Update</button>
+                          </div>
+                        </div>
 <?php } } else { ?>						
 						<div class="form-group row">
                           <label class="col-sm-3 form-control-label">Name</label>
@@ -296,13 +297,14 @@
                             <input type="text" name="copyright" required class="form-control" placeholder="Enter Your Site's Copyright Text">
                           </div>
                         </div>
-<?php } ?>
-     
-                        <div class="form-group row">
+						<div class="form-group row">
                           <div class="col-sm-4 offset-sm-3">
-                            <button type="submit" class="btn btn-primary">Update</button>
+                            <button type="submit" class="btn btn-primary">Add</button>
                           </div>
                         </div>
+<?php } ?>
+     
+                       
                       </form>
                     </div>
                   </div>

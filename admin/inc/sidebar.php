@@ -23,7 +23,7 @@
                     <!--<li class="active"><a href="index.php"> <i class="icon-home"></i>Home </a></li>-->
 					<li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-file-text"></i>Basic Site Option</a>
                         <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
-                            <li><a href="editdashboard.php">Edit Admin Dashboard</a></li>       
+                            <li><a href="editdashboard.php">Admin Dashboard</a></li>       
                             <li><a href="titlelogo.php">Basic Information</a></li>
                             <li><a href="social.php">Social Media</a></li>
                             <li><a href="footer.php">Footer Text</a></li>

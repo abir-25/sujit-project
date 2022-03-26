@@ -6989,7 +6989,7 @@ textarea:-ms-input-placeholder {
   height: 60px;
   line-height: 60px;
   text-align: center;
-  font-size: 14px;
+  font-size: 19px;
   letter-spacing: 2px;
   text-transform: uppercase;
   border-radius: 6px;
@@ -10691,11 +10691,11 @@ body.template-color-1 {
 .logo a img {
   transition: 0.3s;
 }
-@media only screen and (max-width: 767px) {
+/* @media only screen and (max-width: 767px) {
   .logo a img {
     max-height: 54px;
   }
-}
+} */
 
 @media only screen and (max-width: 1199px) {
   .rn-header .header-wrapper.menu-open #sideNav {
@@ -15940,6 +15940,7 @@ div#featured-project-carousel {
   height: 61px;
   line-height: 57px;
   margin-right: 15px;
+  margin-bottom: 15px;
   box-shadow: var(--shadow-1);
   border-radius: 6px;
   transition: var(--transition);
