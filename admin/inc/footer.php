@@ -3,7 +3,7 @@
 		<div class="row">
 			<div class="col-sm-8">
 <?php
-$query = "select * from tbl_basic_info where id = '1'";
+$query = "select * from tbl_basic_info";
 $getData = $db->select($query);
 if($getData)
 {

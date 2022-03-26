@@ -16,14 +16,17 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <?php
-		$query = "select * from tbl_basic_info where id = '1'";
-		$getData = $db->select($query);
-		if($getData)
-		{
-			while($result = $getData->fetch_assoc()) 
-			{
+		$query = "select * from tbl_basic_info";
+    $getData = $db->num_rows($query);
+    if($getData)
+    {
+      $getData1 = $db->select($query);
+      while($result = $getData1->fetch_assoc()) 
+      {
 ?>
     <title><?php echo $result['nickname'];?>-Admin</title>
+    <link rel="shortcut icon" href="../<?php echo $result['favicon'];?>">
+<?php } } ?>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
@@ -40,9 +43,6 @@
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="css/custom.css">
     <!-- Favicon-->
-
-    <link rel="shortcut icon" href="../<?php echo $result['favicon'];?>">
-<?php } } ?>
   </head>
   <body>
     <div class="page login-page">
@@ -113,15 +113,18 @@
       </div>
       <div class="copyrights text-center">
 <?php
-$query = "select * from tbl_basic_info where id = '1'";
-$getData = $db->select($query);
+$query = "select * from tbl_basic_info";
+$getData = $db->num_rows($query);
 if($getData)
 {
-	while($result = $getData->fetch_assoc()) 
+  $getData1 = $db->select($query);
+	while($result = $getData1->fetch_assoc()) 
 	{
 ?>
         &copy; Copyright <strong><span><?php echo $result['name'];?></span></strong>. All Rights Reserved || Developed By <b><a href="#">Agamee-IT</a></b>
- <?php } } ?>      
+<?php } } else { ?>   
+  &copy; Copyright <strong><span>Sujit Barua</span></strong>. All Rights Reserved || Developed By <b><a href="#">Agamee-IT</a></b>
+<?php }?>
       </div>
 	  
     </div>

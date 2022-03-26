@@ -4,8 +4,17 @@
                 <!-- Page Header-->
                 <header class="page-header">
                     <div class="container-fluid dashboard">
-                        <h2 class="no-margin-bottom">Dashboard</h2>
-						<img src="img/admin.jpeg" alt="" />
+                        <h2 class="margin-bottom-20">Dashboard</h2>
+<?php
+    $query = "select * from tbl_dashboard";
+    $getData = $db->select($query);
+    if($getData)
+    {
+        while($result = $getData->fetch_assoc()) 
+        {
+?>
+                        <img src="<?php echo $result['image'];?>" alt="" />
+<?php } } ?>
                     </div>
                 </header>
 

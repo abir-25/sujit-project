@@ -4,7 +4,7 @@
           <!-- Page Header-->
           <header class="page-header">
             <div class="container-fluid">
-              <h2 class="no-margin-bottom">Edit Dashboard</h2>
+              <h2 class="no-margin-bottom">Edit Admin Dashboard</h2>
             </div>
           </header>
           <!-- Breadcrumb-->
@@ -12,7 +12,7 @@
             <ul class="breadcrumb">
               <li class="breadcrumb-item"><a href="index.php">Home</a></li>
               <li class="breadcrumb-item active">Basic Site Option</li>  
-              <li class="breadcrumb-item active">Edit Dashboard</li>
+              <li class="breadcrumb-item active">Edit Admin Dashboard</li>
             </ul>
           </div>
           <!-- Forms Section-->
@@ -56,11 +56,12 @@
 				else
 				{	
 					move_uploaded_file($file_temp, $uploaded_image);
-                    $query1 = "select * from tbl_dashboard where id='1'";
+                    $query1 = "select * from tbl_dashboard";
                     $getpost = $db->num_rows($query1);
                     if(!$getpost)
                     {
                         $query = "INSERT INTO tbl_dashboard(image) VALUES('$uploaded_image')";
+                        $inserted_rows = $db->insert($query);
                         if ($inserted_rows) 
                         {
                             echo "<span class='success'>Data Inserted Successfully.
@@ -98,11 +99,13 @@
 	}
 ?>
 <?php
-	$query1 = "select * from tbl_dashboard where id='1'";
-	$getpost = $db->select($query1);
-	
-	while($postresult = $getpost->fetch_assoc())
-	{
+	$query1 = "select * from tbl_dashboard";
+    $getpost = $db->num_rows($query1);
+    if($getpost)
+    {
+	    $getpost = $db->select($query1);
+	    while($postresult = $getpost->fetch_assoc())
+	    {
 ?>
 						<div class="form-group row">
                           <label class="col-sm-3 form-control-label">Upload Image</label>
@@ -111,6 +114,13 @@
                             <input type="file" name="image" class="form-control">
                           </div>
                         </div>  
+<?php } } else { ?>
+                        <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">Upload Image</label>
+                          <div class="col-sm-9" style="text-align:center">					 
+                            <input type="file" name="image" class="form-control">
+                          </div>
+                        </div> 
 <?php } ?>						
      
                         <div class="form-group row">

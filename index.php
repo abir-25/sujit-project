@@ -13,7 +13,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 <?php
-    $query = "select * from tbl_basic_info where id = '1'";
+    $query = "select * from tbl_basic_info";
     $getData = $db->select($query);
     if($getData)
     {
@@ -21,12 +21,13 @@
         {
 ?>
     <title><?php echo $result['name'];?></title>
-
+    <link rel="shortcut icon" type="image/x-icon" href="admin/<?php echo $result['favicon'];?>">
+<?php } } ?>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="admin/<?php echo $result['favicon'];?>">
+    
     <!-- CSS 
     ============================================ -->
     <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
@@ -49,13 +50,22 @@
                 <div class="header-left">
                     <div class="logo">
                         <a href="index.html">
+<?php
+    $query = "select * from tbl_basic_info";
+    $getData = $db->select($query);
+    if($getData)
+    {
+        while($result = $getData->fetch_assoc()) 
+        {
+?>
                             <img src="admin/<?php echo $result['logo'];?>" alt="logo">
                             <span><?php echo $result['name'];?></span>
+<?php } } ?>
                         </a>
                     </div>
                 </div>
             </div>
-<?php } } ?>
+
             <!-- End Header Left -->
             <!-- Start Header Center -->
             <div class="col-lg-9 col-6">
@@ -100,7 +110,7 @@
             <div class="menu-top">
                 <div class="menu-header">
 <?php
-    $query = "select * from tbl_basic_info where id = '1'";
+    $query = "select * from tbl_basic_info";
     $getData = $db->select($query);
     if($getData)
     {
@@ -169,17 +179,22 @@
                     <div class="row row--30 align-items-center">
                         <div class="order-2 order-lg-1 col-lg-7 mt_md--50 mt_sm--50 mt_lg--30">
                             <div class="content">
+
+                                <div class="inner">
+                                    <span class="subtitle">Welcome to my world</span>
 <?php
-    $query = "select * from tbl_bio where id = '1'";
+    $query = "select * from tbl_bio";
     $getData = $db->select($query);
     if($getData)
     {
         while($result = $getData->fetch_assoc()) 
         {
-?>
-                                <div class="inner">
-                                    <span class="subtitle">Welcome to my world</span>
-                                    <h1 class="title">Hi, I’m <span><?php echo $result['name']?></span><br>
+            $bio_name = $result['name'];
+            $bio_intro = $result['intro'];
+            $bio_image = $result['image'];
+?> 
+                                    <h1 class="title">Hi, I’m <span><?php echo $bio_name?></span><br>
+<?php } } ?>
                                         <span class="header-caption" id="page-top">
                                             <!-- type headline start-->
                                             <span class="cd-headline clip is-full-width">
@@ -208,7 +223,7 @@
                                     </h1>
 
                                     <div>
-                                        <p class="description"><?php echo $result['intro']?></p>
+                                        <p class="description"><?php echo $bio_intro?></p>
                                     </div>
                                 </div>
 
@@ -243,11 +258,11 @@
                         <div class="order-1 order-lg-2 col-lg-5">
                             <div class="thumbnail">
                                 <div class="inner">
-                                    <img src="admin/<?php echo $result['image']?>" alt="Personal Portfolio Images">
+                                    <img src="admin/<?php echo $bio_image?>" alt="Personal Portfolio Images">
                                 </div>
                             </div>
                         </div>
-<?php } } ?>
+
                     </div>
                 </div>
             </div>
@@ -3786,7 +3801,7 @@
                 <div class="col-lg-12">
                     <div class="footer-area text-center">
 <?php
-    $query = "select * from tbl_basic_info where id = '1'";
+    $query = "select * from tbl_basic_info";
     $getData = $db->select($query);
     if($getData)
     {

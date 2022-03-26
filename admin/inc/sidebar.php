@@ -4,7 +4,7 @@
             <nav class="side-navbar">
                 <!-- Sidebar Header-->
 <?php
-    $query = "select * from tbl_basic_info where id = '1'";
+    $query = "select * from tbl_basic_info";
     $getData = $db->select($query);
     if($getData)
     {
@@ -23,8 +23,8 @@
                     <!--<li class="active"><a href="index.php"> <i class="icon-home"></i>Home </a></li>-->
 					<li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-file-text"></i>Basic Site Option</a>
                         <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
+                            <li><a href="editdashboard.php">Edit Admin Dashboard</a></li>       
                             <li><a href="titlelogo.php">Basic Information</a></li>
-                            <li><a href="editdashboard.php">Edit Dashboard</a></li>
                             <li><a href="social.php">Social Media</a></li>
                             <li><a href="footer.php">Footer Text</a></li>
                             <li><a href="sliderlist.php">Update Slider</a></li>

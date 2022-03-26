@@ -61,133 +61,169 @@
 		$uploaded_image2 = "upload/bio/".$unique_image2;
 	
 
-		if(!empty($file_name) && !empty($file_name2))
+		move_uploaded_file($file_temp, $uploaded_image);
+		move_uploaded_file($file_temp2, $uploaded_image2);
+	
+
+		$query1 = "select * from tbl_basic_info";
+		$getpost = $db->num_rows($query1);
+		if(!$getpost)
 		{
-			if (in_array($file_ext, $permitted) === false) 
-			{
-				 echo "<span class='error'>You can upload only:-"
-				 .implode(', ', $permitted)."</span>";
-			} 
-			else if (in_array($file_ext2, $permitted) === false) 
-			{
-				 echo "<span class='error'>You can upload only:-"
-				 .implode(', ', $permitted)."</span>";
-			} 
-			else
-			{	
-				move_uploaded_file($file_temp, $uploaded_image);
-				move_uploaded_file($file_temp2, $uploaded_image2);
+			if(empty($file_name)){
+				echo "<span class='error'>Please enter your Logo!!</span>";
+			}
+			else if(empty($file_name2)){
+				echo "<span class='error'>Please enter your Favicon!!</span>";
+			}
+			else{
 				
-				$query = "UPDATE tbl_basic_info 
-						  SET 
-						  name = '$name',
-						  nickname = '$nickname',
-						  logo = '$uploaded_image',
-						  favicon = '$uploaded_image2',
-						  copyright = '$copyright'
-						  WHERE id = '1'";
-				
-				$updated_rows = $db->update($query);
-				if ($updated_rows) 
+				$query = "INSERT INTO tbl_basic_info(name, nickname, logo, favicon, copyright) VALUES('$name','$nickname','$uploaded_image','$uploaded_image2','$copyright')";
+				$inserted_rows = $db->insert($query);
+				if ($inserted_rows) 
 				{
-					echo "<span class='success'>Data Updated Successfully.
+					echo "<span class='success'>Data Inserted Successfully.
 					</span>";
 				}
 				else 
 				{
-					echo "<span class='error'>Data Not Updated !!</span>";
+					echo "<span class='error'>Data Not Inserted !!</span>";
 				}
 			}
+			
 		}
-		else if(!empty($file_name))
-		{
-			if (in_array($file_ext, $permitted) === false) 
-			{
-				 echo "<span class='error'>You can upload only:-"
-				 .implode(', ', $permitted)."</span>";
-			} 
-			else
-			{	
-				move_uploaded_file($file_temp, $uploaded_image);
-				$query = "UPDATE tbl_basic_info 
-						  SET 
-						  name = '$name',
-						  nickname = '$nickname',
-						  logo = '$uploaded_image',
-						  copyright = '$copyright'
-						  WHERE id = '1'";
-				
-				$updated_rows = $db->update($query);
-				if ($updated_rows) 
-				{
-					echo "<span class='success'>Data Updated Successfully.
-					</span>";
-				}
-				else 
-				{
-					echo "<span class='error'>Data Not Updated !!</span>";
-				}
-			}
-		}
-		else if(!empty($file_name2))
-		{
-			if (in_array($file_ext2, $permitted) === false) 
-			{
-				 echo "<span class='error'>You can upload only:-"
-				 .implode(', ', $permitted)."</span>";
-			} 
-			else
-			{	
-				move_uploaded_file($file_temp2, $uploaded_image2);
-				$query = "UPDATE tbl_basic_info 
-						  SET 
-						  name = '$name',
-						  nickname = '$nickname',
-						  favicon = '$uploaded_image2',
-						  copyright = '$copyright'
-						  WHERE id = '1'";
-				
-				$updated_rows = $db->update($query);
-				if ($updated_rows) 
-				{
-					echo "<span class='success'>Data Updated Successfully.
-					</span>";
-				}
-				else 
-				{
-					echo "<span class='error'>Data Not Updated !!</span>";
-				}
-			}
-		}
+
 		else{
-			$query = "UPDATE tbl_basic_info 
-						  SET 
-						  name = '$name',
-						  nickname = '$nickname',
-						  copyright = '$copyright'
-						  WHERE id = '1'";
-				
-				$updated_rows = $db->update($query);
-				if ($updated_rows) 
+			if(!empty($file_name) && !empty($file_name2))
+			{
+				if (in_array($file_ext, $permitted) === false) 
 				{
-					echo "<span class='success'>Data Updated Successfully.
-					</span>";
-				}
-				else 
+					 echo "<span class='error'>You can upload only:-"
+					 .implode(', ', $permitted)."</span>";
+				} 
+				else if (in_array($file_ext2, $permitted) === false) 
 				{
-					echo "<span class='error'>Data Not Updated !!</span>";
+					 echo "<span class='error'>You can upload only:-"
+					 .implode(', ', $permitted)."</span>";
+				} 
+				else
+				{	
+					move_uploaded_file($file_temp, $uploaded_image);
+					move_uploaded_file($file_temp2, $uploaded_image2);
+					
+					$query = "UPDATE tbl_basic_info 
+							  SET 
+							  name = '$name',
+							  nickname = '$nickname',
+							  logo = '$uploaded_image',
+							  favicon = '$uploaded_image2',
+							  copyright = '$copyright'
+							  WHERE id = '1'";
+					
+					$updated_rows = $db->update($query);
+					if ($updated_rows) 
+					{
+						echo "<span class='success'>Data Updated Successfully.
+						</span>";
+					}
+					else 
+					{
+						echo "<span class='error'>Data Not Updated !!</span>";
+					}
 				}
+			}
+			else if(!empty($file_name))
+			{
+				if (in_array($file_ext, $permitted) === false) 
+				{
+					 echo "<span class='error'>You can upload only:-"
+					 .implode(', ', $permitted)."</span>";
+				} 
+				else
+				{	
+					move_uploaded_file($file_temp, $uploaded_image);
+					$query = "UPDATE tbl_basic_info 
+							  SET 
+							  name = '$name',
+							  nickname = '$nickname',
+							  logo = '$uploaded_image',
+							  copyright = '$copyright'
+							  WHERE id = '1'";
+					
+					$updated_rows = $db->update($query);
+					if ($updated_rows) 
+					{
+						echo "<span class='success'>Data Updated Successfully.
+						</span>";
+					}
+					else 
+					{
+						echo "<span class='error'>Data Not Updated !!</span>";
+					}
+				}
+			}
+			else if(!empty($file_name2))
+			{
+				if (in_array($file_ext2, $permitted) === false) 
+				{
+					 echo "<span class='error'>You can upload only:-"
+					 .implode(', ', $permitted)."</span>";
+				} 
+				else
+				{	
+					move_uploaded_file($file_temp2, $uploaded_image2);
+					$query = "UPDATE tbl_basic_info 
+							  SET 
+							  name = '$name',
+							  nickname = '$nickname',
+							  favicon = '$uploaded_image2',
+							  copyright = '$copyright'
+							  WHERE id = '1'";
+					
+					$updated_rows = $db->update($query);
+					if ($updated_rows) 
+					{
+						echo "<span class='success'>Data Updated Successfully.
+						</span>";
+					}
+					else 
+					{
+						echo "<span class='error'>Data Not Updated !!</span>";
+					}
+				}
+			}
+			else{
+				$query = "UPDATE tbl_basic_info 
+							  SET 
+							  name = '$name',
+							  nickname = '$nickname',
+							  copyright = '$copyright'
+							  WHERE id = '1'";
+					
+					$updated_rows = $db->update($query);
+					if ($updated_rows) 
+					{
+						echo "<span class='success'>Data Updated Successfully.
+						</span>";
+					}
+					else 
+					{
+						echo "<span class='error'>Data Not Updated !!</span>";
+					}
+			}
 		}
+
 	
 	}
 ?>
 
 <?php
-	$query1 = "select * from tbl_basic_info where id='1'";
-	$getpost = $db->select($query1);
-	
-	while($postresult = $getpost->fetch_assoc())
-	{
+	$query1 = "select * from tbl_basic_info";
+	$getpost = $db->num_rows($query1);
+    if($getpost)
+    {
+	    $getpost = $db->select($query1);
+	    while($postresult = $getpost->fetch_assoc())
+	    {
 ?>
                         <div class="form-group row">
                           <label class="col-sm-3 form-control-label">Name</label>
@@ -225,7 +261,42 @@
                             <input type="text" name="copyright" required class="form-control" value="<?php echo $postresult['copyright']; ?>">
                           </div>
                         </div>
-<?php } ?>						
+<?php } } else { ?>						
+						<div class="form-group row">
+                          <label class="col-sm-3 form-control-label">Name</label>
+                          <div class="col-sm-9">
+                            <input type="text" name="name" class="form-control" required placeholder="Enter Your Name">
+                          </div>
+                        </div>
+						<div class="line"></div>
+						<div class="form-group row">
+                          <label class="col-sm-3 form-control-label">Nick Name</label>
+                          <div class="col-sm-9">
+                            <input type="text" name="nickname" class="form-control" required placeholder="Enter Your Nick Name">
+                          </div>
+                        </div>
+						<div class="line"></div>
+						<div class="form-group row">
+                          <label class="col-sm-3 form-control-label">Upload Image</label>
+                          <div class="col-sm-9" style="text-align:center">
+                            <input type="file" name="logo" class="form-control" required>
+                          </div>
+                        </div>  
+						<div class="line"></div>
+						<div class="form-group row">
+                          <label class="col-sm-3 form-control-label">Favicon</label>
+                          <div class="col-sm-9" style="text-align:center">
+                            <input type="file" name="favicon" class="form-control" required>
+                          </div>
+                        </div>
+						<div class="line"></div>
+						<div class="form-group row">
+                          <label class="col-sm-3 form-control-label">Copyright Text</label>
+                          <div class="col-sm-9">
+                            <input type="text" name="copyright" required class="form-control" placeholder="Enter Your Site's Copyright Text">
+                          </div>
+                        </div>
+<?php } ?>
      
                         <div class="form-group row">
                           <div class="col-sm-4 offset-sm-3">
