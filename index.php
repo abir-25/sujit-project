@@ -26,7 +26,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="<?php echo $result['favicon'];?>">
+    <link rel="shortcut icon" type="image/x-icon" href="admin/<?php echo $result['favicon'];?>">
     <!-- CSS 
     ============================================ -->
     <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
@@ -49,7 +49,7 @@
                 <div class="header-left">
                     <div class="logo">
                         <a href="index.html">
-                            <img src="<?php echo $result['logo'];?>" alt="logo">
+                            <img src="admin/<?php echo $result['logo'];?>" alt="logo">
                             <span><?php echo $result['name'];?></span>
                         </a>
                     </div>
@@ -108,7 +108,7 @@
         {
 ?>
                     <a class="logo" href="index.html">
-                        <img src="<?php echo $result['logo'];?>" alt="Personal Portfolio">
+                        <img src="admin/<?php echo $result['logo'];?>" alt="Personal Portfolio">
                         <span><?php echo $result['name'];?></span>
                     </a>
 <?php } } ?>
@@ -243,7 +243,7 @@
                         <div class="order-1 order-lg-2 col-lg-5">
                             <div class="thumbnail">
                                 <div class="inner">
-                                    <img src="<?php echo $result['image']?>" alt="Personal Portfolio Images">
+                                    <img src="admin/<?php echo $result['image']?>" alt="Personal Portfolio Images">
                                 </div>
                             </div>
                         </div>
@@ -3795,7 +3795,7 @@
 ?>
                         <div class="logo footer-logo">
                             <a href="index.html" class="footer-logo-link">
-                                <img src="<?php echo $result['logo'];?>" alt="logo">
+                                <img src="admin/<?php echo $result['logo'];?>" alt="logo">
                                 <span><?php echo $result['name'];?></span>
                             </a>
                         </div>

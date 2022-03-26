@@ -1,17 +1,3 @@
-<?php
-session_cache_limiter(FALSE); 
-session_start();
-if($_SESSION['login']==false){
-	header("Location:login.php");
-}
-?>
-<?php include '../config/config.php'; ?>
-<?php include '../lib/database.php'; ?>
-<?php include '../helpers/format.php'; ?>
-<?php
-	$db = new Database();
-	$fm = new Format();
-?>
 <?php include "inc/header.php"; ?>
 <?php include "inc/sidebar.php"; ?>
             <div class="content-inner">

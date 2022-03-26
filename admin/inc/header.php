@@ -1,4 +1,17 @@
-
+<?php
+session_cache_limiter(FALSE); 
+session_start();
+if($_SESSION['login']==false){
+	header("Location:login.php");
+}
+?>
+<?php include '../config/config.php'; ?>
+<?php include '../lib/database.php'; ?>
+<?php include '../helpers/format.php'; ?>
+<?php
+	$db = new Database();
+	$fm = new Format();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -31,7 +44,7 @@
     <link rel="stylesheet" href="css/custom.css">
     <!-- Favicon-->
 
-    <link rel="shortcut icon" href="../<?php echo $result['favicon'];?>">
+    <link rel="shortcut icon" href="<?php echo $result['favicon'];?>">
 <?php } } ?>
 </head>
 

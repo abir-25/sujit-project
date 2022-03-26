@@ -41,6 +41,20 @@ class Database{
 		}
 	}
 	
+	//check Number of rows
+	public function num_rows($query)
+	{
+		$result = $this->link1->query($query) or die ($this->link1->error.__LINE__);
+		
+		if($result->num_rows > 0){
+			return true;
+		}
+		
+		else{
+			return false;
+		}
+	}
+
 	//insert data
 	public function insert($query)
 	{

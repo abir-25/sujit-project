@@ -1,3 +1,4 @@
+
         <div class="page-content d-flex align-items-stretch">
             <!-- Side Navbar -->
             <nav class="side-navbar">
@@ -11,7 +12,7 @@
         {
 ?>
                 <div class="sidebar-header d-flex align-items-center">
-                    <div class="avatar"><img src="../<?php echo $result['logo'];?>" alt="..." class="img-fluid rounded-circle"></div>
+                    <div class="avatar"><img src="<?php echo $result['logo'];?>" alt="..." class="img-fluid rounded-circle"></div>
                     <div class="title">
                         <h1 class="h4"><?php echo $result['nickname'];?></h1>
                     </div>
@@ -22,8 +23,8 @@
                     <!--<li class="active"><a href="index.php"> <i class="icon-home"></i>Home </a></li>-->
 					<li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-file-text"></i>Basic Site Option</a>
                         <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
-                            <li><a href="titlelogo.php">Title And Logo</a></li>
-                            <li><a href="whylist.php">Why Section</a></li>
+                            <li><a href="titlelogo.php">Basic Information</a></li>
+                            <li><a href="editdashboard.php">Edit Dashboard</a></li>
                             <li><a href="social.php">Social Media</a></li>
                             <li><a href="footer.php">Footer Text</a></li>
                             <li><a href="sliderlist.php">Update Slider</a></li>
