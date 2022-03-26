@@ -49,7 +49,7 @@
                 <div class="header-left">
                     <div class="logo">
                         <a href="index.html">
-                            <img src="<?php echo $result['image'];?>" alt="logo">
+                            <img src="<?php echo $result['logo'];?>" alt="logo">
                             <span><?php echo $result['name'];?></span>
                         </a>
                     </div>
@@ -108,7 +108,7 @@
         {
 ?>
                     <a class="logo" href="index.html">
-                        <img src="<?php echo $result['image'];?>" alt="Personal Portfolio">
+                        <img src="<?php echo $result['logo'];?>" alt="Personal Portfolio">
                         <span><?php echo $result['name'];?></span>
                     </a>
 <?php } } ?>
@@ -3795,7 +3795,7 @@
 ?>
                         <div class="logo footer-logo">
                             <a href="index.html" class="footer-logo-link">
-                                <img src="<?php echo $result['image'];?>" alt="logo">
+                                <img src="<?php echo $result['logo'];?>" alt="logo">
                                 <span><?php echo $result['name'];?></span>
                             </a>
                         </div>
