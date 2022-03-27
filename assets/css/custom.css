@@ -26,4 +26,6 @@
   align-items: center;
   justify-content: center;
 }
-
+.instruction {
+  float: left !important;
+}

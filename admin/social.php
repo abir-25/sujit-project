@@ -30,7 +30,7 @@
                       </div>
                     </div>
                     <div class="card-header d-flex align-items-center">
-                      <h3 class="h4">Update Social Media Link</h3>
+                      <h3 class="h4">Enter Information</h3>
                     </div>
                     <div class="card-body">
                       <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">

@@ -4,14 +4,15 @@
                 <!-- Page Header-->
                 <header class="page-header">
                     <div class="container-fluid">
-                        <h2 class="no-margin-bottom">Tables</h2>
+                        <h2 class="no-margin-bottom">Best Skills</h2>
                     </div>
                 </header>
                 <!-- Breadcrumb-->
                 <div class="breadcrumb-holder container-fluid">
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                        <li class="breadcrumb-item active">Gallery List</li>
+                        <li class="breadcrumb-item active">Basic Site Option</li>
+                        <li class="breadcrumb-item active">Best Skills</li>
                     </ul>
                 </div>
 
@@ -27,27 +28,27 @@
                                         </div>
                                     </div>
                                     <div class="card-header d-flex align-items-center">
-                                        <h3 class="h4">Gallery List</h3>
+                                        <h3 class="h4">Skill List</h3>
                                     </div>
                                     <div class="card-body">
 <?php
 
-	if(isset($_GET['delgalid']))
+	if(isset($_GET['delskillid']))
 	{
-		$delgalid = $_GET['delgalid'];
-		$query = "select * from tbl_gallery where id='$delgalid'"; 
+		$delskillid = $_GET['delskillid'];
+		$query = "select * from tbl_skills where id='$delskillid'"; 
 		$getdata = $db->select($query);
 		
 		if($getdata)
 		{
 			while($delimg = $getdata->fetch_assoc())
 			{
-				$dellink = $delimg['image'];
+				$dellink = $delimg['icon'];
 				unlink($dellink);
 			}
 		}
 		
-		$delquery = "delete from tbl_gallery where id = '$delgalid'";
+		$delquery = "delete from tbl_skills where id = '$delskillid'";
 		$deldata = $db->deletedata($delquery);
 		
 		if($deldata)
@@ -65,13 +66,13 @@
                                             <thead>
                                                 <tr>
                                                     <th width="20%">No.</th>
-                                                    <th width="50%">Image</th>
+                                                    <th width="50%">Skill</th>
                                                     <th width="30%">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
 <?php
-	$query = "select * from tbl_gallery order by id asc";				
+	$query = "select * from tbl_skills order by id asc";				
 	$post = $db->select($query);				
 	if($post)
 	{
@@ -83,14 +84,15 @@
                                                 <tr>
                                                     <th scope="row" style="vertical-align:middle"><?php echo $i; ?></th>
                                                     
-                                                    <td style="vertical-align:middle"><img class="userimglist" src="<?php echo $result['image']; ?>" alt="" /></td>
+                                                    <td style="vertical-align:middle"><img class="skill-list" src="<?php echo $result['icon']; ?>" alt="" /></td>
 													
 													
-                                                    <td style="vertical-align:middle"><a class="actionLink" href="editgallery.php?galid=<?php echo $result['id']; ?>">Update</a>  || <a class="actionLink" onclick= "return confirm('Are you sure to Delete This User?');" href="?delgalid=<?php echo $result['id'];?>">Delete</a></td>
+                                                    <td style="vertical-align:middle"><a class="actionLink" href="editskill.php?skillId=<?php echo $result['id']; ?>">Update</a>  || <a class="actionLink" onclick= "return confirm('Are you sure to Delete This skill?');" href="?delskillid=<?php echo $result['id'];?>">Delete</a></td>
                                                 </tr>
 <?php } } ?>
 											</tbody>
                                         </table>
+                                        <a href="addskill.php" class="btn btn-primary">Add Skills</a>
                                     </div>
                                 </div>
                             </div>

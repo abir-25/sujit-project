@@ -4,14 +4,15 @@
           <!-- Page Header-->
           <header class="page-header">
             <div class="container-fluid">
-              <h2 class="no-margin-bottom">Forms</h2>
+              <h2 class="no-margin-bottom">Change Admin Password</h2>
             </div>
           </header>
           <!-- Breadcrumb-->
           <div class="breadcrumb-holder container-fluid">
             <ul class="breadcrumb">
               <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-              <li class="breadcrumb-item active">Forms            </li>
+              <li class="breadcrumb-item active">Basic Site Option</li>
+              <li class="breadcrumb-item active">>Change Admin Password</li>
             </ul>
           </div>
           <!-- Forms Section-->
@@ -29,7 +30,7 @@
                       </div>
                     </div>
                     <div class="card-header d-flex align-items-center">
-                      <h3 class="h4">Update Admin Password</h3>
+                      <h3 class="h4">Update Information</h3>
                     </div>
                     <div class="card-body">
                       <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
@@ -44,52 +45,39 @@
 		$new = mysqli_real_escape_string($db->link1, $new);
 		$confirm = mysqli_real_escape_string($db->link1, $confirm);
 		
-		if(empty($old) || empty($new) || empty($confirm))
-		{
-			echo "<span class='error'>Field must not be empty!!</span>";
-		}
-		else
-		{
-			if($new == $confirm)
-			{
-				$new1 = $new;
-				$old = md5($old); 
-				$new = md5($new);  
+    if($new == $confirm)
+    {
+      $new1 = $new;
 
-				$cquery = "select * from tbl_login where password='$old'";
-				$check = $db->select($cquery);
-				if($check)
-				{
-					while($result = $check->fetch_assoc())
-					{
-						$query = "update tbl_login set password='$new' where id='1'";
-			
-						$result = $db->update($query);
-						if($result != false)
-						{
-							$query = "update tbl_temp set password='$new1' where id='1'";
-			
-							$result = $db->update($query);
-							
-							echo "<span style='color:green; font-size:18px;'>Password Changed Successfully!</span>";	
-						}
-						else
-						{
-							echo "<span style='color:red; font-size:18px;'>Error!! Password Not Changed...</span>";
-						}
-					}
-				}
-				else
-				{
-					echo "<span style='color:red; font-size:18px;'>Error!! Old Password Not Matched.</span>";
-				}
-			}
-			else
-			{
-				echo "<span style='color:red; font-size:18px;'>Error!! New Password is Not Confirmed.</span>";
-			}
-			
-		}
+      $cquery = "select * from tbl_login where password='$old'";
+      $check = $db->select($cquery);
+      if($check)
+      {
+        while($result = $check->fetch_assoc())
+        {
+          $query = "update tbl_login set password='$new' where id='1'";
+    
+          $result = $db->update($query);
+          if($result)
+          {
+            echo "<span style='color:green; font-size:18px;'>Password Changed Successfully!</span>";	
+          }
+          else
+          {
+            echo "<span style='color:red; font-size:18px;'>Error!! Password Not Changed...</span>";
+          }
+        }
+      }
+      else
+      {
+        echo "<span style='color:red; font-size:18px;'>Error!! Old Password Not Matched.</span>";
+      }
+    }
+    else
+    {
+      echo "<span style='color:red; font-size:18px;'>Error!! New Password is Not Confirmed.</span>";
+    }
+		
 	
 	}
 ?>
@@ -97,21 +85,24 @@
                         <div class="form-group row">
                           <label class="col-sm-3 form-control-label">Old Password</label>
                           <div class="col-sm-9">
-                            <input type="text" name="old" class="form-control" placeholder="Enter Old Password">
+                            <input type="text" name="old" 
+                            required class="form-control" placeholder="Enter Old Password">
                           </div>
                         </div>
 						<div class="line"></div>
 						<div class="form-group row">
                           <label class="col-sm-3 form-control-label">New Password</label>
                           <div class="col-sm-9">
-                            <input type="text" name="new" class="form-control" placeholder="Enter New Password">
+                            <input type="text" name="new" 
+                            required class="form-control" placeholder="Enter New Password">
                           </div>
                         </div>
 						<div class="line"></div>
 						<div class="form-group row">
                           <label class="col-sm-3 form-control-label">Confirm New Password</label>
                           <div class="col-sm-9">
-                            <input type="text" name="confirm" class="form-control" placeholder="Confirm New Password">
+                            <input type="text" name="confirm" 
+                            required class="form-control" placeholder="Confirm New Password">
                           </div>
                         </div>			 					
      

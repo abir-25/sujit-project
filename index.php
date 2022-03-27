@@ -169,59 +169,59 @@
             if($facebook!=""){
 ?>               
                         <li class="facebook">
-                            <a href="" class="social-icon-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="<?php echo $facebook; ?>" target="_blank" class="social-icon-link"><i class="fab fa-facebook-f"></i></a>
                         </li>
 <?php } if($youtube!=""){?>
                         <li class="facebook">
-                            <a href="" class="social-icon-link"><i class="fab fa-youtube"></i></a>
+                            <a href="<?php echo $youtube; ?>" target="_blank" class="social-icon-link"><i class="fab fa-youtube"></i></a>
                         </li>
 <?php } if($instagram!=""){?>
                         <li class="facebook">
-                            <a href="" class="social-icon-link"><i class="fab fa-instagram"></i></a>
+                            <a href="<?php echo $instagram; ?>" target="_blank" class="social-icon-link"><i class="fab fa-instagram"></i></a>
                         </li>
 <?php } if($linkedin!=""){?>
                         <li class="facebook">
-                            <a href="" class="social-icon-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="<?php echo $linkedin; ?>" target="_blank" class="social-icon-link"><i class="fab fa-linkedin-in"></i></a>
                         </li>
 <?php } if($twitter!=""){?>
                         <li class="facebook">
-                            <a href="" class="social-icon-link"><i class="fab fa-twitter"></i></a>
+                            <a href="<?php echo $twitter; ?>" target="_blank" class="social-icon-link"><i class="fab fa-twitter"></i></a>
                         </li>
 <?php } if($github!=""){?>                       
                         <li class="facebook">
-                            <a href="" class="social-icon-link"><i class="fab fa-github"></i></a>
+                            <a href="<?php echo $github; ?>" target="_blank" class="social-icon-link"><i class="fab fa-github"></i></a>
                         </li>
 <?php } if($website!=""){?>  
                         <li class="facebook">
-                            <a href="" class="social-icon-link"><i class="fas fa-globe"></i></a>
+                            <a href="<?php echo $website; ?>" target="_blank" class="social-icon-link"><i class="fas fa-globe"></i></a>
                         </li>
 <?php } if($pinterest!=""){?>  
                         <li class="facebook">
-                            <a href="" class="social-icon-link"><i class="fab fa-pinterest-p"></i></a>
+                            <a href="<?php echo $pinterest; ?>" target="_blank" class="social-icon-link"><i class="fab fa-pinterest-p"></i></a>
                         </li>
 <?php } if($reddit!=""){?>  
                         <li class="facebook">
-                            <a href="" class="social-icon-link"><i class="fab fa-reddit-alien"></i></a>
+                            <a href="<?php echo $reddit; ?>" target="_blank" class="social-icon-link"><i class="fab fa-reddit-alien"></i></a>
                         </li>
 <?php } if($tumblr!=""){?>  
                         <li class="facebook">
-                            <a href="" class="social-icon-link"><i class="fab fa-tumblr"></i></a>
+                            <a href="<?php echo $tumblr; ?>" target="_blank" class="social-icon-link"><i class="fab fa-tumblr"></i></a>
                         </li>
  <?php } if($google_plus!=""){?>  
                         <li class="facebook">
-                            <a href="" class="social-icon-link"><i class="fab fa-google-plus-g"></i></a>
+                            <a href="<?php echo $google_plus; ?>" target="_blank" class="social-icon-link"><i class="fab fa-google-plus-g"></i></a>
                         </li>
 <?php } if($twitch!=""){?>  
                         <li class="facebook">
-                            <a href="" class="social-icon-link"><i class="fab fa-twitch"></i></a>
+                            <a href="<?php echo $twitch; ?>" target="_blank" class="social-icon-link"><i class="fab fa-twitch"></i></a>
                         </li>
 <?php } if($discord!=""){?>  
                         <li class="facebook">
-                            <a href="" class="social-icon-link"><i class="fab fa-discord"></i></a>
+                            <a href="<?php echo $discord; ?>" target="_blank" class="social-icon-link"><i class="fab fa-discord"></i></a>
                         </li>
 <?php } if($vimeo!=""){?>  
                         <li class="facebook">
-                            <a href="" class="social-icon-link"><i class="fab fa-vimeo-v"></i></a>
+                            <a href="<?php echo $vimeo; ?>" target="_blank" class="social-icon-link"><i class="fab fa-vimeo-v"></i></a>
                         </li>
 <?php } } }?>
                     </ul>
@@ -322,59 +322,59 @@
             if($facebook!=""){
 ?>               
                         <li class="facebook">
-                            <a href="" class="social-icon-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="<?php echo $facebook; ?>" target="_blank" class="social-icon-link"><i class="fab fa-facebook-f"></i></a>
                         </li>
 <?php } if($youtube!=""){?>
                         <li class="facebook">
-                            <a href="" class="social-icon-link"><i class="fab fa-youtube"></i></a>
+                            <a href="<?php echo $youtube; ?>" target="_blank" class="social-icon-link"><i class="fab fa-youtube"></i></a>
                         </li>
 <?php } if($instagram!=""){?>
                         <li class="facebook">
-                            <a href="" class="social-icon-link"><i class="fab fa-instagram"></i></a>
+                            <a href="<?php echo $instagram; ?>" target="_blank" class="social-icon-link"><i class="fab fa-instagram"></i></a>
                         </li>
 <?php } if($linkedin!=""){?>
                         <li class="facebook">
-                            <a href="" class="social-icon-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="<?php echo $linkedin; ?>" target="_blank" class="social-icon-link"><i class="fab fa-linkedin-in"></i></a>
                         </li>
 <?php } if($twitter!=""){?>
                         <li class="facebook">
-                            <a href="" class="social-icon-link"><i class="fab fa-twitter"></i></a>
+                            <a href="<?php echo $twitter; ?>" target="_blank" class="social-icon-link"><i class="fab fa-twitter"></i></a>
                         </li>
 <?php } if($github!=""){?>                       
                         <li class="facebook">
-                            <a href="" class="social-icon-link"><i class="fab fa-github"></i></a>
+                            <a href="<?php echo $github; ?>" target="_blank" class="social-icon-link"><i class="fab fa-github"></i></a>
                         </li>
 <?php } if($website!=""){?>  
                         <li class="facebook">
-                            <a href="" class="social-icon-link"><i class="fas fa-globe"></i></a>
+                            <a href="<?php echo $website; ?>" target="_blank" class="social-icon-link"><i class="fas fa-globe"></i></a>
                         </li>
 <?php } if($pinterest!=""){?>  
                         <li class="facebook">
-                            <a href="" class="social-icon-link"><i class="fab fa-pinterest-p"></i></a>
+                            <a href="<?php echo $pinterest; ?>" target="_blank" class="social-icon-link"><i class="fab fa-pinterest-p"></i></a>
                         </li>
 <?php } if($reddit!=""){?>  
                         <li class="facebook">
-                            <a href="" class="social-icon-link"><i class="fab fa-reddit-alien"></i></a>
+                            <a href="<?php echo $reddit; ?>" target="_blank" class="social-icon-link"><i class="fab fa-reddit-alien"></i></a>
                         </li>
 <?php } if($tumblr!=""){?>  
                         <li class="facebook">
-                            <a href="" class="social-icon-link"><i class="fab fa-tumblr"></i></a>
+                            <a href="<?php echo $tumblr; ?>" target="_blank" class="social-icon-link"><i class="fab fa-tumblr"></i></a>
                         </li>
  <?php } if($google_plus!=""){?>  
                         <li class="facebook">
-                            <a href="" class="social-icon-link"><i class="fab fa-google-plus-g"></i></a>
+                            <a href="<?php echo $google_plus; ?>" target="_blank" class="social-icon-link"><i class="fab fa-google-plus-g"></i></a>
                         </li>
 <?php } if($twitch!=""){?>  
                         <li class="facebook">
-                            <a href="" class="social-icon-link"><i class="fab fa-twitch"></i></a>
+                            <a href="<?php echo $twitch; ?>" target="_blank" class="social-icon-link"><i class="fab fa-twitch"></i></a>
                         </li>
 <?php } if($discord!=""){?>  
                         <li class="facebook">
-                            <a href="" class="social-icon-link"><i class="fab fa-discord"></i></a>
+                            <a href="<?php echo $discord; ?>" target="_blank" class="social-icon-link"><i class="fab fa-discord"></i></a>
                         </li>
 <?php } if($vimeo!=""){?>  
                         <li class="facebook">
-                            <a href="" class="social-icon-link"><i class="fab fa-vimeo-v"></i></a>
+                            <a href="<?php echo $vimeo; ?>" target="_blank" class="social-icon-link"><i class="fab fa-vimeo-v"></i></a>
                         </li>
 <?php } } }?>
                     </ul>
@@ -384,9 +384,16 @@
                                         <div class="skill-share-inner">
                                             <span class="title">best skill on</span>
                                             <ul class="skill-share d-flex liststyle">
-                                                <li><img src="assets/images/icons/icons-01.png" alt="Icons Images"></li>
-                                                <li><img src="assets/images/icons/icons-02.png" alt="Icons Images"></li>
-                                                <li><img src="assets/images/icons/icons-03.png" alt="Icons Images"></li>
+<?php
+    $query1 = "select * from tbl_skills";
+    $getData1 = $db->select($query1);
+    if($getData1)
+    {
+        while($result1 = $getData1->fetch_assoc()) 
+        {
+?>                                
+                                                <li><img src="admin/<?php echo $result1['icon']; ?>" alt="Icons Images"></li>
+<?php } } ?>
                                             </ul>
                                         </div>
                                     </div>
@@ -3053,60 +3060,58 @@
             $vimeo          = $result["vimeo"];
 
             if($facebook!=""){
-?>               
-                       
-                            <a href="" class="social-icon-link"><i class="fab fa-facebook-f"></i></a>
-                        
+?>                          
+                            <a href="<?php echo $facebook; ?>" target="_blank" class="social-icon-link"><i class="fab fa-facebook-f"></i></a>           
 <?php } if($youtube!=""){?>
                         
-                            <a href="" class="social-icon-link"><i class="fab fa-youtube"></i></a>
+                            <a href="<?php echo $youtube; ?>" target="_blank" class="social-icon-link"><i class="fab fa-youtube"></i></a>
                        
 <?php } if($instagram!=""){?>
                         
-                            <a href="" class="social-icon-link"><i class="fab fa-instagram"></i></a>
+                            <a href="<?php echo $instagram; ?>" target="_blank" class="social-icon-link"><i class="fab fa-instagram"></i></a>
                         
 <?php } if($linkedin!=""){?>
                         
-                            <a href="" class="social-icon-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="<?php echo $linkedin; ?>" target="_blank" class="social-icon-link"><i class="fab fa-linkedin-in"></i></a>
                         
 <?php } if($twitter!=""){?>
                         
-                            <a href="" class="social-icon-link"><i class="fab fa-twitter"></i></a>
+                            <a href="<?php echo $twitter; ?>" target="_blank" class="social-icon-link"><i class="fab fa-twitter"></i></a>
                        
 <?php } if($github!=""){?>                       
                         
-                            <a href="" class="social-icon-link"><i class="fab fa-github"></i></a>
+                            <a href="<?php echo $github; ?>" target="_blank" class="social-icon-link"><i class="fab fa-github"></i></a>
                         
 <?php } if($website!=""){?>  
                     
-                            <a href="" class="social-icon-link"><i class="fas fa-globe"></i></a>
+                            <a href="<?php echo $website; ?>" target="_blank" class="social-icon-link"><i class="fas fa-globe"></i></a>
                         
 <?php } if($pinterest!=""){?>  
                         
-                            <a href="" class="social-icon-link"><i class="fab fa-pinterest-p"></i></a>
+                            <a href="<?php echo $pinterest; ?>" target="_blank" class="social-icon-link"><i class="fab fa-pinterest-p"></i></a>
                         
 <?php } if($reddit!=""){?>  
                         
-                            <a href="" class="social-icon-link"><i class="fab fa-reddit-alien"></i></a>
+                            <a href="<?php echo $reddit; ?>" target="_blank" class="social-icon-link"><i class="fab fa-reddit-alien"></i></a>
                         
 <?php } if($tumblr!=""){?>  
                        
-                            <a href="" class="social-icon-link"><i class="fab fa-tumblr"></i></a>
+                            <a href="<?php echo $tumblr; ?>" target="_blank" class="social-icon-link"><i class="fab fa-tumblr"></i></a>
                         
  <?php } if($google_plus!=""){?>  
                        
-                            <a href="" class="social-icon-link"><i class="fab fa-google-plus-g"></i></a>
+                            <a href="<?php echo $google_plus; ?>" target="_blank" class="social-icon-link"><i class="fab fa-google-plus-g"></i></a>
                         
 <?php } if($twitch!=""){?>  
                         
-                            <a href="" class="social-icon-link"><i class="fab fa-twitch"></i></a>
+                            <a href="<?php echo $twitch; ?>" target="_blank" class="social-icon-link"><i class="fab fa-twitch"></i></a>
                         
 <?php } if($discord!=""){?>  
                        
-                            <a href="" class="social-icon-link"><i class="fab fa-discord"></i></a>
+                            <a href="<?php echo $discord; ?>" target="_blank" class="social-icon-link"><i class="fab fa-discord"></i></a>
 
 <?php } if($vimeo!=""){?>  
-                            <a href="" class="social-icon-link"><i class="fab fa-vimeo-v"></i></a>
+                            <a href="<?php echo $vimeo; ?>" target="_blank" class="social-icon-link"><i class="fab fa-vimeo-v"></i></a>
 <?php } } }?>
                     </ul>
                                     <!-- <a href="#"><i data-feather="facebook"></i></a>

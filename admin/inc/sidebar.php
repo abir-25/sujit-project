@@ -25,10 +25,10 @@
                         <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
                             <li><a href="editdashboard.php">Admin Dashboard</a></li>       
                             <li><a href="titlelogo.php">Basic Information</a></li>
+                            <li><a href="updatebio.php">Update Bio</a></li>
                             <li><a href="social.php">Social Media</a></li>
-                            <li><a href="footer.php">Footer Text</a></li>
-                            <li><a href="sliderlist.php">Update Slider</a></li>
-                            <li><a href="changepassword.php">Change Password</a></li>
+                            <li><a href="skilllist.php">Best Skills</a></li>
+                            <li><a href="changepassword.php">Change Admin Password</a></li>
                         </ul>
                     </li>
 					<li><a href="#exampledropdownDropdown2" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-cogs"></i>Brand Option</a>

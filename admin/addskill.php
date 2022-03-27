@@ -4,7 +4,7 @@
           <!-- Page Header-->
           <header class="page-header">
             <div class="container-fluid">
-              <h2 class="no-margin-bottom">Admin Dashboard</h2>
+              <h2 class="no-margin-bottom">Best Skills</h2>
             </div>
           </header>
           <!-- Breadcrumb-->
@@ -12,15 +12,14 @@
             <ul class="breadcrumb">
               <li class="breadcrumb-item"><a href="index.php">Home</a></li>
               <li class="breadcrumb-item active">Basic Site Option</li>  
-              <li class="breadcrumb-item active">Admin Dashboard</li>
+              <li class="breadcrumb-item active">Best Skills</li>
             </ul>
           </div>
           <!-- Forms Section-->
           <section class="forms"> 
             <div class="container-fluid">
               <div class="row">
-               
-               
+            
                 <div class="col-lg-12">
                   <div class="card">
                     <div class="card-close">
@@ -38,16 +37,16 @@
 	if($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
 		$permited  = array('jpg', 'jpeg', 'png', 'gif');
-		$file_name = $_FILES['image']['name'];
-		$file_size = $_FILES['image']['size'];
-		$file_temp = $_FILES['image']['tmp_name'];
+		$file_name = $_FILES['icon']['name'];
+		$file_size = $_FILES['icon']['size'];
+		$file_temp = $_FILES['icon']['tmp_name'];
 
 		$div = explode('.', $file_name);
 		$file_ext = strtolower(end($div));
 		$unique_image = substr(md5(time()), 0, 10).'.'.$file_ext;
-		$uploaded_image = "upload/".$unique_image;
+		$uploaded_image = "upload/skill/".$unique_image;
 	
-		if(!empty($file_name))
+		  if(!empty($file_name))
 			{
 				if (in_array($file_ext, $permited) === false) 
 				{
@@ -55,74 +54,27 @@
 				} 
 				else
 				{	
-					move_uploaded_file($file_temp, $uploaded_image);
-                    $query1 = "select * from tbl_dashboard";
-                    $getpost = $db->num_rows($query1);
-                    if(!$getpost)
-                    {
-                        $query = "INSERT INTO tbl_dashboard(image) VALUES('$uploaded_image')";
-                        $inserted_rows = $db->insert($query);
-                        if ($inserted_rows) 
-                        {
-                            echo "<span class='success'>Data Inserted Successfully.
-                            </span>";
-                        }
-                        else 
-                        {
-                            echo "<span class='error'>Data Not Inserted !!</span>";
-                        }
-                    }
-					else{
-                        $query = "UPDATE tbl_dashboard 
-						  SET 
-						  image = '$uploaded_image'";
-				
-				        $updated_rows = $db->update($query);
-                        if ($updated_rows) 
-                        {
-                            echo "<span class='success'>Data Updated Successfully.
-                            </span>";
-                        }
-                        else 
-                        {
-                            echo "<span class='error'>Data Not Updated !!</span>";
-                        }
-                    }	
-					
-				}
-			}
-			else
-			{
-				echo "<span class='error'>Error...Please Select an image to upload !!</span>";
-			}
-	}
+            move_uploaded_file($file_temp, $uploaded_image);
+            $query = "INSERT INTO tbl_skills(icon) VALUES('$uploaded_image')";
+            $inserted_rows = $db->insert($query);
+            if ($inserted_rows) 
+            {
+                echo "<span class='success'>Data Inserted Successfully.
+                </span>";
+            }
+            else 
+            {
+                echo "<span class='error'>Data Not Inserted !!</span>";
+            }
+			  }
+	   } 
+  }
 ?>
-<?php
-	$query1 = "select * from tbl_dashboard";
-    $getpost = $db->num_rows($query1);
-    if($getpost)
-    {
-	    $getpost = $db->select($query1);
-	    while($postresult = $getpost->fetch_assoc())
-	    {
-?>
-						<div class="form-group row">
-                          <label class="col-sm-3 form-control-label">Upload Image</label>
-                          <div class="col-sm-9" style="text-align:center">
-						  <img src="<?php echo $postresult['image'];?>" width="300px"/><br/>
-                            <input type="file" name="image" class="form-control">
-                          </div>
-                        </div>  
                         <div class="form-group row">
-                          <div class="col-sm-4 offset-sm-3">
-                            <button type="submit" class="btn btn-primary">Update</button>
-                          </div>
-                        </div>
-<?php } } else { ?>
-                        <div class="form-group row">
-                          <label class="col-sm-3 form-control-label">Upload Image</label>
+                          <label class="col-sm-3 form-control-label">Upload Skill Icon</label>
                           <div class="col-sm-9" style="text-align:center">					 
-                            <input type="file" name="image" class="form-control">
+                            <input type="file" required name="icon" class="form-control">
+                            <span class="instruction">Upload .png icon of your skills. e.g. wordpress icon, photoshop icon</span>
                           </div>
                         </div> 
                         <div class="form-group row">
@@ -130,8 +82,7 @@
                             <button type="submit" class="btn btn-primary">Add</button>
                           </div>
                         </div>
-<?php } ?>						
-     
+          
                       </form>
                     </div>
                   </div>
