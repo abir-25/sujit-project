@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 23, 2022 at 06:56 PM
+-- Generation Time: Mar 27, 2022 at 03:29 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -30,9 +30,18 @@ SET time_zone = "+00:00";
 CREATE TABLE `tbl_basic_info` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL,
+  `nickname` varchar(100) NOT NULL,
+  `logo` varchar(255) NOT NULL,
+  `favicon` varchar(255) NOT NULL,
   `copyright` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_basic_info`
+--
+
+INSERT INTO `tbl_basic_info` (`id`, `name`, `nickname`, `logo`, `favicon`, `copyright`) VALUES
+(4, 'Sujit Barua Arnob', 'Sujit', 'upload/bio/87c3577b1e.jpg', 'upload/bio/87c3577b1e.jpg', '© 2021. All rights reserved by Sujit Barua');
 
 -- --------------------------------------------------------
 
@@ -46,6 +55,13 @@ CREATE TABLE `tbl_bio` (
   `image` varchar(255) NOT NULL,
   `intro` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_bio`
+--
+
+INSERT INTO `tbl_bio` (`id`, `name`, `image`, `intro`) VALUES
+(2, 'Mr. Sujit Barua', 'upload/bio/afcb8ba7cf.png', 'Hello there. This is Sujit Barua Arnob. I am a designer. Basically, I have designed Logo, Banner, Modern Website. I have a specialization in WordPress and Bootstrap CSS framework. I have completed many projects. ');
 
 -- --------------------------------------------------------
 
@@ -88,7 +104,8 @@ CREATE TABLE `tbl_contact` (
   `email` varchar(255) NOT NULL,
   `phone` varchar(20) NOT NULL,
   `subject` varchar(255) NOT NULL,
-  `message` text NOT NULL
+  `message` text NOT NULL,
+  `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -104,6 +121,24 @@ CREATE TABLE `tbl_contact_info` (
   `phone` varchar(20) NOT NULL,
   `email` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_dashboard`
+--
+
+CREATE TABLE `tbl_dashboard` (
+  `id` int(11) NOT NULL,
+  `image` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_dashboard`
+--
+
+INSERT INTO `tbl_dashboard` (`id`, `image`) VALUES
+(3, 'upload/2606995da4.jpg');
 
 -- --------------------------------------------------------
 
@@ -176,6 +211,26 @@ CREATE TABLE `tbl_job_exp` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_login`
+--
+
+CREATE TABLE `tbl_login` (
+  `id` int(11) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_login`
+--
+
+INSERT INTO `tbl_login` (`id`, `email`, `password`, `status`) VALUES
+(1, 'sujit@gmail.com', '12345', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_portfolio`
 --
 
@@ -225,6 +280,15 @@ CREATE TABLE `tbl_profession` (
   `title` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tbl_profession`
+--
+
+INSERT INTO `tbl_profession` (`id`, `title`) VALUES
+(1, 'Web Designer'),
+(2, 'Graphics Designer'),
+(3, 'WordPress Theme Developer');
+
 -- --------------------------------------------------------
 
 --
@@ -250,6 +314,16 @@ CREATE TABLE `tbl_skills` (
   `icon` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tbl_skills`
+--
+
+INSERT INTO `tbl_skills` (`id`, `icon`) VALUES
+(4, 'upload/skill/d14935bf74.png'),
+(5, 'upload/skill/6c21cc68b6.png'),
+(6, 'upload/skill/5713de36fc.png'),
+(7, 'upload/skill/d6420d4130.png');
+
 -- --------------------------------------------------------
 
 --
@@ -273,6 +347,13 @@ CREATE TABLE `tbl_social` (
   `discord` varchar(255) NOT NULL,
   `vimeo` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_social`
+--
+
+INSERT INTO `tbl_social` (`id`, `facebook`, `youtube`, `instagram`, `linkedin`, `twitter`, `github`, `website`, `pinterest`, `reddit`, `tumblr`, `google_plus`, `twitch`, `discord`, `vimeo`) VALUES
+(3, 'https://www.facebook.com/AbirMahmud101/', 'https://www.youtube.com/channel/UCtl8kJmRv19z8SDZ-7JpTiA', 'https://www.instagram.com/_abir_mahmud_/', 'https://www.linkedin.com/in/mohammad-...', 'https://twitter.com/TheAbirMahmud', 'https://github.com/abir-25', '', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -345,6 +426,12 @@ ALTER TABLE `tbl_contact_info`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbl_dashboard`
+--
+ALTER TABLE `tbl_dashboard`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tbl_design_skills`
 --
 ALTER TABLE `tbl_design_skills`
@@ -372,6 +459,12 @@ ALTER TABLE `tbl_feature`
 -- Indexes for table `tbl_job_exp`
 --
 ALTER TABLE `tbl_job_exp`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_login`
+--
+ALTER TABLE `tbl_login`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -436,13 +529,13 @@ ALTER TABLE `tbl_topic`
 -- AUTO_INCREMENT for table `tbl_basic_info`
 --
 ALTER TABLE `tbl_basic_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_bio`
 --
 ALTER TABLE `tbl_bio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_blog`
@@ -467,6 +560,12 @@ ALTER TABLE `tbl_contact`
 --
 ALTER TABLE `tbl_contact_info`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_dashboard`
+--
+ALTER TABLE `tbl_dashboard`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_design_skills`
@@ -499,6 +598,12 @@ ALTER TABLE `tbl_job_exp`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `tbl_login`
+--
+ALTER TABLE `tbl_login`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `tbl_portfolio`
 --
 ALTER TABLE `tbl_portfolio`
@@ -520,7 +625,7 @@ ALTER TABLE `tbl_pricing_point`
 -- AUTO_INCREMENT for table `tbl_profession`
 --
 ALTER TABLE `tbl_profession`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_reply`
@@ -532,13 +637,13 @@ ALTER TABLE `tbl_reply`
 -- AUTO_INCREMENT for table `tbl_skills`
 --
 ALTER TABLE `tbl_skills`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbl_social`
 --
 ALTER TABLE `tbl_social`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_testimonial`

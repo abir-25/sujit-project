@@ -4,14 +4,15 @@
                 <!-- Page Header-->
                 <header class="page-header">
                     <div class="container-fluid">
-                        <h2 class="no-margin-bottom">Tables</h2>
+                        <h2 class="no-margin-bottom">Feature List</h2>
                     </div>
                 </header>
                 <!-- Breadcrumb-->
                 <div class="breadcrumb-holder container-fluid">
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                        <li class="breadcrumb-item active">Promotion List</li>
+                        <li class="breadcrumb-item active">Feature Option</li>
+                        <li class="breadcrumb-item active">Feature List</li>
                     </ul>
                 </div>
 
@@ -23,31 +24,31 @@
                                     <div class="card-close">
                                         <div class="dropdown">
                                             <button type="button" id="closeCard1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
-                                            <div aria-labelledby="closeCard1" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
+                                            <div aria-labelledby="closeCard1" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a></div>
                                         </div>
                                     </div>
                                     <div class="card-header d-flex align-items-center">
-                                        <h3 class="h4">Promotion List</h3>
+                                        <h3 class="h4">Feature List</h3>
                                     </div>
                                     <div class="card-body">
 <?php
 
-	if(isset($_GET['delpromoid']))
+	if(isset($_GET['delfeatureid']))
 	{
-		$delpromoid = $_GET['delpromoid'];
-		$query = "select * from tbl_promo where id='$delpromoid'"; 
+		$delfeatureid = $_GET['delfeatureid'];
+		$query = "select * from tbl_feature where id='$delfeatureid'"; 
 		$getdata = $db->select($query);
 		
 		if($getdata)
 		{
 			while($delimg = $getdata->fetch_assoc())
 			{
-				$dellink = $delimg['image'];
+				$dellink = $delimg['icon'];
 				unlink($dellink);
 			}
 		}
 		
-		$delquery = "delete from tbl_promo where id = '$delpromoid'";
+		$delquery = "delete from tbl_feature where id = '$delfeatureid'";
 		$deldata = $db->deletedata($delquery);
 		
 		if($deldata)
@@ -64,19 +65,16 @@
                                         <table class="table">
                                             <thead>
                                                 <tr>
-                                                    <th>No.</th>
-                                                    <th>Name</th>
-                                                    <th>Image</th>
-                                                    <th>Old Price</th>
-                                                    <th>New Price</th>
-                                                    <th>Description</th>
-                                                   
-                                                    <th>Action</th>
+                                                    <th width="8%">No.</th>
+                                                    <th width="22%">Title</th>
+                                                    <th width="40%">Description</th>
+                                                    <th width="10%">Icon</th>
+                                                    <th width="20%">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
 <?php
-	$query = "select * from tbl_promo order by id asc";				
+	$query = "select * from tbl_feature order by id asc";				
 	$post = $db->select($query);				
 	if($post)
 	{
@@ -87,18 +85,20 @@
 ?>
                                                 <tr>
                                                     <th scope="row" style="vertical-align:middle"><?php echo $i; ?></th>
-                                                    <td style="vertical-align:middle"><?php echo $result['name']; ?></td>
-                                                    <td style="vertical-align:middle"><img class="userimglist" src="<?php echo $result['image']; ?>" alt="" /></td>
+                                                    
+                                                    <td scope="row" style="vertical-align:middle"><?php echo $result['title'];; ?></td>
+
+                                                    <td scope="row" style="vertical-align:middle"><?php echo $result['description'];; ?></td>
+
+                                                    <td style="vertical-align:middle"><img class="skill-list" src="<?php echo $result['icon']; ?>" alt="" /></td>
 													
-                                                    <td style="vertical-align:middle; text-align:justify"><?php echo $result['oldprice']; ?></td>
-													<td style="vertical-align:middle; text-align:justify"><?php echo $result['newprice']; ?></td>
-													<td style="vertical-align:middle"><?php echo $fm->textShorten($result['description'],100); ?></td>
 													
-                                                    <td style="vertical-align:middle" align="center"><a class="actionLink" href="editpromo.php?promoid=<?php echo $result['id']; ?>">Update</a><br> || <br><a class="actionLink" onclick= "return confirm('Are you sure to Delete This User?');" href="?delpromoid=<?php echo $result['id'];?>">Delete</a></td>
+                                                    <td style="vertical-align:middle"><a class="actionLink" href="editfeature.php?featureId=<?php echo $result['id']; ?>">Update</a>  || <a class="actionLink" onclick= "return confirm('Are you sure to Delete This feature?');" href="?delfeatureid=<?php echo $result['id'];?>">Delete</a></td>
                                                 </tr>
 <?php } } ?>
 											</tbody>
                                         </table>
+                                        <a href="addfeature.php" class="btn btn-primary">Add</a>
                                     </div>
                                 </div>
                             </div>

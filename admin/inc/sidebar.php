@@ -20,7 +20,7 @@
 <?php } } ?>
                 <!-- Sidebar Navidation Menus<span class="heading">Main</span>-->
                 <ul class="list-unstyled">
-                    <!--<li class="active"><a href="index.php"> <i class="icon-home"></i>Home </a></li>-->
+                    <li class="active"><a href="index.php"> <i class="icon-home"></i>Home </a></li>
 					<li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-file-text"></i>Basic Site Option</a>
                         <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
                             <li><a href="editdashboard.php">Admin Dashboard</a></li>       
@@ -31,10 +31,10 @@
                             <li><a href="changepassword.php">Change Admin Password</a></li>
                         </ul>
                     </li>
-					<li><a href="#exampledropdownDropdown2" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-cogs"></i>Brand Option</a>
+					<li><a href="#exampledropdownDropdown2" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-cogs"></i>Feature Option</a>
                         <ul id="exampledropdownDropdown2" class="collapse list-unstyled ">
-                            <li><a href="addbrand.php">Add Brand</a></li>
-                            <li><a href="brandlist.php">Brand List</a></li>            
+                            <li><a href="addfeature.php">Add Feature</a></li>
+                            <li><a href="featurelist.php">Feature List</a></li>            
                         </ul>
                     </li>
 					<li><a href="#exampledropdownDropdown3" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-external-link"></i>Exclusive Option</a>

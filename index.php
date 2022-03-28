@@ -427,27 +427,35 @@
                     </div>
                 </div>
                 <div class="row row--25 mt_md--10 mt_sm--10">
-
+<?php
+    $query1 = "select * from tbl_feature";
+    $getData1 = $db->select($query1);
+    if($getData1)
+    {
+        while($result1 = $getData1->fetch_assoc()) 
+        {
+?>   
                     <!-- Start Single Service -->
                     <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="100" data-aos-once="true" class="col-lg-6 col-xl-4 col-md-6 col-sm-12 col-12 mt--50 mt_md--30 mt_sm--30">
                         <div class="rn-service">
                             <div class="inner">
                                 <div class="icon">
-                                    <i data-feather="menu"></i>
+                                    <img src="<?php echo $result1['icon']; ?>" alt="">
+                                    <!-- <i data-feather="menu"></i> -->
                                 </div>
                                 <div class="content">
-                                    <h4 class="title"><a href="#">Business Stratagy</a></h4>
-                                    <p class="description">I throw myself down among the tall grass by the stream as I
-                                        lie close to the earth.</p>
+                                    <h4 class="title"><a href="#"><?php echo $result1['title']; ?></a></h4>
+                                    <p class="description"><?php echo $result1['description']; ?></p>
                                     <a class="read-more-button" href="#"><i class="feather-arrow-right"></i></a>
                                 </div>
                             </div>
-                            <a class="over-link" href="#"></a>
+                            <a class="over-link" href="<?php echo $result1['work_link']; ?>"></a>
                         </div>
-                    </div>
+                   </div>
+<?php } } ?>
                     <!-- End SIngle Service -->
                     <!-- Start Single Service -->
-                    <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="300" data-aos-once="true" class="col-lg-6 col-xl-4 col-md-6 col-sm-12 col-12 mt--50 mt_md--30 mt_sm--30">
+                    <!-- <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="300" data-aos-once="true" class="col-lg-6 col-xl-4 col-md-6 col-sm-12 col-12 mt--50 mt_md--30 mt_sm--30">
                         <div class="rn-service">
                             <div class="inner">
                                 <div class="icon">
@@ -462,10 +470,10 @@
                             </div>
                             <a class="over-link" href="#"></a>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- End SIngle Service -->
                     <!-- Start Single Service -->
-                    <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="500" data-aos-once="true" class="col-lg-6 col-xl-4 col-md-6 col-sm-12 col-12 mt--50 mt_md--30 mt_sm--30">
+                    <!-- <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="500" data-aos-once="true" class="col-lg-6 col-xl-4 col-md-6 col-sm-12 col-12 mt--50 mt_md--30 mt_sm--30">
                         <div class="rn-service">
                             <div class="inner">
                                 <div class="icon">
@@ -480,10 +488,10 @@
                             </div>
                             <a class="over-link" href="#"></a>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- End SIngle Service -->
                     <!-- Start Single Service -->
-                    <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="100" data-aos-once="true" class="col-lg-6 col-xl-4 col-md-6 col-sm-12 col-12 mt--50 mt_md--30 mt_sm--30">
+                    <!-- <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="100" data-aos-once="true" class="col-lg-6 col-xl-4 col-md-6 col-sm-12 col-12 mt--50 mt_md--30 mt_sm--30">
                         <div class="rn-service">
                             <div class="inner">
                                 <div class="icon">
@@ -499,10 +507,10 @@
                             </div>
                             <a class="over-link" href="#"></a>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- End SIngle Service -->
                     <!-- Start Single Service -->
-                    <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="300" data-aos-once="true" class="col-lg-6 col-xl-4 col-md-6 col-sm-12 col-12 mt--50 mt_md--30 mt_sm--30">
+                    <!-- <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="300" data-aos-once="true" class="col-lg-6 col-xl-4 col-md-6 col-sm-12 col-12 mt--50 mt_md--30 mt_sm--30">
                         <div class="rn-service">
                             <div class="inner">
                                 <div class="icon">
@@ -517,10 +525,10 @@
                             </div>
                             <a class="over-link" href="#"></a>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- End SIngle Service -->
                     <!-- Start Single Service -->
-                    <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="500" data-aos-once="true" class="col-lg-6 col-xl-4 col-md-6 col-sm-12 col-12 mt--50 mt_md--30 mt_sm--30">
+                    <!-- <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="500" data-aos-once="true" class="col-lg-6 col-xl-4 col-md-6 col-sm-12 col-12 mt--50 mt_md--30 mt_sm--30">
                         <div class="rn-service">
                             <div class="inner">
                                 <div class="icon">
@@ -535,8 +543,8 @@
                             </div>
                             <a class="over-link" href="#"></a>
                         </div>
-                    </div>
-                    <!-- End SIngle Service -->
+                    </div> 
+                    End SIngle Service -->
 
                 </div>
             </div>

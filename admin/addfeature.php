@@ -4,15 +4,16 @@
           <!-- Page Header-->
           <header class="page-header">
             <div class="container-fluid">
-              <h2 class="no-margin-bottom">Forms</h2>
+              <h2 class="no-margin-bottom">Add Feature</h2>
             </div>
           </header>
           <!-- Breadcrumb-->
           <div class="breadcrumb-holder container-fluid">
             <ul class="breadcrumb">
               <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-              <li class="breadcrumb-item active">Forms            </li>
-            </ul>
+              <li class="breadcrumb-item active">Feature Option</li>
+			  <li class="breadcrumb-item active">Add Feature</li>
+			</ul>
           </div>
           <!-- Forms Section-->
           <section class="forms"> 
@@ -29,107 +30,84 @@
                       </div>
                     </div>
                     <div class="card-header d-flex align-items-center">
-                      <h3 class="h4">Add Brand</h3>
+                      <h3 class="h4">Enter Information</h3>
                     </div>
                     <div class="card-body">
                       <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
 <?php
 	if($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
-		$name 	   = $_POST['name'];
-		$para1 	   = $_POST['para1'];
-		$para2     = $_POST['para2'];
-		$price     = $_POST['price'];
+		$title  = mysqli_real_escape_string($db->link1, $_POST['title']);
+		$description  = mysqli_real_escape_string($db->link1, $_POST['description']);
+		$work_link = $_POST['work_link'];
 		 
-		 
-		$permited  = array('jpg', 'jpeg', 'png', 'gif');
-		$file_name = $_FILES['image']['name'];
-		$file_size = $_FILES['image']['size'];
-		$file_temp = $_FILES['image']['tmp_name'];
+		$permitted  = array('jpg', 'jpeg', 'png', 'gif');
+		$file_name = $_FILES['icon']['name'];
+		$file_size = $_FILES['icon']['size'];
+		$file_temp = $_FILES['icon']['tmp_name'];
 
 		$div = explode('.', $file_name);
 		$file_ext = strtolower(end($div));
 		$unique_image = substr(md5(time()), 0, 10).'.'.$file_ext;
-		$uploaded_image = "upload/".$unique_image;
-	
-		if($name == "" || $para1 == "" || $para2 == "" || $price == "")
-		{
-			echo "<span class='error'>Error...Field must not be empty !!</span>";
-		}
-		else
-		{
-			if(!empty($file_name))
-			{
-				if (in_array($file_ext, $permited) === false) 
-				{
-					echo "<span class='error'>Error...You can upload only:-".implode(', ', $permited)."</span>";
-				} 
-				else
-				{	
-					move_uploaded_file($file_temp, $uploaded_image);
+		$uploaded_image = "upload/feature/".$unique_image;	
 
-					$query = "INSERT INTO tbl_brand(name, image, para1, para2, price) VALUES('$name', '$uploaded_image', '$para1', '$para2', '$price')";
-							
-					$inserted_rows = $db->insert($query);
-					if ($inserted_rows) 
-					{
-						echo "<span class='success'>Data Inserted Successfully.
-						</span>";
-					}
-					else 
-					{
-						echo "<span class='error'>Data Not Inserted !!</span>";
-					}
-				}
-			}
-			else
-			{
-				echo "<span class='error'>Error...Field must not be empty !!</span>";
-			}
-		}
-		
-	
+        if (in_array($file_ext, $permitted) === false) 
+        {
+            echo "<span class='error'>You can upload only:-".implode(', ', $permitted)."</span>";
+        } 
+        else
+        {	
+            move_uploaded_file($file_temp, $uploaded_image);
+            $query = "INSERT INTO tbl_feature(title, description, icon, work_link) VALUES('$title','$description','$uploaded_image','$work_link')";
+            $inserted_rows = $db->insert($query);
+            if ($inserted_rows) 
+            {
+                echo "<span class='success'>Data Inserted Successfully.
+                </span>";
+            }
+            else 
+            {
+                echo "<span class='error'>Data Not Inserted !!</span>";
+            }
+        }
 	}
 ?>
+
                         <div class="form-group row">
-                          <label class="col-sm-3 form-control-label">Name</label>
+                          <label class="col-sm-3 form-control-label">Title</label>
                           <div class="col-sm-9">
-                            <input type="text" name="name" class="form-control">
+                            <input type="text" name="title" class="form-control" required placeholder="Enter Feature Title">
                           </div>
                         </div>
 						<div class="line"></div>
 						<div class="form-group row">
-                          <label class="col-sm-3 form-control-label">Upload Image</label>
+                          <label class="col-sm-3 form-control-label">Description</label>
                           <div class="col-sm-9">
-                            <input type="file" name="image"  class="form-control">
+                          <textarea name="description" required class="form-control" style="height:200px"
+                            placeholder="Enter Your Feature Description"
+                            ></textarea>
                           </div>
                         </div>
-                        <div class="line"></div>
-                        <div class="form-group row">
-                          <label class="col-sm-3 form-control-label">First Paragraph</label>
+						<div class="line"></div>
+						<div class="form-group row">
+                          <label class="col-sm-3 form-control-label">Upload Feature Icon</label>
+                          <div class="col-sm-9" style="text-align:center">
+                            <input type="file" name="icon" class="form-control" required>
+                          </div>
+                        </div>  
+						<div class="line"></div>
+						<div class="form-group row">
+                          <label class="col-sm-3 form-control-label">Feature Link</label>
                           <div class="col-sm-9">
-							<textarea name="para1" class="form-control" style="height:200px"></textarea>
+                            <input type="text" name="work_link" class="form-control" placeholder="Enter your work link related with this feature. People will know more about this feature by clicking on this link">
                           </div>
                         </div>
-                        <div class="line"></div>
-                        <div class="form-group row">
-                          <label class="col-sm-3 form-control-label">Second Paragraph</label>
-                          <div class="col-sm-9">
-                            <textarea name="para2" class="form-control" style="height:200px"></textarea>
-                          </div>
-                        </div>
-                        <div class="line"></div>
-                        <div class="form-group row">
-                          <label class="col-sm-3 form-control-label">Price</label>
-                          <div class="col-sm-9">
-                            <input type="text" name="price" class="form-control">
-                          </div>
-                        </div>
-                        <div class="form-group row">
+						<div class="form-group row">
                           <div class="col-sm-4 offset-sm-3">
                             <button type="submit" class="btn btn-primary">Add</button>
                           </div>
                         </div>
+         
                       </form>
                     </div>
                   </div>
