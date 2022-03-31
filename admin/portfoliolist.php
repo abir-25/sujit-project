@@ -4,15 +4,15 @@
                 <!-- Page Header-->
                 <header class="page-header">
                     <div class="container-fluid">
-                        <h2 class="no-margin-bottom">Feature List</h2>
+                        <h2 class="no-margin-bottom">Portfolio List</h2>
                     </div>
                 </header>
                 <!-- Breadcrumb-->
                 <div class="breadcrumb-holder container-fluid">
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                        <li class="breadcrumb-item active">Feature Option</li>
-                        <li class="breadcrumb-item active">Feature List</li>
+                        <li class="breadcrumb-item active">Portfolio Option</li>
+                        <li class="breadcrumb-item active">Portfolio List</li>
                     </ul>
                 </div>
 
@@ -28,27 +28,27 @@
                                         </div>
                                     </div>
                                     <div class="card-header d-flex align-items-center">
-                                        <h3 class="h4">Feature List</h3>
+                                        <h3 class="h4">Portfolio List</h3>
                                     </div>
                                     <div class="card-body">
 <?php
 
-	if(isset($_GET['delfeatureid']))
+	if(isset($_GET['delportfolioid']))
 	{
-		$delfeatureid = $_GET['delfeatureid'];
-		$query = "select * from tbl_feature where id='$delfeatureid'"; 
+		$delportfolioid = $_GET['delportfolioid'];
+		$query = "select * from tbl_portfolio where id='$delportfolioid'"; 
 		$getdata = $db->select($query);
 		
 		if($getdata)
 		{
 			while($delimg = $getdata->fetch_assoc())
 			{
-				$dellink = $delimg['icon'];
+				$dellink = $delimg['image'];
 				unlink($dellink);
 			}
 		}
 		
-		$delquery = "delete from tbl_feature where id = '$delfeatureid'";
+		$delquery = "delete from tbl_portfolio where id = '$delportfolioid'";
 		$deldata = $db->deletedata($delquery);
 		
 		if($deldata)
@@ -66,15 +66,16 @@
                                             <thead>
                                                 <tr>
                                                     <th width="8%">No.</th>
-                                                    <th width="22%">Title</th>
-                                                    <th width="40%">Description</th>
-                                                    <th width="10%">Icon</th>
-                                                    <th width="20%">Action</th>
+                                                    <th width="12%">Title</th>
+                                                    <th width="12%">Long Title</th>
+                                                    <th width="38%">Description</th>
+                                                    <th width="12%">Image</th>
+                                                    <th width="18%">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
 <?php
-	$query = "select * from tbl_feature order by id asc";				
+	$query = "select * from tbl_portfolio order by id asc";				
 	$post = $db->select($query);				
 	if($post)
 	{
@@ -88,12 +89,14 @@
                                                     
                                                     <td scope="row" style="vertical-align:middle"><?php echo $result['title'];; ?></td>
 
+                                                    <td scope="row" style="vertical-align:middle"><?php echo $result['long_title'];; ?></td>
+
                                                     <td scope="row" style="vertical-align:middle"><?php echo $result['description'];; ?></td>
 
-                                                    <td style="vertical-align:middle"><img class="skill-list" src="<?php echo $result['icon']; ?>" alt="" /></td>
+                                                    <td style="vertical-align:middle;"><img style="width:100px !important;" src="<?php echo $result['image']; ?>" alt="" /></td>
 													
 													
-                                                    <td style="vertical-align:middle"><a class="actionLink" href="editfeature.php?featureId=<?php echo $result['id']; ?>">Update</a>  || <a class="actionLink" onclick= "return confirm('Are you sure to Delete This Feature?');" href="?delfeatureid=<?php echo $result['id'];?>">Delete</a></td>
+                                                    <td style="vertical-align:middle"><a class="actionLink" href="editportfolio.php?portfolioId=<?php echo $result['id']; ?>">Update</a>  || <a class="actionLink" onclick= "return confirm('Are you sure to Delete This Portfolio?');" href="?delportfolioid=<?php echo $result['id'];?>">Delete</a></td>
                                                 </tr>
 <?php } } ?>
 											</tbody>

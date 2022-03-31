@@ -440,112 +440,19 @@
                         <div class="rn-service">
                             <div class="inner">
                                 <div class="icon">
-                                    <img src="<?php echo $result1['icon']; ?>" alt="">
+                                    <img src="admin/<?php echo $result1['icon']; ?>" alt="">
                                     <!-- <i data-feather="menu"></i> -->
                                 </div>
                                 <div class="content">
                                     <h4 class="title"><a href="#"><?php echo $result1['title']; ?></a></h4>
-                                    <p class="description"><?php echo $result1['description']; ?></p>
+                                    <p class="description feature-description"><?php echo $result1['description']; ?></p>
                                     <a class="read-more-button" href="#"><i class="feather-arrow-right"></i></a>
                                 </div>
                             </div>
-                            <a class="over-link" href="<?php echo $result1['work_link']; ?>"></a>
+                            <a class="over-link" href="<?php echo $result1['work_link']; ?>" target="_blank"></a>
                         </div>
                    </div>
 <?php } } ?>
-                    <!-- End SIngle Service -->
-                    <!-- Start Single Service -->
-                    <!-- <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="300" data-aos-once="true" class="col-lg-6 col-xl-4 col-md-6 col-sm-12 col-12 mt--50 mt_md--30 mt_sm--30">
-                        <div class="rn-service">
-                            <div class="inner">
-                                <div class="icon">
-                                    <i data-feather="book-open"></i>
-                                </div>
-                                <div class="content">
-                                    <h4 class="title"><a href="#">App Development</a></h4>
-                                    <p class="description"> It uses a dictionary of over 200 Latin words, combined with
-                                        a handful of model sentence.</p>
-                                    <a class="read-more-button" href="#"><i class="feather-arrow-right"></i></a>
-                                </div>
-                            </div>
-                            <a class="over-link" href="#"></a>
-                        </div>
-                    </div> -->
-                    <!-- End SIngle Service -->
-                    <!-- Start Single Service -->
-                    <!-- <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="500" data-aos-once="true" class="col-lg-6 col-xl-4 col-md-6 col-sm-12 col-12 mt--50 mt_md--30 mt_sm--30">
-                        <div class="rn-service">
-                            <div class="inner">
-                                <div class="icon">
-                                    <i data-feather="tv"></i>
-                                </div>
-                                <div class="content">
-                                    <h4 class="title"><a href="#">App Development</a></h4>
-                                    <p class="description">I throw myself down among the tall grass by the stream as I
-                                        lie close to the earth.</p>
-                                    <a class="read-more-button" href="#"><i class="feather-arrow-right"></i></a>
-                                </div>
-                            </div>
-                            <a class="over-link" href="#"></a>
-                        </div>
-                    </div> -->
-                    <!-- End SIngle Service -->
-                    <!-- Start Single Service -->
-                    <!-- <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="100" data-aos-once="true" class="col-lg-6 col-xl-4 col-md-6 col-sm-12 col-12 mt--50 mt_md--30 mt_sm--30">
-                        <div class="rn-service">
-                            <div class="inner">
-                                <div class="icon">
-                                    <i data-feather="twitch"></i>
-                                </div>
-                                <div class="content">
-                                    <h4 class="title"><a href="#">Mobile App</a></h4>
-                                    <p class="description">There are many variations of passages of Lorem Ipsum
-                                        available, but the majority.
-                                    </p>
-                                    <a class="read-more-button" href="#"><i class="feather-arrow-right"></i></a>
-                                </div>
-                            </div>
-                            <a class="over-link" href="#"></a>
-                        </div>
-                    </div> -->
-                    <!-- End SIngle Service -->
-                    <!-- Start Single Service -->
-                    <!-- <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="300" data-aos-once="true" class="col-lg-6 col-xl-4 col-md-6 col-sm-12 col-12 mt--50 mt_md--30 mt_sm--30">
-                        <div class="rn-service">
-                            <div class="inner">
-                                <div class="icon">
-                                    <i data-feather="wifi"></i>
-                                </div>
-                                <div class="content">
-                                    <h4 class="title"><a href="#">CEO Marketing</a></h4>
-                                    <p class="description">always free from repetition,
-                                        injected humour, or non-characteristic words etc.</p>
-                                    <a class="read-more-button" href="#"><i class="feather-arrow-right"></i></a>
-                                </div>
-                            </div>
-                            <a class="over-link" href="#"></a>
-                        </div>
-                    </div> -->
-                    <!-- End SIngle Service -->
-                    <!-- Start Single Service -->
-                    <!-- <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="500" data-aos-once="true" class="col-lg-6 col-xl-4 col-md-6 col-sm-12 col-12 mt--50 mt_md--30 mt_sm--30">
-                        <div class="rn-service">
-                            <div class="inner">
-                                <div class="icon">
-                                    <i data-feather="slack"></i>
-                                </div>
-                                <div class="content">
-                                    <h4 class="title"><a href="#">Personal Portfolio April</a></h4>
-                                    <p class="description"> It uses a dictionary of over 200 Latin words, combined with
-                                        a handful of model sentence.</p>
-                                    <a class="read-more-button" href="#"><i class="feather-arrow-right"></i></a>
-                                </div>
-                            </div>
-                            <a class="over-link" href="#"></a>
-                        </div>
-                    </div> 
-                    End SIngle Service -->
-
                 </div>
             </div>
         </div>
@@ -564,167 +471,108 @@
                 </div>
 
                 <div class="row row--25 mt--10 mt_md--10 mt_sm--10">
+<?php
+    $query1 = "select * from tbl_portfolio";
+    $getData1 = $db->select($query1);
+    if($getData1)
+    {
+        $love = 0;
+        while($result1 = $getData1->fetch_assoc()) 
+        {
+            $id= $result1['id'];
+            $old_love = $result1['love'];
+?>   
                     <!-- Start Single Portfolio -->
                     <div data-aos="fade-up" data-aos-delay="100" data-aos-once="true" class="col-lg-6 col-xl-4 col-md-6 col-12 mt--50 mt_md--30 mt_sm--30">
-                        <div class="rn-portfolio" data-toggle="modal" data-target="#exampleModalCenter">
+                        <div class="rn-portfolio" data-toggle="modal" data-target="#portfolioModal_<?php echo $id; ?>">
                             <div class="inner">
                                 <div class="thumbnail">
                                     <a href="javascript:void(0)">
-                                        <img src="assets/images/portfolio/portfolio-01.jpg" alt="Personal Portfolio Images">
+                                        <img src="admin/<?php echo $result1['image']; ?>" alt="Personal Portfolio Images">
                                     </a>
                                 </div>
                                 <div class="content">
                                     <div class="category-info">
                                         <div class="category-list">
-                                            <a href="javascript:void(0)">Development</a>
+                                            <a href="javascript:void(0)"><?php echo $result1['title']; ?></a>
                                         </div>
                                         <div class="meta">
                                             <span><a href="javascript:void(0)"><i class="feather-heart"></i></a>
-                                                600</span>
+                                            <?php echo $result1['love']; ?></span>
                                         </div>
                                     </div>
-                                    <h4 class="title"><a href="javascript:void(0)">The services provide for design <i
-                                                class="feather-arrow-up-right"></i></a></h4>
+                                    <h4 class="title"><a href="javascript:void(0)" target="_blank"><?php echo $result1['long_title']; ?><i class="feather-arrow-up-right"></i></a></h4>
                                 </div>
                             </div>
                         </div>
                     </div>
+<?php
+	if($_SERVER['REQUEST_METHOD'] == 'POST')
+	{
+        $love  = $result1['love']+1;
+        $query = "UPDATE tbl_portfolio 
+                        SET 
+                        love = '10'
+                        where id='$id'";
+    }
+?>
+
+                    <!-- Modal Portfolio Body area Start -->
+                    <div class="modal fade" id="portfolioModal_<?php echo $id; ?>" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                               
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true"><i data-feather="x"></i></span>
+                                        </button>
+                                   
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row align-items-center">
+
+                                        <div class="col-lg-6">
+                                            <div class="portfolio-popup-thumbnail">
+                                                <div class="image">
+                                                    <img class="w-100" src="admin/<?php echo $result1['image']; ?>" alt="slide">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="text-content">
+                                                <h3>
+                                                    <span><?php echo $result1['title']; ?></span> <?php echo $result1['long_title']; ?>
+                                                </h3>
+                                                <p class="mb--30"><?php echo $result1['description']; ?></p>
+                                                <div class="button-group mt--20">
+                                                <form method="post" action="">
+                                                    <button type="submit">
+                                                        <a href="#" class="rn-btn thumbs-icon">
+                                                            <span>LOVE THIS</span>
+                                                            <i data-feather="thumbs-up"></i>
+                                                        </a>
+                                                    </button>
+                                                </form>
+                                                    <a href="<?php echo $result1['work_link']; ?>" class="rn-btn">
+                                                        <span>VIEW PROJECT</span>
+                                                        <i data-feather="chevron-right"></i>
+                                                    </a>
+                                                </div>
+
+                                            </div>
+                                            <!-- End of .text-content -->
+                                        </div>
+                                    </div>
+                                    <!-- End of .row Body-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Modal Portfolio area -->
+<?php } } ?>
                     <!-- End Single Portfolio -->
 
-                    <!-- Start Single Portfolio -->
-                    <div data-aos="fade-up" data-aos-delay="300" data-aos-once="true" class="col-lg-6 col-xl-4 col-md-6 col-12 mt--50 mt_md--30 mt_sm--30">
-                        <div class="rn-portfolio" data-toggle="modal" data-target="#exampleModalCenter">
-                            <div class="inner">
-                                <div class="thumbnail">
-                                    <a href="javascript:void(0)">
-                                        <img src="assets/images/portfolio/portfolio-02.jpg" alt="Personal Portfolio Images">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <div class="category-info">
-                                        <div class="category-list">
-                                            <a href="javascript:void(0)">Application</a>
-                                        </div>
-                                        <div class="meta">
-                                            <span><a href="javascript:void(0)"><i class="feather-heart"></i></a>
-                                                750</span>
-                                        </div>
-                                    </div>
-                                    <h4 class="title"><a href="javascript:void(0)">Mobile app landing design & app
-                                            maintain<i class="feather-arrow-up-right"></i></a></h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Portfolio -->
-
-                    <!-- Start Single Portfolio -->
-                    <div data-aos="fade-up" data-aos-delay="500" data-aos-once="true" class="col-lg-6 col-xl-4 col-md-6 col-12 mt--50 mt_md--30 mt_sm--30">
-                        <div class="rn-portfolio" data-toggle="modal" data-target="#exampleModalCenter">
-                            <div class="inner">
-                                <div class="thumbnail">
-                                    <a href="javascript:void(0)">
-                                        <img src="assets/images/portfolio/portfolio-03.jpg" alt="Personal Portfolio Images">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <div class="category-info">
-                                        <div class="category-list">
-                                            <a href="javascript:void(0)">Photoshop</a>
-                                        </div>
-                                        <div class="meta">
-                                            <span><a href="javascript:void(0)"><i class="feather-heart"></i></a>
-                                                630</span>
-                                        </div>
-                                    </div>
-                                    <h4 class="title"><a href="javascript:void(0)">Logo design creativity & Application
-                                            <i class="feather-arrow-up-right"></i></a></h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Portfolio -->
-
-                    <!-- Start Single Portfolio -->
-                    <div data-aos="fade-up" data-aos-delay="100" data-aos-once="true" class="col-lg-6 col-xl-4 col-md-6 col-12 mt--50 mt_md--30 mt_sm--30">
-                        <div class="rn-portfolio" data-toggle="modal" data-target="#exampleModalCenter">
-                            <div class="inner">
-                                <div class="thumbnail">
-                                    <a href="javascript:void(0)">
-                                        <img src="assets/images/portfolio/portfolio-04.jpg" alt="Personal Portfolio Images">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <div class="category-info">
-                                        <div class="category-list">
-                                            <a href="javascript:void(0)">Figma</a>
-                                        </div>
-                                        <div class="meta">
-                                            <span><a href="javascript:void(0)"><i class="feather-heart"></i></a>
-                                                360</span>
-                                        </div>
-                                    </div>
-                                    <h4 class="title"><a href="javascript:void(0)">Mobile app landing design &
-                                            Services<i class="feather-arrow-up-right"></i></a></h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Portfolio -->
-
-                    <!-- Start Single Portfolio -->
-                    <div data-aos="fade-up" data-aos-delay="300" data-aos-once="true" class="col-lg-6 col-xl-4 col-md-6 col-12 mt--50 mt_md--30 mt_sm--30">
-                        <div class="rn-portfolio" data-toggle="modal" data-target="#exampleModalCenter">
-                            <div class="inner">
-                                <div class="thumbnail">
-                                    <a href="javascript:void(0)">
-                                        <img src="assets/images/portfolio/portfolio-05.jpg" alt="Personal Portfolio Images">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <div class="category-info">
-                                        <div class="category-list">
-                                            <a href="javascript:void(0)">Web Design</a>
-                                        </div>
-                                        <div class="meta">
-                                            <span><a href="javascript:void(0)"><i class="feather-heart"></i></a>
-                                                280</span>
-                                        </div>
-                                    </div>
-                                    <h4 class="title"><a href="javascript:void(0)">Design for tecnology & services<i
-                                                class="feather-arrow-up-right"></i></a></h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Portfolio -->
-
-                    <!-- Start Single Portfolio -->
-                    <div data-aos="fade-up" data-aos-delay="500" data-aos-once="true" class="col-lg-6 col-xl-4 col-md-6 col-12 mt--50 mt_md--30 mt_sm--30">
-                        <div class="rn-portfolio" data-toggle="modal" data-target="#exampleModalCenter">
-                            <div class="inner">
-                                <div class="thumbnail">
-                                    <a href="javascript:void(0)">
-                                        <img src="assets/images/portfolio/portfolio-06.jpg" alt="Personal Portfolio Images">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <div class="category-info">
-                                        <div class="category-list">
-                                            <a href="javascript:void(0)">Web Design</a>
-                                        </div>
-                                        <div class="meta">
-                                            <span><a href="javascript:void(0)"><i class="feather-heart"></i></a>
-                                                690</span>
-                                        </div>
-                                    </div>
-                                    <h4 class="title"><a href="javascript:void(0)">App for tecnology & services<i
-                                                class="feather-arrow-up-right"></i></a></h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Portfolio -->
                 </div>
             </div>
         </div>
@@ -3185,54 +3033,7 @@
         </div>
         <!-- End Contuct section -->
 
-        <!-- Modal Portfolio Body area Start -->
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true"><i data-feather="x"></i></span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row align-items-center">
-
-                            <div class="col-lg-6">
-                                <div class="portfolio-popup-thumbnail">
-                                    <div class="image">
-                                        <img class="w-100" src="assets/images/portfolio/portfolio-04.jpg" alt="slide">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6">
-                                <div class="text-content">
-                                    <h3>
-                                        <span>Featured - Design</span> App Design Development.
-                                    </h3>
-                                    <p class="mb--30">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate distinctio assumenda explicabo veniam temporibus eligendi.</p>
-                                    <p>Consectetur adipisicing elit. Cupiditate distinctio assumenda. dolorum alias suscipit rerum maiores aliquam earum odit, nihil culpa quas iusto hic minus!</p>
-                                    <div class="button-group mt--20">
-                                        <a href="#" class="rn-btn thumbs-icon">
-                                            <span>LIKE THIS</span>
-                                            <i data-feather="thumbs-up"></i>
-                                        </a>
-                                        <a href="#" class="rn-btn">
-                                            <span>VIEW PROJECT</span>
-                                            <i data-feather="chevron-right"></i>
-                                        </a>
-                                    </div>
-
-                                </div>
-                                <!-- End of .text-content -->
-                            </div>
-                        </div>
-                        <!-- End of .row Body-->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Modal Portfolio area -->
+        
         <!-- Modal Blog Body area Start -->
         <div class="modal fade" id="exampleModalCenters" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-news" role="document">
@@ -3345,13 +3146,13 @@
         </div>
         <!-- Back to top end -->
 
-        <!-- Start Right Demo  -->
+        <!-- Start Right Demo 
         <div class="rn-right-demo">
             <button class="demo-button">
                 <span class="text">Demos</span>
             </button>
-        </div>
-        <!-- End Right Demo  -->
+        </div> -->
+        <!-- End Right Demo -->
 
         <!-- Start Modal Area  -->
         <div class="demo-modal-area">

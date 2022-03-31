@@ -37,52 +37,43 @@
                             <li><a href="featurelist.php">Feature List</a></li>            
                         </ul>
                     </li>
-					<li><a href="#exampledropdownDropdown3" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-external-link"></i>Exclusive Option</a>
+					<li><a href="#exampledropdownDropdown3" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-laptop"></i>Portfolio Option</a>
                         <ul id="exampledropdownDropdown3" class="collapse list-unstyled ">
-                            <li><a href="addex.php">Add Exclusive Product </a></li>
-                            <li><a href="exlist.php">Exclusive Product List</a></li>            
+                            <li><a href="addportfolio.php">Add Portfolio </a></li>
+                            <li><a href="portfoliolist.php">Portfolio List</a></li>            
                         </ul>
                     </li>
-					<li><a href="#exampledropdownDropdown4" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-hand-o-up"></i>Promotion Option</a>
+					<li><a href="#exampledropdownDropdown4" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-user"></i>Resume Option</a>
                         <ul id="exampledropdownDropdown4" class="collapse list-unstyled ">
-                            <li><a href="addpromo.php">Add Promotion  </a></li>
-                            <li><a href="promolist.php">Promotion List</a></li>            
+                            <li><a href="addresume.php">Add Resume  </a></li>
+                            <li><a href="resumelist.php">Resume List</a></li>            
                         </ul>
                     </li>
-					<li><a href="#exampledropdownDropdown5" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-file-image-o"></i>Gallery Option</a>
+					<li><a href="#exampledropdownDropdown5" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-star-o"></i>Testimonial Option</a>
                         <ul id="exampledropdownDropdown5" class="collapse list-unstyled ">
-                            <li><a href="addgallery.php">Add Gallery </a></li>
-                            <li><a href="gallerylist.php">Gallery List</a></li>            
+                            <li><a href="addtestimonial.php">Add Testimonial </a></li>
+                            <li><a href="testimoniallist.php">Testimonial List</a></li>            
                         </ul>
                     </li>
-					<li><a href="#exampledropdownDropdown6" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-users"></i>Portfolio Option</a>
+					<li><a href="#exampledropdownDropdown6" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-users"></i>Client Option</a>
                         <ul id="exampledropdownDropdown6" class="collapse list-unstyled ">
-                            <li><a href="addport.php">Add Portfolio </a></li>
-                            <li><a href="portlist.php">Portfolio List</a></li>            
+                            <li><a href="addclient.php">Add Client </a></li>
+                            <li><a href="clientlist.php">Client List</a></li>            
                         </ul>
                     </li>
-					<li><a href="#exampledropdownDropdown7" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-phone"></i>Contact Option</a>
-                        <ul id="exampledropdownDropdown7" class="collapse list-unstyled ">
-                            <li><a href="updatecontact.php">Update Contact Information </a></li>
-                                        
+					<li><a href="#exampledropdownDropdown6" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-money"></i>Pricing Option</a>
+                        <ul id="exampledropdownDropdown6" class="collapse list-unstyled ">
+                            <li><a href="addpricing.php">Add Pricing </a></li>
+                            <li><a href="pricinglist.php"> Pricing List</a></li>            
                         </ul>
                     </li>
-                    <!--<li><a href="#exampledropdownDropdown8" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>User Table </a>
-                        <ul id="exampledropdownDropdown8" class="collapse list-unstyled ">
-                            <li><a href="reguser.php">Add User</a></li>
-                            <li><a href="userlist.php">User List</a></li>
-                            <li><a href="generatebill.php">Generate Bill</a></li>
-                            <li><a href="Bill-list.php">Bill List</a></li>
-                            <li><a href="paymentlist.php">Payment List</a></li>
+                    <li><a href="#exampledropdownDropdown6" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-edit"></i>Blog Option</a>
+                        <ul id="exampledropdownDropdown6" class="collapse list-unstyled ">
+                            <li><a href="addpricing.php">Add Blog </a></li>
+                            <li><a href="pricinglist.php">Blog List</a></li>  
+                            <li><a href="pricinglist.php"> Comment List</a></li>              
                         </ul>
                     </li>
-                    <li><a href="#adminDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Admin </a>
-                        <ul id="adminDropdown" class="collapse list-unstyled ">
-                            <li><a href="#">Change Admin Details</a></li>
-                            <li><a href="newadmin.php">Register Admin</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="login.php"> <i class="icon-interface-windows"></i>Login page </a></li>-->
                 </ul>
 
             </nav>
