@@ -421,8 +421,17 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-title text-left" data-aos="fade-up" data-aos-duration="500" data-aos-delay="100" data-aos-once="true">
-                            <span class="subtitle">Features</span>
-                            <h2 class="title">What I Do</h2>
+<?php
+    $query1 = "select * from tbl_section_title where id='1'";
+    $getData1 = $db->select($query1);
+    if($getData1)
+    {
+        while($result1 = $getData1->fetch_assoc()) 
+        {
+?>         
+                            <span class="subtitle"><?php echo $result1['subtitle']; ?></span>
+                            <h2 class="title"><?php echo $result1['title']; ?></h2>
+<?php } }?>
                         </div>
                     </div>
                 </div>
@@ -464,8 +473,17 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-title text-center">
-                            <span class="subtitle">Visit my portfolio and keep your feedback</span>
-                            <h2 class="title">My Portfolio</h2>
+<?php
+    $query1 = "select * from tbl_section_title where id='2'";
+    $getData1 = $db->select($query1);
+    if($getData1)
+    {
+        while($result1 = $getData1->fetch_assoc()) 
+        {
+?>        
+                            <span class="subtitle"><?php echo $result1['subtitle']; ?></span>
+                            <h2 class="title"><?php echo $result1['title']; ?></h2>
+<?php } }?>
                         </div>
                     </div>
                 </div>
@@ -476,11 +494,9 @@
     $getData1 = $db->select($query1);
     if($getData1)
     {
-        $love = 0;
         while($result1 = $getData1->fetch_assoc()) 
         {
             $id= $result1['id'];
-            $old_love = $result1['love'];
 ?>   
                     <!-- Start Single Portfolio -->
                     <div data-aos="fade-up" data-aos-delay="100" data-aos-once="true" class="col-lg-6 col-xl-4 col-md-6 col-12 mt--50 mt_md--30 mt_sm--30">
@@ -496,26 +512,12 @@
                                         <div class="category-list">
                                             <a href="javascript:void(0)"><?php echo $result1['title']; ?></a>
                                         </div>
-                                        <div class="meta">
-                                            <span><a href="javascript:void(0)"><i class="feather-heart"></i></a>
-                                            <?php echo $result1['love']; ?></span>
-                                        </div>
                                     </div>
                                     <h4 class="title"><a href="javascript:void(0)" target="_blank"><?php echo $result1['long_title']; ?><i class="feather-arrow-up-right"></i></a></h4>
                                 </div>
                             </div>
                         </div>
                     </div>
-<?php
-	if($_SERVER['REQUEST_METHOD'] == 'POST')
-	{
-        $love  = $result1['love']+1;
-        $query = "UPDATE tbl_portfolio 
-                        SET 
-                        love = '10'
-                        where id='$id'";
-    }
-?>
 
                     <!-- Modal Portfolio Body area Start -->
                     <div class="modal fade" id="portfolioModal_<?php echo $id; ?>" tabindex="-1" role="dialog" aria-hidden="true">
@@ -546,14 +548,7 @@
                                                 </h3>
                                                 <p class="mb--30"><?php echo $result1['description']; ?></p>
                                                 <div class="button-group mt--20">
-                                                <form method="post" action="">
-                                                    <button type="submit">
-                                                        <a href="#" class="rn-btn thumbs-icon">
-                                                            <span>LOVE THIS</span>
-                                                            <i data-feather="thumbs-up"></i>
-                                                        </a>
-                                                    </button>
-                                                </form>
+                                               
                                                     <a href="<?php echo $result1['work_link']; ?>" class="rn-btn">
                                                         <span>VIEW PROJECT</span>
                                                         <i data-feather="chevron-right"></i>
@@ -584,8 +579,17 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-title text-center">
-                            <span class="subtitle">7+ Years of Experience</span>
-                            <h2 class="title">My Resume</h2>
+<?php
+    $query1 = "select * from tbl_section_title where id='3'";
+    $getData1 = $db->select($query1);
+    if($getData1)
+    {
+        while($result1 = $getData1->fetch_assoc()) 
+        {
+?>        
+                            <span class="subtitle"><?php echo $result1['subtitle']; ?></span>
+                            <h2 class="title"><?php echo $result1['title']; ?></h2>
+<?php } }?>    
                         </div>
                     </div>
                 </div>
@@ -1210,8 +1214,17 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-title text-center">
-                            <span class="subtitle">What Clients Say</span>
-                            <h2 class="title">Testimonial</h2>
+<?php
+    $query1 = "select * from tbl_section_title where id='4'";
+    $getData1 = $db->select($query1);
+    if($getData1)
+    {
+        while($result1 = $getData1->fetch_assoc()) 
+        {
+?>        
+                            <span class="subtitle"><?php echo $result1['subtitle']; ?></span>
+                            <h2 class="title"><?php echo $result1['title']; ?></h2>
+<?php } }?>        
                         </div>
                     </div>
                 </div>
@@ -1422,8 +1435,17 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-title">
-                            <span class="subtitle">Popular Clients</span>
-                            <h2 class="title">Awesome Clients</h2>
+<?php
+    $query1 = "select * from tbl_section_title where id='5'";
+    $getData1 = $db->select($query1);
+    if($getData1)
+    {
+        while($result1 = $getData1->fetch_assoc()) 
+        {
+?>        
+                            <span class="subtitle"><?php echo $result1['subtitle']; ?></span>
+                            <h2 class="title"><?php echo $result1['title']; ?></h2>
+<?php } }?>                               
                         </div>
                     </div>
                 </div>
@@ -2460,8 +2482,17 @@
                         <div class="d-block d-lg-flex text-center d-lg-left section-flex flex-wrap align-content-start h-100">
                             <div class="position-sticky sticky-top rbt-sticky-top-adjust">
                                 <div class="section-title text-left">
-                                    <span class="subtitle text-center text-lg-left">Pricing</span>
-                                    <h2 class="title text-center text-lg-left">My Pricing</h2>
+ <?php
+    $query1 = "select * from tbl_section_title where id='6'";
+    $getData1 = $db->select($query1);
+    if($getData1)
+    {
+        while($result1 = $getData1->fetch_assoc()) 
+        {
+?>        
+                            <span class="subtitle text-center text-lg-left"><?php echo $result1['subtitle']; ?></span>
+                             <h2 class="title text-center text-lg-left"><?php echo $result1['title']; ?></h2>
+<?php } }?>        
                                 </div>
                             </div>
                         </div>
@@ -2773,8 +2804,18 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="500" data-aos-once="true" class="section-title text-center">
-                            <span class="subtitle">Visit my blog and keep your feedback</span>
-                            <h2 class="title">My Blog</h2>
+<?php
+    $query1 = "select * from tbl_section_title where id='7'";
+    $getData1 = $db->select($query1);
+    if($getData1)
+    {
+        while($result1 = $getData1->fetch_assoc()) 
+        {
+?>         
+                            <span class="subtitle"><?php echo $result1['subtitle']; ?></span>
+                            <h2 class="title"><?php echo $result1['title']; ?></h2>
+<?php } }?>
+                            
                         </div>
                     </div>
                 </div>
@@ -2868,8 +2909,18 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-title text-center">
-                            <span class="subtitle">Contact</span>
-                            <h2 class="title">Contact With Me</h2>
+                            
+<?php
+    $query1 = "select * from tbl_section_title where id='8'";
+    $getData1 = $db->select($query1);
+    if($getData1)
+    {
+        while($result1 = $getData1->fetch_assoc()) 
+        {
+?>         
+                            <span class="subtitle"><?php echo $result1['subtitle']; ?></span>
+                            <h2 class="title"><?php echo $result1['title']; ?></h2>
+<?php } }?>
                         </div>
                     </div>
                 </div>

@@ -4,15 +4,15 @@
           <!-- Page Header-->
           <header class="page-header">
             <div class="container-fluid">
-              <h2 class="no-margin-bottom">Change Admin Password</h2>
+              <h2 class="no-margin-bottom">Resume Section</h2>
             </div>
           </header>
           <!-- Breadcrumb-->
           <div class="breadcrumb-holder container-fluid">
             <ul class="breadcrumb">
               <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-              <li class="breadcrumb-item active">Basic Site Option</li>
-              <li class="breadcrumb-item active">Change Admin Password</li>
+              <li class="breadcrumb-item active">Section Title Option</li>    
+              <li class="breadcrumb-item active">Resume Section</li>
             </ul>
           </div>
           <!-- Forms Section-->
@@ -37,80 +37,57 @@
 <?php
 	if($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
-		$old = $fm->validation($_POST['old']);
-		$new = $fm->validation($_POST['new']);
-		$confirm = $fm->validation($_POST['confirm']);
-		
-		$old = mysqli_real_escape_string($db->link1, $old);
-		$new = mysqli_real_escape_string($db->link1, $new);
-		$confirm = mysqli_real_escape_string($db->link1, $confirm);
-		
-    if($new == $confirm)
-    {
-      $new1 = $new;
+		$title    = mysqli_real_escape_string($db->link1, $_POST['title']);
+		$subtitle  	 = mysqli_real_escape_string($db->link1, $_POST['subtitle']);
 
-      $cquery = "select * from tbl_login where password='$old'";
-      $check = $db->select($cquery);
-      if($check)
-      {
-        while($result = $check->fetch_assoc())
+        $query = "UPDATE tbl_section_title 
+                SET 
+                title    = '$title',
+                subtitle     = '$subtitle'
+                WHERE id='3'";
+
+        $updated_rows = $db->update($query);
+        if ($updated_rows) 
         {
-          $query = "update tbl_login set password='$new' where id='1'";
-    
-          $result = $db->update($query);
-          if($result)
-          {
-            echo "<span style='color:green; font-size:18px;'>Password Changed Successfully!</span>";	
-          }
-          else
-          {
-            echo "<span style='color:red; font-size:18px;'>Error!! Password Not Changed...</span>";
-          }
+            echo "<span class='success'>Data Updated Successfully.
+        </span>";
         }
-      }
-      else
-      {
-        echo "<span style='color:red; font-size:18px;'>Error!! Old Password Not Matched.</span>";
-      }
-    }
-    else
-    {
-      echo "<span style='color:red; font-size:18px;'>Error!! New Password is Not Confirmed.</span>";
-    }
+        else 
+        {
+            echo "<span class='error'>Data Not Updated !!</span>";
+        }
 		
-	
 	}
 ?>
 
+<?php
+	$query1 = "select * from tbl_section_title where id='3'";
+    $getpost = $db->select($query1);
+    if($getpost)
+    {
+	    while($postresult = $getpost->fetch_assoc())
+	    {
+?>
                         <div class="form-group row">
-                          <label class="col-sm-3 form-control-label">Old Password</label>
+                          <label class="col-sm-3 form-control-label">Title</label>
                           <div class="col-sm-9">
-                            <input type="text" name="old" 
-                            required class="form-control" placeholder="Enter Old Password">
+                            <input type="text" name="title" class="form-control" value="<?php echo $postresult['title']; ?>">
                           </div>
                         </div>
-						<div class="line"></div>
-						<div class="form-group row">
-                          <label class="col-sm-3 form-control-label">New Password</label>
+						    <div class="line"></div>
+						    <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">Subtitle</label>
                           <div class="col-sm-9">
-                            <input type="text" name="new" 
-                            required class="form-control" placeholder="Enter New Password">
+                            <input type="text" name="subtitle" class="form-control" value="<?php echo $postresult['subtitle']; ?>">
                           </div>
                         </div>
-						<div class="line"></div>
-						<div class="form-group row">
-                          <label class="col-sm-3 form-control-label">Confirm New Password</label>
-                          <div class="col-sm-9">
-                            <input type="text" name="confirm" 
-                            required class="form-control" placeholder="Confirm New Password">
-                          </div>
-                        </div>			 					
-     
+                        
                         <div class="form-group row">
                           <div class="col-sm-4 offset-sm-3">
                             <button type="submit" class="btn btn-primary">Update</button>
                           </div>
                         </div>
+<?php } } ?>              				 
                       </form>
                     </div>
                   </div>

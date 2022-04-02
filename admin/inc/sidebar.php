@@ -31,44 +31,56 @@
                             <li><a href="changepassword.php">Change Admin Password</a></li>
                         </ul>
                     </li>
-					<li><a href="#exampledropdownDropdown2" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-cogs"></i>Feature Option</a>
+                    <li><a href="#exampledropdownDropdown2" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-cogs"></i>Section Title Option</a>
                         <ul id="exampledropdownDropdown2" class="collapse list-unstyled ">
+                            <li><a href="feature.php">Feature Section</a></li>
+                            <li><a href="portfolio.php">Portfolio Section</a></li>  
+                            <li><a href="resume.php">Resume Section</a></li>            
+                            <li><a href="testimonial.php">Testimonial Section</a></li>            
+                            <li><a href="client.php">Clients Section</a></li>            
+                            <li><a href="pricing.php">Pricing Section</a></li>            
+                            <li><a href="blog.php">Blog Section</a></li>            
+                            <li><a href="contact.php">Contact Section</a></li>            
+                        </ul>
+                    </li>
+					<li><a href="#exampledropdownDropdown3" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-list-alt"></i>Feature Option</a>
+                        <ul id="exampledropdownDropdown3" class="collapse list-unstyled ">
                             <li><a href="addfeature.php">Add Feature</a></li>
                             <li><a href="featurelist.php">Feature List</a></li>            
                         </ul>
                     </li>
-					<li><a href="#exampledropdownDropdown3" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-laptop"></i>Portfolio Option</a>
-                        <ul id="exampledropdownDropdown3" class="collapse list-unstyled ">
+					<li><a href="#exampledropdownDropdown4" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-laptop"></i>Portfolio Option</a>
+                        <ul id="exampledropdownDropdown4" class="collapse list-unstyled ">
                             <li><a href="addportfolio.php">Add Portfolio </a></li>
                             <li><a href="portfoliolist.php">Portfolio List</a></li>            
                         </ul>
                     </li>
-					<li><a href="#exampledropdownDropdown4" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-user"></i>Resume Option</a>
-                        <ul id="exampledropdownDropdown4" class="collapse list-unstyled ">
-                            <li><a href="addresume.php">Add Resume  </a></li>
-                            <li><a href="resumelist.php">Resume List</a></li>            
+					<li><a href="#exampledropdownDropdown5" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-user"></i>Resume Option</a>
+                        <ul id="exampledropdownDropdown5" class="collapse list-unstyled ">
+                            <li><a href="addeducation.php">Add Education</a></li>
+                            <li><a href="educationlist.php">Education List</a></li>            
                         </ul>
                     </li>
-					<li><a href="#exampledropdownDropdown5" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-star-o"></i>Testimonial Option</a>
-                        <ul id="exampledropdownDropdown5" class="collapse list-unstyled ">
+					<li><a href="#exampledropdownDropdown6" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-star-o"></i>Testimonial Option</a>
+                        <ul id="exampledropdownDropdown6" class="collapse list-unstyled ">
                             <li><a href="addtestimonial.php">Add Testimonial </a></li>
                             <li><a href="testimoniallist.php">Testimonial List</a></li>            
                         </ul>
                     </li>
-					<li><a href="#exampledropdownDropdown6" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-users"></i>Client Option</a>
-                        <ul id="exampledropdownDropdown6" class="collapse list-unstyled ">
+					<li><a href="#exampledropdownDropdown7" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-users"></i>Client Option</a>
+                        <ul id="exampledropdownDropdown7" class="collapse list-unstyled ">
                             <li><a href="addclient.php">Add Client </a></li>
                             <li><a href="clientlist.php">Client List</a></li>            
                         </ul>
                     </li>
-					<li><a href="#exampledropdownDropdown6" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-money"></i>Pricing Option</a>
-                        <ul id="exampledropdownDropdown6" class="collapse list-unstyled ">
+					<li><a href="#exampledropdownDropdown8" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-money"></i>Pricing Option</a>
+                        <ul id="exampledropdownDropdown8" class="collapse list-unstyled ">
                             <li><a href="addpricing.php">Add Pricing </a></li>
                             <li><a href="pricinglist.php"> Pricing List</a></li>            
                         </ul>
                     </li>
-                    <li><a href="#exampledropdownDropdown6" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-edit"></i>Blog Option</a>
-                        <ul id="exampledropdownDropdown6" class="collapse list-unstyled ">
+                    <li><a href="#exampledropdownDropdown9" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-edit"></i>Blog Option</a>
+                        <ul id="exampledropdownDropdown9" class="collapse list-unstyled ">
                             <li><a href="addpricing.php">Add Blog </a></li>
                             <li><a href="pricinglist.php">Blog List</a></li>  
                             <li><a href="pricinglist.php"> Comment List</a></li>              

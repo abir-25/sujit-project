@@ -4,17 +4,17 @@
           <!-- Page Header-->
           <header class="page-header">
             <div class="container-fluid">
-              <h2 class="no-margin-bottom">Edit Portfolio</h2>
+              <h2 class="no-margin-bottom">Edit Education</h2>
             </div>
           </header>
 <?php
-	if(!isset($_GET['portfolioId']) || $_GET['portfolioId'] == NULL)
+	if(!isset($_GET['educationId']) || $_GET['educationId'] == NULL)
 	{
-		echo "<script>window.location = 'portfoliolist.php'; </script>";
+		echo "<script>window.location = 'educationlist.php'; </script>";
 	}
 	else
 	{
-		$portfolioId = $_GET['portfolioId'];
+		$educationId = $_GET['educationId'];
 	}
 ?>
           <!-- Breadcrumb-->
@@ -47,76 +47,36 @@
 	if($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
         $title  = mysqli_real_escape_string($db->link1, $_POST['title']);
-        $long_title  = mysqli_real_escape_string($db->link1, $_POST['long_title']);
-		$description  = mysqli_real_escape_string($db->link1, $_POST['description']);
-		$work_link = $_POST['work_link'];
-
-		$permited  = array('jpg', 'jpeg', 'png', 'gif');
-		$file_name = $_FILES['image']['name'];
-		$file_size = $_FILES['image']['size'];
-		$file_temp = $_FILES['image']['tmp_name'];
-
-		$div = explode('.', $file_name);
-		$file_ext = strtolower(end($div));
-		$unique_image = substr(md5(time()), 0, 10).'.'.$file_ext;
-		$uploaded_image = "upload/portfolio/".$unique_image;
+		$degree  = mysqli_real_escape_string($db->link1, $_POST['degree']);
+		$achievement  = mysqli_real_escape_string($db->link1, $_POST['achievement']);
+		$gpa  = mysqli_real_escape_string($db->link1, $_POST['gpa']);
+        $year_in  = mysqli_real_escape_string($db->link1, $_POST['year_in']);
+        $year_out  = mysqli_real_escape_string($db->link1, $_POST['year_out']);
 	
-		if(!empty($file_name))
+		$query = "UPDATE tbl_education
+                    SET 
+                    title = '$title',
+                    degree = '$degree',
+                    achievement = '$achievement',
+                    gpa = '$gpa',
+                    year_in = '$year_in',
+                    year_out = '$year_out'
+                    where id='$educationId'";
+        
+        $updated_rows = $db->update($query);
+        if ($updated_rows) 
         {
-            if (in_array($file_ext, $permited) === false) 
-            {
-                echo "<span class='error'>Error...You can upload only:-".implode(', ', $permited)."</span>";
-            } 
-            else
-            {	
-                move_uploaded_file($file_temp, $uploaded_image);
-                $query = "UPDATE tbl_portfolio 
-                        SET 
-                        title = '$title',
-                        long_title = '$long_title',
-                        description = '$description',
-                        image = '$uploaded_image',
-                        work_link = '$work_link'
-                        where id='$portfolioId'";
-            
-                $updated_rows = $db->update($query);
-                if ($updated_rows) 
-                {
-                    echo "<span class='success'>Data Updated Successfully.
-                    </span>";
-                }
-                else 
-                {
-                    echo "<span class='error'>Data Not Updated !!</span>";
-                }
-                
-            }
+            echo "<span class='success'>Data Updated Successfully.
+            </span>";
         }
-        else
+        else 
         {
-            $query = "UPDATE tbl_portfolio 
-                        SET 
-                        title = '$title',
-                        long_title = '$long_title',
-                        description = '$description',
-                        work_link = '$work_link'
-                        where id='$portfolioId'";
-            
-                $updated_rows = $db->update($query);
-                if ($updated_rows) 
-                {
-                    echo "<span class='success'>Data Updated Successfully.
-                    </span>";
-                }
-                else 
-                {
-                    echo "<span class='error'>Data Not Updated !!</span>";
-                }
+            echo "<span class='error'>Data Not Updated !!</span>";
         }
 	}
 ?>
 <?php
-	$query1 = "select * from tbl_portfolio where id='$portfolioId'";
+	$query1 = "select * from tbl_education where id='$educationId'";
 	    $getpost = $db->select($query1);
       if($getpost)
       {
@@ -124,39 +84,45 @@
 	      {
 ?>
                         <div class="form-group row">
-                          <label class="col-sm-3 form-control-label">Title</label>
+                          <label class="col-sm-3 form-control-label">Institution Name</label>
                           <div class="col-sm-9">
                             <input type="text" name="title" class="form-control" required value="<?php echo $postresult['title'];?>">
                           </div>
                         </div>
                         <div class="line"></div>
                         <div class="form-group row">
-                          <label class="col-sm-3 form-control-label">Long Title</label>
+                          <label class="col-sm-3 form-control-label">Degree</label>
                           <div class="col-sm-9">
-                            <input type="text" name="long_title" class="form-control" required value="<?php echo $postresult['long_title'];?>">
+                            <input type="text" name="degree" class="form-control" required value="<?php echo $postresult['degree'];?>">
                           </div>
                         </div>
-						<div class="line"></div>
-						<div class="form-group row">
-                          <label class="col-sm-3 form-control-label">Description</label>
+                        <div class="line"></div>
+                        <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">Achievement</label>
                           <div class="col-sm-9">
-                          <textarea name="description" required class="form-control" style="height:100px"><?php echo $postresult['description'];?>
+                          <textarea name="achievement" required class="form-control" style="height:100px"><?php echo $postresult['achievement'];?>
                             </textarea>
                           </div>
                         </div>
 						<div class="line"></div>
 						<div class="form-group row">
-                          <label class="col-sm-3 form-control-label">Upload Portfolio Image</label>
-                          <div class="col-sm-9" style="text-align:center">
-						    <img src="<?php echo $postresult['image'];?>" width="300px"/><br/>
-                            <input type="file" name="image" class="form-control">
+                          <label class="col-sm-3 form-control-label">GPA</label>
+                          <div class="col-sm-9">
+                            <input type="text" name="gpa" class="form-control" required value="<?php echo $postresult['gpa'];?>">
                           </div>
                         </div>
-						<div class="line"></div>
-						<div class="form-group row">
-                          <label class="col-sm-3 form-control-label">Portfolio Work Link</label>
+                        <div class="line"></div>
+                        <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">Year In</label>
                           <div class="col-sm-9">
-                            <input type="text" name="work_link" class="form-control" value="<?php echo $postresult['work_link'];?>">
+                            <input type="text" name="year_in" class="form-control" value="<?php echo $postresult['year_in'];?>">
+                          </div>
+                        </div>
+                        <div class="line"></div>
+                        <div class="form-group row">
+                          <label class="col-sm-3 form-control-label">Year Out</label>
+                          <div class="col-sm-9">
+                            <input type="text" name="year_out" class="form-control" value="<?php echo $postresult['year_out'];?>">
                           </div>
                         </div>
                         <div class="form-group row">

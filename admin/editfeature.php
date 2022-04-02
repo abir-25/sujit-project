@@ -4,7 +4,7 @@
           <!-- Page Header-->
           <header class="page-header">
             <div class="container-fluid">
-              <h2 class="no-margin-bottom">Best Skill</h2>
+              <h2 class="no-margin-bottom">Edit Feature</h2>
             </div>
           </header>
 <?php
