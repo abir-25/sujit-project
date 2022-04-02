@@ -604,7 +604,7 @@
                                     Skills</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="experience-tab" data-toggle="tab" href="#experience" role="tab" aria-controls="experience" aria-selected="false">experience</a>
+                                <a class="nav-link" id="experience-tab" data-toggle="tab" href="#experience" role="tab" aria-controls="experience" aria-selected="false">job experience</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="interview-tab" data-toggle="tab" href="#interview" role="tab" aria-controls="interview" aria-selected="false">interview</a>
@@ -615,74 +615,65 @@
                             <!-- Start Single Tab  -->
                             <div class="tab-pane show active fade single-tab-area" id="education" role="tabpanel" aria-labelledby="education-tab">
                                 <div class="personal-experience-inner mt--40">
+<?php
+    $query_edu = "select max(countt) as countt from tbl_education";
+    $getData = $db->select($query_edu);
+    if($getData)
+    {
+        while($result = $getData->fetch_assoc()) 
+        {
+            $num = $result['countt'];
+        }
+    }
+?>
                                     <div class="row">
                                         <!-- Start Skill List Area  -->
                                         <div class="col-lg-6 col-md-12 col-12">
                                             <div class="content">
-                                                <span class="subtitle">2007 - 2010</span>
+                                                <!-- <span class="subtitle">2007 - 2010</span> -->
                                                 <h4 class="maintitle">Education Quality</h4>
                                                 <div class="experience-list">
-
+<?php
+    if($num%2==0){
+        $num1 = $num/2;
+        $num2 = $num1;
+    }
+    else{
+        $num1 = intval($num/2) + 1;
+        $num2 = $num-$num1;
+    }
+    $query1 = "select * from tbl_education limit $num1";
+    $getData1 = $db->select($query1);
+    if($getData1)
+    {
+        while($result1 = $getData1->fetch_assoc()) 
+        {
+            $gpa = $result1['gpa'];
+            if($gpa==""){
+                $gpa = "Pursuing";
+            }
+            $year_out = $result1['year_out'];
+            if($year_out==0){
+                $year_out = "Present";
+            }
+?>        
                                                     <!-- Start Single List  -->
                                                     <div class="resume-single-list">
                                                         <div class="inner">
                                                             <div class="heading">
                                                                 <div class="title">
-                                                                    <h4>Personal Portfolio April Fools</h4>
-                                                                    <span>University of DVI (1997 - 2001)</span>
+                                                                    <h4><?php echo $result1['degree']; ?></h4>
+                                                                    <span><?php echo $result1['title']; ?> (<?php echo $result1['year_in']; ?> - <?php echo $year_out; ?>)</span>
                                                                 </div>
                                                                 <div class="date-of-time">
-                                                                    <span>4.30/5</span>
+                                                                    <span><?php echo $gpa; ?>/<?php echo $result1['gpa_outof']; ?></span>
                                                                 </div>
                                                             </div>
-                                                            <p class="description">The education should be very
-                                                                interactual. Ut tincidunt est ac dolor aliquam sodales.
-                                                                Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                                mauris hendrerit ante.</p>
+                                                            <p class="description"><?php echo $result1['achievement']; ?></p>
                                                         </div>
                                                     </div>
+<?php } } ?>                                                    
                                                     <!-- End Single List  -->
-
-                                                    <!-- Start Single List  -->
-                                                    <div class="resume-single-list">
-                                                        <div class="inner">
-                                                            <div class="heading">
-                                                                <div class="title">
-                                                                    <h4> Examples Of Personal Portfolio</h4>
-                                                                    <span>College of Studies (2000 - 2002)</span>
-                                                                </div>
-                                                                <div class="date-of-time">
-                                                                    <span>4.50/5</span>
-                                                                </div>
-                                                            </div>
-                                                            <p class="description">Maecenas finibus nec sem ut
-                                                                imperdiet. Ut tincidunt est ac dolor aliquam sodales.
-                                                                Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                                mauris hendrerit ante.</p>
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Single List  -->
-
-                                                    <!-- Start Single List  -->
-                                                    <div class="resume-single-list">
-                                                        <div class="inner">
-                                                            <div class="heading">
-                                                                <div class="title">
-                                                                    <h4>Tips For Personal Portfolio</h4>
-                                                                    <span>University of Studies (1997 - 2001)</span>
-                                                                </div>
-                                                                <div class="date-of-time">
-                                                                    <span>4.80/5</span>
-                                                                </div>
-                                                            </div>
-                                                            <p class="description"> If you are going to use a passage.
-                                                                Ut tincidunt est ac dolor aliquam sodales.
-                                                                Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                                mauris hendrerit ante.</p>
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Single List  -->
-
                                                 </div>
                                             </div>
                                         </div>
@@ -691,71 +682,43 @@
                                         <!-- Start Skill List Area 2nd  -->
                                         <div class="col-lg-6 col-md-12 col-12 mt_md--60 mt_sm--60">
                                             <div class="content">
-                                                <span class="subtitle">2007 - 2010</span>
-                                                <h4 class="maintitle">Job Experience</h4>
+                                            <h4 class="maintitle"></h4>
                                                 <div class="experience-list">
 
                                                     <!-- Start Single List  -->
+<?php
+    $query1 = "select * from tbl_education where countt>$num1 limit $num2";
+    $getData1 = $db->select($query1);
+    if($getData1)
+    {
+        while($result1 = $getData1->fetch_assoc()) 
+        {
+            $gpa = $result1['gpa'];
+            if($gpa==""){
+                $gpa = "Pursuing";
+            }
+            $year_out = $result1['year_out'];
+            if($year_out==0){
+                $year_out = "Present";
+            }
+?>  
                                                     <div class="resume-single-list">
                                                         <div class="inner">
                                                             <div class="heading">
                                                                 <div class="title">
-                                                                    <h4>Diploma in Web Development</h4>
-                                                                    <span>BSE In CSE (2004 - 2008)</span>
+                                                                    <h4><?php echo $result1['degree']; ?></h4>
+                                                                    <span><?php echo $result1['title']; ?> (<?php echo $result1['year_in']; ?> - <?php echo $year_out; ?>)</span>
                                                                 </div>
                                                                 <div class="date-of-time">
-                                                                    <span>4.70/5</span>
+                                                                    <span><?php echo $gpa; ?>/<?php echo $result1['gpa_outof']; ?></span>
                                                                 </div>
                                                             </div>
-                                                            <p class="description">Contrary to popular belief. Ut
-                                                                tincidunt est ac dolor aliquam sodales.
-                                                                Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                                mauris hendrerit ante.</p>
+                                                            <p class="description"><?php echo $result1['achievement']; ?></p>
                                                         </div>
                                                     </div>
+<?php } } ?>
                                                     <!-- End Single List  -->
-
-                                                    <!-- Start Single List  -->
-                                                    <div class="resume-single-list">
-                                                        <div class="inner">
-                                                            <div class="heading">
-                                                                <div class="title">
-                                                                    <h4>The Personal Portfolio Mystery</h4>
-                                                                    <span>Job at Rainbow-Themes (2008 - 2016)</span>
-                                                                </div>
-                                                                <div class="date-of-time">
-                                                                    <span>4.95/5</span>
-                                                                </div>
-                                                            </div>
-                                                            <p class="description">Generate Lorem Ipsum which looks. Ut
-                                                                tincidunt est ac dolor aliquam sodales.
-                                                                Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                                mauris hendrerit ante.</p>
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Single List  -->
-
-                                                    <!-- Start Single List  -->
-                                                    <div class="resume-single-list">
-                                                        <div class="inner">
-                                                            <div class="heading">
-                                                                <div class="title">
-                                                                    <h4>Diploma in Computer Science</h4>
-                                                                    <span>Works at Plugin Development (2016 -
-                                                                2020)</span>
-                                                                </div>
-                                                                <div class="date-of-time">
-                                                                    <span>5.00/5</span>
-                                                                </div>
-                                                            </div>
-                                                            <p class="description">Maecenas finibus nec sem ut
-                                                                imperdiet. Ut tincidunt est ac dolor aliquam sodales.
-                                                                Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                                mauris hendrerit ante.</p>
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Single List  -->
-
+                                          
                                                 </div>
                                             </div>
                                         </div>

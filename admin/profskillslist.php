@@ -4,7 +4,7 @@
                 <!-- Page Header-->
                 <header class="page-header">
                     <div class="container-fluid">
-                        <h2 class="no-margin-bottom">Education List</h2>
+                        <h2 class="no-margin-bottom">Professional Skills List</h2>
                     </div>
                 </header>
                 <!-- Breadcrumb-->
@@ -12,7 +12,7 @@
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.php">Home</a></li>
                         <li class="breadcrumb-item active">Resume Option</li>
-                        <li class="breadcrumb-item active">Education List</li>
+                        <li class="breadcrumb-item active">Professional Skills List</li>
                     </ul>
                 </div>
 
@@ -28,16 +28,16 @@
                                         </div>
                                     </div>
                                     <div class="card-header d-flex align-items-center">
-                                        <h3 class="h4">Education List</h3>
+                                        <h3 class="h4">Professional Skills</h3>
                                     </div>
                                     <div class="card-body">
 <?php
 
-	if(isset($_GET['deleducationid']))
+	if(isset($_GET['delProfSkillid']))
 	{
-		$deleducationid = $_GET['deleducationid'];
+		$delProfSkillid = $_GET['delProfSkillid'];
 		
-		$delquery = "delete from tbl_education where id = '$deleducationid'";
+		$delquery = "delete from tbl_prof_skills where id = '$delProfSkillid'";
 		$deldata = $db->deletedata($delquery);
 		
 		if($deldata)
@@ -54,16 +54,16 @@
                                         <table class="table">
                                             <thead>
                                                 <tr>
-                                                    <th width="8%">No.</th>
-                                                    <th width="22%">Institution Name</th>
-                                                    <th width="36%">Achievement</th>
-                                                    <th width="14%">GPA</th>
+                                                    <th width="15%">No.</th>
+                                                    <th width="20%">Skill Type</th>
+                                                    <th width="30%">Skill Name</th>
+                                                    <th width="15%">Percentage</th>
                                                     <th width="20%">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
 <?php
-	$query = "select * from tbl_education order by id asc";				
+	$query = "select * from tbl_prof_skills order by id asc";	
 	$post = $db->select($query);				
 	if($post)
 	{
@@ -71,27 +71,34 @@
 		while($result = $post->fetch_assoc())
 		{
 			$i++;
-            $gpa = $result['gpa'];
-            if($gpa==""){
-                $gpa = "Pursuing";
+            $skill_type_id = $result["type"];
+            $query1 = "select * from tbl_skill_type order by id asc";				
+            $post1 = $db->select($query1);				
+            if($post1)
+            {
+                while($result1 = $post1->fetch_assoc())
+                {
+                    if($skill_type_id == $result1["id"])
+                        $skill_type = $result1["title"];
+                }
             }
 ?>
                                                 <tr>
                                                     <th scope="row" style="vertical-align:middle"><?php echo $i; ?></th>
                                                     
+                                                    <td scope="row" style="vertical-align:middle"><?php echo $skill_type; ?></td>
+
                                                     <td scope="row" style="vertical-align:middle"><?php echo $result['title']; ?></td>
 
-                                                    <td scope="row" style="vertical-align:middle"><?php echo $result['achievement']; ?></td>
-
-                                                    <td scope="row" style="vertical-align:middle"><?php echo $gpa; ?> / <?php echo $result['gpa_outof']; ?></td>
+                                                    <td scope="row" style="vertical-align:middle"><?php echo $result['percentage']; ?></td>
 													
-													
-                                                    <td style="vertical-align:middle"><a class="actionLink" href="editeducation.php?educationId=<?php echo $result['id']; ?>">Update</a>  || <a class="actionLink" onclick= "return confirm('Are you sure to Delete This Education?');" href="?deleducationid=<?php echo $result['id'];?>">Delete</a></td>
+							
+                                                    <td style="vertical-align:middle"><a class="actionLink" href="editprofsKills.php?profSkillId=<?php echo $result['id']; ?>">Update</a>  || <a class="actionLink" onclick= "return confirm('Are you sure to Delete This Professional Skill?');" href="?delProfSkillid=<?php echo $result['id'];?>">Delete</a></td>
                                                 </tr>
 <?php } } ?>
 											</tbody>
                                         </table>
-                                        <a href="addeducation.php" class="btn btn-primary">Add</a>
+                                        <a href="addprofskills.php" class="btn btn-primary">Add</a>
                                     </div>
                                 </div>
                             </div>

@@ -21,8 +21,8 @@
           <div class="breadcrumb-holder container-fluid">
             <ul class="breadcrumb">
               <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-              <li class="breadcrumb-item active">Portfolio Option</li>  
-              <li class="breadcrumb-item active">Edit Portfolio</li>
+              <li class="breadcrumb-item active">Education Option</li>  
+              <li class="breadcrumb-item active">Edit Education</li>
             </ul>
           </div>
           <!-- Forms Section-->
@@ -50,7 +50,8 @@
 		$degree  = mysqli_real_escape_string($db->link1, $_POST['degree']);
 		$achievement  = mysqli_real_escape_string($db->link1, $_POST['achievement']);
 		$gpa  = mysqli_real_escape_string($db->link1, $_POST['gpa']);
-        $year_in  = mysqli_real_escape_string($db->link1, $_POST['year_in']);
+		$gpa_outof  = mysqli_real_escape_string($db->link1, $_POST['gpa_outof']);
+    $year_in  = mysqli_real_escape_string($db->link1, $_POST['year_in']);
         $year_out  = mysqli_real_escape_string($db->link1, $_POST['year_out']);
 	
 		$query = "UPDATE tbl_education
@@ -59,6 +60,7 @@
                     degree = '$degree',
                     achievement = '$achievement',
                     gpa = '$gpa',
+                    gpa_outof = '$gpa_outof',
                     year_in = '$year_in',
                     year_out = '$year_out'
                     where id='$educationId'";
@@ -109,6 +111,13 @@
                           <label class="col-sm-3 form-control-label">GPA</label>
                           <div class="col-sm-9">
                             <input type="text" name="gpa" class="form-control" required value="<?php echo $postresult['gpa'];?>">
+                          </div>
+                        </div>
+                        <div class="line"></div>
+						<div class="form-group row">
+                          <label class="col-sm-3 form-control-label">GPA Out Of</label>
+                          <div class="col-sm-9">
+                            <input type="text" name="gpa_outof" class="form-control" required value="<?php echo $postresult['gpa_outof'];?>">
                           </div>
                         </div>
                         <div class="line"></div>

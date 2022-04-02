@@ -4,7 +4,7 @@
           <!-- Page Header-->
           <header class="page-header">
             <div class="container-fluid">
-              <h2 class="no-margin-bottom">Add Education</h2>
+              <h2 class="no-margin-bottom">Add Professional Skills</h2>
             </div>
           </header>
           <!-- Breadcrumb-->
@@ -12,7 +12,7 @@
             <ul class="breadcrumb">
               <li class="breadcrumb-item"><a href="index.php">Home</a></li>
               <li class="breadcrumb-item active">Resume Option</li>
-			  <li class="breadcrumb-item active">Add Education</li>
+			  <li class="breadcrumb-item active">Add Professional Skills</li>
 			</ul>
           </div>
           <!-- Forms Section-->
@@ -38,24 +38,10 @@
 	if($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
 		$title  = mysqli_real_escape_string($db->link1, $_POST['title']);
-		$degree  = mysqli_real_escape_string($db->link1, $_POST['degree']);
-		$achievement  = mysqli_real_escape_string($db->link1, $_POST['achievement']);
-		$gpa  = mysqli_real_escape_string($db->link1, $_POST['gpa']);
-		$gpa_outof  = mysqli_real_escape_string($db->link1, $_POST['gpa_outof']);
-    $year_in  = mysqli_real_escape_string($db->link1, $_POST['year_in']);
-    $year_out  = mysqli_real_escape_string($db->link1, $_POST['year_out']);
+		$percentage  = mysqli_real_escape_string($db->link1, $_POST['percentage']);
+		$type  = $_POST['type'];
 
-    $query1 = "select max(countt) as countt from tbl_education";
-    $getData1 = $db->select($query1);
-    if($getData1)
-    {
-        while($result1 = $getData1->fetch_assoc()) 
-        {
-          $countt = $result1['countt'];
-        }
-    }
-        $countt++;
-        $query = "INSERT INTO tbl_education(title, degree, achievement, gpa, gpa_outof, year_in, year_out, countt) VALUES('$title','$degree','$achievement','$gpa',$gpa_outof,'$year_in','$year_out','$countt')";
+        $query = "INSERT INTO tbl_prof_skills(title, percentage, type) VALUES('$title','$percentage','$type')";
         $inserted_rows = $db->insert($query);
         if ($inserted_rows) 
         {
@@ -66,57 +52,32 @@
         {
             echo "<span class='error'>Data Not Inserted !!</span>";
         }
-	}
+    }
 ?>
 
                         <div class="form-group row">
-                          <label class="col-sm-3 form-control-label">Institution Name</label>
+                          <label class="col-sm-3 form-control-label">Skill Type</label>
                           <div class="col-sm-9">
-                            <input type="text" name="title" class="form-control" required placeholder="Enter Your Institution Name">
+                              <select name="type" id="" class="form-control" required>
+                                  <option value="">Select skill type</option>
+                                  <option value="1">Design</option>
+                                  <option value="2">Development</option>
+                              </select>
+                          </div>
+                        </div>
+                        
+						<div class="line"></div>
+						<div class="form-group row">
+                          <label class="col-sm-3 form-control-label">Skill Name</label>
+                          <div class="col-sm-9">
+                            <input type="text" name="title" class="form-control" required placeholder="Enter Your Skill Name">
                           </div>
                         </div>
 						<div class="line"></div>
 						<div class="form-group row">
-                          <label class="col-sm-3 form-control-label">Degree</label>
+                          <label class="col-sm-3 form-control-label">Skill Percentage</label>
                           <div class="col-sm-9">
-                            <input type="text" name="degree" class="form-control" required placeholder="Enter Your Degree">
-                          </div>
-                        </div>
-						<div class="line"></div>
-						<div class="form-group row">
-                          <label class="col-sm-3 form-control-label">Achievement</label>
-                          <div class="col-sm-9">
-                          <textarea name="achievement" required class="form-control" style="height:200px"
-                            placeholder="Enter Your Achievement Description"
-                            ></textarea>
-                          </div>
-                        </div>  
-						<div class="line"></div>
-						<div class="form-group row">
-                          <label class="col-sm-3 form-control-label">GPA</label>
-                          <div class="col-sm-9">
-                            <input type="text" name="gpa" class="form-control" placeholder="Enter your GPA">
-                          </div>
-                        </div>
-                        <div class="line"></div>
-                        <div class="form-group row">
-                          <label class="col-sm-3 form-control-label">GPA Out of</label>
-                          <div class="col-sm-9">
-                            <input type="text" name="gpa_outof" class="form-control" placeholder="Enter your GPA out of. e.g. 5">
-                          </div>
-                        </div>
-                        <div class="line"></div>
-						<div class="form-group row">
-                          <label class="col-sm-3 form-control-label">Year In</label>
-                          <div class="col-sm-9">
-                            <input type="text" name="year_in" class="form-control" placeholder="Enter your Year of joining that institution">
-                          </div>
-                        </div>
-                        <div class="line"></div>
-						<div class="form-group row">
-                          <label class="col-sm-3 form-control-label">Year Out</label>
-                          <div class="col-sm-9">
-                            <input type="text" name="year_out" class="form-control" placeholder="Enter your Year of leaving that institution">
+                            <input type="number" name="percentage" class="form-control" placeholder="Enter your skill percentage" required>
                           </div>
                         </div>
 						<div class="form-group row">

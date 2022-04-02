@@ -58,7 +58,9 @@
 					<li><a href="#exampledropdownDropdown5" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-user"></i>Resume Option</a>
                         <ul id="exampledropdownDropdown5" class="collapse list-unstyled ">
                             <li><a href="addeducation.php">Add Education</a></li>
-                            <li><a href="educationlist.php">Education List</a></li>            
+                            <li><a href="educationlist.php">Education List</a></li> 
+                            <li><a href="addprofskills.php">Add Professional Skills</a></li>
+                            <li><a href="profskillslist.php">Professional Skills List</a></li>             
                         </ul>
                     </li>
 					<li><a href="#exampledropdownDropdown6" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-star-o"></i>Testimonial Option</a>
