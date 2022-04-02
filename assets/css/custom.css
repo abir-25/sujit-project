@@ -39,3 +39,10 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.training-title {
+  width: 79%;
+}
+.duration-div {
+  width: 21%;
+  text-align: center;
+}

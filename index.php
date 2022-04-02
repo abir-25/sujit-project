@@ -603,7 +603,7 @@
                     <div class="col-lg-12">
                         <ul class="rn-nav-list nav nav-tabs" id="myTabs" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="education-tab" data-toggle="tab" href="#education" role="tab" aria-controls="education" aria-selected="true">education</a>
+                                <a class="nav-link active" id="education-tab" data-toggle="tab" href="#education" role="tab" aria-controls="education" aria-selected="true">academic qualification</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="professional-tab" data-toggle="tab" href="#professional" role="tab" aria-controls="professional" aria-selected="false">professional
@@ -636,7 +636,7 @@
                                         <!-- Start Skill List Area  -->
                                         <div class="col-lg-6 col-md-12 col-12">
                                             <div class="content">
-                                                <h4 class="maintitle">Education Quality</h4>
+                                                <h4 class="maintitle">Academic Qualification</h4>
                                                 <div class="experience-list">
 <?php
     if($num%2==0){
@@ -914,74 +914,58 @@
                             <!-- Start Single Tab  -->
                             <div class="tab-pane fade" id="interview" role="tabpanel" aria-labelledby="interview-tab">
                                 <div class="personal-experience-inner mt--40">
+<?php
+    $query_edu = "select max(countt) as countt from tbl_training";
+    $getData = $db->select($query_edu);
+    if($getData)
+    {
+        while($result = $getData->fetch_assoc()) 
+        {
+            $num = $result['countt'];
+        }
+    }
+?>
                                     <div class="row">
                                         <!-- Start Skill List Area  -->
                                         <div class="col-lg-6 col-md-12 col-12">
                                             <div class="content">
-                                                <span class="subtitle">2007 - 2010</span>
-                                                <h4 class="maintitle">Company Experience</h4>
+                                                 <h4 class="maintitle">Training Summary</h4>
                                                 <div class="experience-list">
-
+<?php
+    if($num%2==0){
+        $num1 = $num/2;
+        $num2 = $num1;
+    }
+    else{
+        $num1 = intval($num/2) + 1;
+        $num2 = $num-$num1;
+    }
+    $query1 = "select * from tbl_training limit $num1";
+    $getData1 = $db->select($query1);
+    if($getData1)
+    {   
+        $delayy = 100;
+        while($result1 = $getData1->fetch_assoc()) 
+        {
+            $delayy = $delayy+200;
+?>    
                                                     <!-- Start Single List  -->
-                                                    <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="300" data-aos-once="true" class="resume-single-list">
+                                                    <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="<?php echo $delayy; ?>" data-aos-once="true" class="resume-single-list">
                                                         <div class="inner">
                                                             <div class="heading">
-                                                                <div class="title">
-                                                                    <h4>Personal Portfolio April Fools</h4>
-                                                                    <span>University of DVI (1997 - 2001)</span>
+                                                                <div class="title training-title">
+                                                                    <h4><?php echo $result1['title']; ?></h4>
+                                                                    <span><?php echo $result1['institute']; ?> (<?php echo $result1['year_out']; ?>)</span>
                                                                 </div>
-                                                                <div class="date-of-time">
-                                                                    <span>4.30/5</span>
+                                                                <div class="date-of-time duration-div">
+                                                                    <span><?php echo $result1['duration']; ?> Hours</span>
                                                                 </div>
                                                             </div>
-                                                            <p class="description">The education should be very
-                                                                interactual. Ut tincidunt est ac dolor aliquam sodales.
-                                                                Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                                mauris hendrerit ante.</p>
+                                                            <p class="description"><?php echo $result1['achievement']; ?></p>
                                                         </div>
                                                     </div>
                                                     <!-- End Single List  -->
-
-                                                    <!-- Start Single List  -->
-                                                    <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="500" data-aos-once="true" class="resume-single-list">
-                                                        <div class="inner">
-                                                            <div class="heading">
-                                                                <div class="title">
-                                                                    <h4> Examples Of Personal Portfolio</h4>
-                                                                    <span>College of Studies (2000 - 2002)</span>
-                                                                </div>
-                                                                <div class="date-of-time">
-                                                                    <span>4.50/5</span>
-                                                                </div>
-                                                            </div>
-                                                            <p class="description">Maecenas finibus nec sem ut
-                                                                imperdiet. Ut tincidunt est ac dolor aliquam sodales.
-                                                                Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                                mauris hendrerit ante.</p>
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Single List  -->
-
-                                                    <!-- Start Single List  -->
-                                                    <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="700" data-aos-once="true" class="resume-single-list">
-                                                        <div class="inner">
-                                                            <div class="heading">
-                                                                <div class="title">
-                                                                    <h4>Tips For Personal Portfolio</h4>
-                                                                    <span>University of Studies (1997 - 2001)</span>
-                                                                </div>
-                                                                <div class="date-of-time">
-                                                                    <span>4.80/5</span>
-                                                                </div>
-                                                            </div>
-                                                            <p class="description"> If you are going to use a passage.
-                                                                Ut tincidunt est ac dolor aliquam sodales.
-                                                                Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                                mauris hendrerit ante.</p>
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Single List  -->
-
+<?php } } ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -990,71 +974,35 @@
                                         <!-- Start Skill List Area 2nd  -->
                                         <div class="col-lg-6 col-md-12 col-12 mt_md--60 mt_sm--60">
                                             <div class="content">
-                                                <span class="subtitle">2007 - 2010</span>
-                                                <h4 class="maintitle">Job Experience</h4>
+                                                <h4 class="maintitle"style="color:transparent">Job Experience</h4>
                                                 <div class="experience-list">
-
+ <?php
+    $query1 = "select * from tbl_training where countt>$num1 limit $num2";
+    $getData1 = $db->select($query1);
+    if($getData1)
+    {
+        $delay = 300;
+        while($result1 = $getData1->fetch_assoc()) 
+        {
+            $delay = $delay+200;
+?>  
                                                     <!-- Start Single List  -->
-                                                    <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="500" data-aos-once="true" class="resume-single-list">
+                                                    <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="<?php echo $delay; ?>" data-aos-once="true" class="resume-single-list">
                                                         <div class="inner">
                                                             <div class="heading">
-                                                                <div class="title">
-                                                                    <h4>Diploma in Web Development</h4>
-                                                                    <span>BSE In CSE (2004 - 2008)</span>
+                                                                <div class="title training-title">
+                                                                    <h4><?php echo $result1['title']; ?></h4>
+                                                                    <span><?php echo $result1['institute']; ?> (<?php echo $result1['year_out']; ?>)</span>
                                                                 </div>
-                                                                <div class="date-of-time">
-                                                                    <span>4.70/5</span>
+                                                                <div class="date-of-time duration-div">
+                                                                    <span><?php echo $result1['duration']; ?> Hours</span>
                                                                 </div>
                                                             </div>
-                                                            <p class="description">Contrary to popular belief. Ut
-                                                                tincidunt est ac dolor aliquam sodales.
-                                                                Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                                mauris hendrerit ante.</p>
+                                                            <p class="description"><?php echo $result1['achievement']; ?></p>
                                                         </div>
                                                     </div>
                                                     <!-- End Single List  -->
-
-                                                    <!-- Start Single List  -->
-                                                    <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="700" data-aos-once="true" class="resume-single-list">
-                                                        <div class="inner">
-                                                            <div class="heading">
-                                                                <div class="title">
-                                                                    <h4>The Personal Portfolio Mystery</h4>
-                                                                    <span>Job at Rainbow-Themes (2008 - 2016)</span>
-                                                                </div>
-                                                                <div class="date-of-time">
-                                                                    <span>4.95/5</span>
-                                                                </div>
-                                                            </div>
-                                                            <p class="description">Generate Lorem Ipsum which looks. Ut
-                                                                tincidunt est ac dolor aliquam sodales.
-                                                                Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                                mauris hendrerit ante.</p>
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Single List  -->
-
-                                                    <!-- Start Single List  -->
-                                                    <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="900" data-aos-once="true" class="resume-single-list">
-                                                        <div class="inner">
-                                                            <div class="heading">
-                                                                <div class="title">
-                                                                    <h4>Diploma in Computer Science</h4>
-                                                                    <span>Works at Plugin Development (2016 -
-                                                                2020)</span>
-                                                                </div>
-                                                                <div class="date-of-time">
-                                                                    <span>5.00/5</span>
-                                                                </div>
-                                                            </div>
-                                                            <p class="description">Maecenas finibus nec sem ut
-                                                                imperdiet. Ut tincidunt est ac dolor aliquam sodales.
-                                                                Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                                mauris hendrerit ante.</p>
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Single List  -->
-
+<?php } } ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -1092,6 +1040,14 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="testimonial-activation testimonial-pb mb--30">
+<?php
+    $query1 = "select * from tbl_testimonial";
+    $getData1 = $db->select($query1);
+    if($getData1)
+    {
+        while($result1 = $getData1->fetch_assoc()) 
+        {
+?>    
                             <!-- Start Single testiminail -->
                             <div class="testimonial mt--50 mt_md--40 mt_sm--40">
                                 <div class="inner">
@@ -1130,160 +1086,7 @@
                                 </div>
                             </div>
                             <!--End Single testiminail -->
-                            <!-- Start Single testiminail -->
-                            <div class="testimonial mt--50 mt_md--40 mt_sm--40">
-                                <div class="inner">
-                                    <div class="card-info">
-                                        <div class="card-thumbnail">
-                                            <img src="assets/images/testimonial/final-home--2nd.png" alt="Testimonial-image">
-                                        </div>
-                                        <div class="card-content">
-                                            <span class="subtitle mt--10">Bound - Trolola</span>
-                                            <h3 class="title">Jone Duone Joe</h3>
-                                            <span class="designation">Operating Officer</span>
-                                        </div>
-                                    </div>
-                                    <div class="card-description">
-                                        <div class="title-area">
-                                            <div class="title-info">
-                                                <h3 class="title">Web App Development</h3>
-                                                <span class="date">Upwork - Mar 4, 2016 - Aug 30, 2021</span>
-                                            </div>
-                                            <div class="rating">
-                                                <img src="assets/images/icons/rating.png" alt="rating-image">
-                                                <img src="assets/images/icons/rating.png" alt="rating-image">
-                                                <img src="assets/images/icons/rating.png" alt="rating-image">
-                                                <img src="assets/images/icons/rating.png" alt="rating-image">
-                                                <img src="assets/images/icons/rating.png" alt="rating-image">
-                                            </div>
-                                        </div>
-                                        <div class="seperator"></div>
-                                        <p class="discription">
-                                            Important fact to nec sem ut imperdiet. Ut tincidunt est ac dolor aliquam
-                                            sodales. Phasellus sed mauris hendrerit, laoreet sem in, lobortis mauris
-                                            hendrerit ante. Ut tincidunt est ac dolor aliquam sodales phasellus smauris
-                                            .
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--End Single testiminail -->
-                            <!-- Start Single testiminail -->
-                            <div class="testimonial mt--50 mt_md--40 mt_sm--40">
-                                <div class="inner">
-                                    <div class="card-info">
-                                        <div class="card-thumbnail">
-                                            <img src="assets/images/testimonial/final-home--3rd.png" alt="Testimonial-image">
-                                        </div>
-                                        <div class="card-content">
-                                            <span class="subtitle mt--10">Glassfisom</span>
-                                            <h3 class="title">Nevine Dhawan</h3>
-                                            <span class="designation">CEO Of Officer</span>
-                                        </div>
-                                    </div>
-                                    <div class="card-description">
-                                        <div class="title-area">
-                                            <div class="title-info">
-                                                <h3 class="title">Android App Design</h3>
-                                                <span class="date">Fiver - Mar 4, 2015 - Aug 30, 2021</span>
-                                            </div>
-                                            <div class="rating">
-                                                <img src="assets/images/icons/rating.png" alt="rating-image">
-                                                <img src="assets/images/icons/rating.png" alt="rating-image">
-                                                <img src="assets/images/icons/rating.png" alt="rating-image">
-                                                <img src="assets/images/icons/rating.png" alt="rating-image">
-                                                <img src="assets/images/icons/rating.png" alt="rating-image">
-                                            </div>
-                                        </div>
-                                        <div class="seperator"></div>
-                                        <p class="discription">
-                                            No more question for design. Ut tincidunt est ac dolor aliquam
-                                            sodales. Phasellus sed mauris hendrerit, laoreet sem in, lobortis mauris
-                                            hendrerit ante. Ut tincidunt est ac dolor aliquam sodales phasellus smauris
-                                            .
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--End Single testiminail -->
-
-                            <!-- Start Single testiminail -->
-                            <div class="testimonial mt--50 mt_md--40 mt_sm--40">
-                                <div class="inner">
-                                    <div class="card-info">
-                                        <div class="card-thumbnail">
-                                            <img src="assets/images/testimonial/final-home--4th.png" alt="Testimonial-image">
-                                        </div>
-                                        <div class="card-content">
-                                            <span class="subtitle mt--10">NCD - Design</span>
-                                            <h3 class="title">Mevine Thoda</h3>
-                                            <span class="designation">Marketing Officer</span>
-                                        </div>
-                                    </div>
-                                    <div class="card-description">
-                                        <div class="title-area">
-                                            <div class="title-info">
-                                                <h3 class="title">CEO - Marketing</h3>
-                                                <span class="date">Thoda Department - Mar 4, 2018 - Aug 30, 2021</span>
-                                            </div>
-                                            <div class="rating">
-                                                <img src="assets/images/icons/rating.png" alt="rating-image">
-                                                <img src="assets/images/icons/rating.png" alt="rating-image">
-                                                <img src="assets/images/icons/rating.png" alt="rating-image">
-                                                <img src="assets/images/icons/rating.png" alt="rating-image">
-                                                <img src="assets/images/icons/rating.png" alt="rating-image">
-                                            </div>
-                                        </div>
-                                        <div class="seperator"></div>
-                                        <p class="discription">
-                                            Marcent Of Vanice and treatment. Ut tincidunt est ac dolor aliquam
-                                            sodales. Phasellus sed mauris hendrerit, laoreet sem in, lobortis mauris
-                                            hendrerit ante. Ut tincidunt est ac dolor aliquam sodales phasellus smauris
-                                            .
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--End Single testiminail -->
-
-                            <!-- Start Single testiminail -->
-                            <div class="testimonial mt--50 mt_md--40 mt_sm--40">
-                                <div class="inner">
-                                    <div class="card-info">
-                                        <div class="card-thumbnail">
-                                            <img src="assets/images/testimonial/final-home--5th.png" alt="Testimonial-image">
-                                        </div>
-                                        <div class="card-content">
-                                            <span class="subtitle mt--10">Default name</span>
-                                            <h3 class="title">Davei Luace</h3>
-                                            <span class="designation">Chief Operating Manager</span>
-                                        </div>
-                                    </div>
-                                    <div class="card-description">
-                                        <div class="title-area">
-                                            <div class="title-info">
-                                                <h3 class="title">Android App Development</h3>
-                                                <span class="date">via Upwork - Mar 4, 2015 - Aug 30, 2021</span>
-                                            </div>
-                                            <div class="rating">
-                                                <img src="assets/images/icons/rating.png" alt="rating-image">
-                                                <img src="assets/images/icons/rating.png" alt="rating-image">
-                                                <img src="assets/images/icons/rating.png" alt="rating-image">
-                                                <img src="assets/images/icons/rating.png" alt="rating-image">
-                                                <img src="assets/images/icons/rating.png" alt="rating-image">
-                                            </div>
-                                        </div>
-                                        <div class="seperator"></div>
-                                        <p class="discription">
-                                            When managment is so important. Ut tincidunt est ac dolor aliquam
-                                            sodales. Phasellus sed mauris hendrerit, laoreet sem in, lobortis mauris
-                                            hendrerit ante. Ut tincidunt est ac dolor aliquam sodales phasellus smauris
-                                            .
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--End Single testiminail -->
+<?php } } ?>
                         </div>
                     </div>
                 </div>
