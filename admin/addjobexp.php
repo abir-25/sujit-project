@@ -4,7 +4,7 @@
           <!-- Page Header-->
           <header class="page-header">
             <div class="container-fluid">
-              <h2 class="no-margin-bottom">Add Education</h2>
+              <h2 class="no-margin-bottom">Add Job Experience</h2>
             </div>
           </header>
           <!-- Breadcrumb-->
@@ -12,7 +12,7 @@
             <ul class="breadcrumb">
               <li class="breadcrumb-item"><a href="index.php">Home</a></li>
               <li class="breadcrumb-item active">Resume Option</li>
-			  <li class="breadcrumb-item active">Add Education</li>
+			  <li class="breadcrumb-item active">Add Job Experience</li>
 			</ul>
           </div>
           <!-- Forms Section-->
@@ -37,20 +37,10 @@
 <?php
 	if($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
-		$title  = mysqli_real_escape_string($db->link1, $_POST['title']);
-		$degree  = mysqli_real_escape_string($db->link1, $_POST['degree']);
-		$achievement  = mysqli_real_escape_string($db->link1, $_POST['achievement']);
-
-    if(!isset($_POST['gpa_check'])){
-      $gpa  = mysqli_real_escape_string($db->link1, $_POST['gpa']);
-    }
-    else{
-      $gpa  = "";
-    }
-
-		$gpa_outof  = mysqli_real_escape_string($db->link1, $_POST['gpa_outof']);
+		$designation  = mysqli_real_escape_string($db->link1, $_POST['designation']);
+		$company  = mysqli_real_escape_string($db->link1, $_POST['company']);
+		$responsibility  = mysqli_real_escape_string($db->link1, $_POST['responsibility']);
     $year_in  = mysqli_real_escape_string($db->link1, $_POST['year_in']);
-
     if(!isset($_POST['year_out_check'])){
       $year_out  = mysqli_real_escape_string($db->link1, $_POST['year_out']);
     }
@@ -58,7 +48,8 @@
       $year_out  = 0;
     }
 
-    $queryCheck = "select * from tbl_education where tbl_education.id mod 1 = 0;";
+
+    $queryCheck = "select * from tbl_job_exp where tbl_job_exp.id mod 1 = 0;";
     $getDataCheck = $db->select($queryCheck);
     if($getDataCheck)
     {
@@ -67,7 +58,7 @@
       {
         $i++;
         $idCheck = $resultCheck['id'];
-        $query = "UPDATE tbl_education
+        $query = "UPDATE tbl_job_exp
                 SET 
                 countt = '$i'
                 where id='$idCheck'";
@@ -75,18 +66,17 @@
       }
     } 
 
-    $query1 = "select max(countt) as countt from tbl_education";
+    $query1 = "select max(countt) as countt from tbl_job_exp";
     $getData1 = $db->select($query1);
     if($getData1)
     {
         while($result1 = $getData1->fetch_assoc()) 
         {
-
           $countt = $result1['countt'];
         }
     }
         $countt++;
-        $query = "INSERT INTO tbl_education(title, degree, achievement, gpa, gpa_outof, year_in, year_out, countt) VALUES('$title','$degree','$achievement','$gpa',$gpa_outof,'$year_in','$year_out','$countt')";
+        $query = "INSERT INTO tbl_job_exp(designation, company, responsibility, year_in, year_out, countt) VALUES('$designation','$company','$responsibility','$year_in','$year_out','$countt')";
         $inserted_rows = $db->insert($query);
         if ($inserted_rows) 
         {
@@ -101,60 +91,39 @@
 ?>
 
                         <div class="form-group row">
-                          <label class="col-sm-3 form-control-label">Institution Name</label>
+                          <label class="col-sm-3 form-control-label">Designation</label>
                           <div class="col-sm-9">
-                            <input type="text" name="title" class="form-control" required placeholder="Enter Your Institution Name">
+                            <input type="text" name="designation" class="form-control" required placeholder="Enter Your Designation">
                           </div>
                         </div>
 						<div class="line"></div>
 						<div class="form-group row">
-                          <label class="col-sm-3 form-control-label">Degree</label>
+                          <label class="col-sm-3 form-control-label">Company Name</label>
                           <div class="col-sm-9">
-                            <input type="text" name="degree" class="form-control" required placeholder="Enter Your Degree">
+                            <input type="text" name="company" class="form-control" required placeholder="Enter Your Company Name">
                           </div>
                         </div>
 						<div class="line"></div>
 						<div class="form-group row">
-                          <label class="col-sm-3 form-control-label">Achievement</label>
+                          <label class="col-sm-3 form-control-label">Responsibilities</label>
                           <div class="col-sm-9">
-                          <textarea name="achievement" required class="form-control" style="height:200px"
-                            placeholder="Enter Your Achievement Description"
+                          <textarea name="responsibility" required class="form-control" style="height:200px"
+                            placeholder="Enter Your Responsibilities"
                             ></textarea>
                           </div>
                         </div>  
-						<div class="line"></div>
-						<div class="form-group row">
-                          <label class="col-sm-3 form-control-label">GPA</label>
-                          <div class="col-sm-9">
-                            <input type="text" id="gpa_field" name="gpa" class="form-control" placeholder="Enter your GPA">
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <label class="col-sm-3 form-control-label"></label>
-                          <div class="col-sm-9">
-                            <input type="checkbox" name="gpa_check" 
-                            value="gpa" onclick="disableTextfield1()"> Result has not been published yet
-                          </div>
-                        </div>
-                        <div class="line"></div>
-                        <div class="form-group row">
-                          <label class="col-sm-3 form-control-label">GPA Out of</label>
-                          <div class="col-sm-9">
-                            <input type="text" required name="gpa_outof" class="form-control" placeholder="Enter your GPA out of. e.g. 5">
-                          </div>
-                        </div>
                         <div class="line"></div>
 						<div class="form-group row">
                           <label class="col-sm-3 form-control-label">Year In</label>
                           <div class="col-sm-9">
-                            <input type="text" name="year_in" class="form-control" required placeholder="Enter your Year of joining that institution">
+                            <input type="text" name="year_in" class="form-control" placeholder="Enter your Year of joining that Company">
                           </div>
                         </div>
                         <div class="line"></div>
-						            <div class="form-group row">
+						<div class="form-group row">
                           <label class="col-sm-3 form-control-label">Year Out</label>
                           <div class="col-sm-9">
-                            <input id="yearOut" type="text" name="year_out" class="form-control" placeholder="Enter your Year of leaving that institution">
+                            <input type="text" id="yearOut" name="year_out" class="form-control" placeholder="Enter your Year of leaving that Company">
                           </div>
                         </div>
                         <div class="form-group row">
@@ -162,7 +131,7 @@
                           <div class="col-sm-9">
                             <input type="checkbox" name="year_out_check" 
                             value="year" 
-                            onclick="disableTextfield()"> Currently Studying
+                            onclick="disableTextfield()"> Currently Working
                           </div>
                         </div>
 						<div class="form-group row">
@@ -202,17 +171,6 @@
         else{
           yearOut.value="";
           yearOut.disabled = true;
-        }
-      }
-      function disableTextfield1() {
-        var gpa_field = document.getElementById("gpa_field");
-        if(gpa_field.disabled)
-        {
-          gpa_field.disabled = false;
-        }
-        else{
-          gpa_field.value="";
-          gpa_field.disabled = true;
         }
       }
   </script>

@@ -61,6 +61,8 @@
                             <li><a href="educationlist.php">Education List</a></li> 
                             <li><a href="addprofskills.php">Add Professional Skills</a></li>
                             <li><a href="profskillslist.php">Professional Skills List</a></li>             
+                            <li><a href="addjobexp.php">Add Job Experience</a></li>
+                            <li><a href="jobexplist.php">Job Experience List</a></li> 
                         </ul>
                     </li>
 					<li><a href="#exampledropdownDropdown6" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-star-o"></i>Testimonial Option</a>

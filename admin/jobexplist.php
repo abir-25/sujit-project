@@ -4,15 +4,15 @@
                 <!-- Page Header-->
                 <header class="page-header">
                     <div class="container-fluid">
-                        <h2 class="no-margin-bottom">Feature List</h2>
+                        <h2 class="no-margin-bottom">Job Experience List</h2>
                     </div>
                 </header>
                 <!-- Breadcrumb-->
                 <div class="breadcrumb-holder container-fluid">
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                        <li class="breadcrumb-item active">Feature Option</li>
-                        <li class="breadcrumb-item active">Feature List</li>
+                        <li class="breadcrumb-item active">Resume Option</li>
+                        <li class="breadcrumb-item active">Job Experience List</li>
                     </ul>
                 </div>
 
@@ -28,27 +28,16 @@
                                         </div>
                                     </div>
                                     <div class="card-header d-flex align-items-center">
-                                        <h3 class="h4">Feature List</h3>
+                                        <h3 class="h4">Job Experience List</h3>
                                     </div>
                                     <div class="card-body">
 <?php
 
-	if(isset($_GET['delfeatureid']))
+	if(isset($_GET['deljobid']))
 	{
-		$delfeatureid = $_GET['delfeatureid'];
-		$query = "select * from tbl_feature where id='$delfeatureid'"; 
-		$getdata = $db->select($query);
+		$deljobid = $_GET['deljobid'];
 		
-		if($getdata)
-		{
-			while($delimg = $getdata->fetch_assoc())
-			{
-				$dellink = $delimg['icon'];
-				unlink($dellink);
-			}
-		}
-		
-		$delquery = "delete from tbl_feature where id = '$delfeatureid'";
+		$delquery = "delete from tbl_job_exp where id = '$deljobid'";
 		$deldata = $db->deletedata($delquery);
 		
 		if($deldata)
@@ -66,16 +55,15 @@
                                             <thead>
                                                 <tr>
                                                     <th width="8%">No.</th>
-                                                    <th width="22%">Title</th>
-                                                    <th width="40%">Description</th>
-                                                    <th width="10%">Icon</th>
+                                                    <th width="15%">Designation</th>
+                                                    <th width="20%">Company Name</th>
+                                                    <th  width="37%">Responsibilities</th>
                                                     <th width="20%">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
 <?php
-	$query = "select * from tbl_feature order by id asc";	
-    $i = 0;			
+	$query = "select * from tbl_job_exp order by id asc";		$i= 0;
 	$post = $db->select($query);				
 	if($post)
 	{
@@ -86,14 +74,13 @@
                                                 <tr>
                                                     <th scope="row" style="vertical-align:middle"><?php echo $i; ?></th>
                                                     
-                                                    <td scope="row" style="vertical-align:middle"><?php echo $result['title'];; ?></td>
+                                                    <td scope="row" style="vertical-align:middle"><?php echo $result['designation']; ?></td>
 
-                                                    <td scope="row" style="vertical-align:middle"><?php echo $result['description'];; ?></td>
+                                                    <td scope="row" style="vertical-align:middle"><?php echo $result['company']; ?></td>
 
-                                                    <td style="vertical-align:middle"><img class="skill-list" src="<?php echo $result['icon']; ?>" alt="" /></td>
+                                                    <td scope="row" style="vertical-align:middle"><?php echo $result['responsibility']; ?></td>
 													
-													
-                                                    <td style="vertical-align:middle"><a class="actionLink" href="editfeature.php?featureId=<?php echo $result['id']; ?>">Update</a>  || <a class="actionLink" onclick= "return confirm('Are you sure to Delete This Feature?');" href="?delfeatureid=<?php echo $result['id'];?>">Delete</a></td>
+                                                    <td style="vertical-align:middle"><a class="actionLink" href="editjobexp.php?jobId=<?php echo $result['id']; ?>">Update</a>  || <a class="actionLink" onclick= "return confirm('Are you sure to Delete This Job Experience?');" href="?deljobid=<?php echo $result['id'];?>">Delete</a></td>
                                                 </tr>
 <?php } } ?>
 											</tbody>
@@ -101,7 +88,7 @@
 <?php if($i==0) { ?>
                                         <p class="text-center py-4">No data Available</p>
 <?php } ?>
-                                        <a href="addfeature.php" class="btn btn-primary">Add</a>
+                                        <a href="addjobexp.php" class="btn btn-primary">Add</a>
                                     </div>
                                 </div>
                             </div>

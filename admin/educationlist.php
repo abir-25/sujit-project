@@ -63,11 +63,11 @@
                                             </thead>
                                             <tbody>
 <?php
-	$query = "select * from tbl_education order by id asc";				
+	$query = "select * from tbl_education order by id asc";		
+    $i = 0;
 	$post = $db->select($query);				
 	if($post)
 	{
-		$i= 0;
 		while($result = $post->fetch_assoc())
 		{
 			$i++;
@@ -91,6 +91,9 @@
 <?php } } ?>
 											</tbody>
                                         </table>
+<?php if($i==0) { ?>
+                                        <p class="text-center py-4">No data Available</p>
+<?php } ?>
                                         <a href="addeducation.php" class="btn btn-primary">Add</a>
                                     </div>
                                 </div>

@@ -441,11 +441,15 @@
     $getData1 = $db->select($query1);
     if($getData1)
     {
+        $duration=500;
+        $delay=100;
         while($result1 = $getData1->fetch_assoc()) 
         {
+            $delay=$delay+100;
+            $duration=$duration+100;
 ?>   
                     <!-- Start Single Service -->
-                    <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="100" data-aos-once="true" class="col-lg-6 col-xl-4 col-md-6 col-sm-12 col-12 mt--50 mt_md--30 mt_sm--30">
+                    <div data-aos="fade-up" data-aos-duration="<?php echo $duration; ?>" data-aos-delay="<?php echo $delay; ?>" data-aos-once="true" class="col-lg-6 col-xl-4 col-md-6 col-sm-12 col-12 mt--50 mt_md--30 mt_sm--30">
                         <div class="rn-service">
                             <div class="inner">
                                 <div class="icon">
@@ -494,12 +498,14 @@
     $getData1 = $db->select($query1);
     if($getData1)
     {
+        $delay=100;
         while($result1 = $getData1->fetch_assoc()) 
         {
+            $delay=$delay+100;
             $id= $result1['id'];
 ?>   
                     <!-- Start Single Portfolio -->
-                    <div data-aos="fade-up" data-aos-delay="100" data-aos-once="true" class="col-lg-6 col-xl-4 col-md-6 col-12 mt--50 mt_md--30 mt_sm--30">
+                    <div data-aos="fade-up" data-aos-delay="<?php echo $delay; ?>" data-aos-once="true" class="col-lg-6 col-xl-4 col-md-6 col-12 mt--50 mt_md--30 mt_sm--30">
                         <div class="rn-portfolio" data-toggle="modal" data-target="#portfolioModal_<?php echo $id; ?>">
                             <div class="inner">
                                 <div class="thumbnail">
@@ -607,7 +613,7 @@
                                 <a class="nav-link" id="experience-tab" data-toggle="tab" href="#experience" role="tab" aria-controls="experience" aria-selected="false">job experience</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="interview-tab" data-toggle="tab" href="#interview" role="tab" aria-controls="interview" aria-selected="false">interview</a>
+                                <a class="nav-link" id="interview-tab" data-toggle="tab" href="#interview" role="tab" aria-controls="interview" aria-selected="false">Training Summary</a>
                             </li>
                         </ul>
                         <!-- Start Tab Content Wrapper  -->
@@ -630,7 +636,6 @@
                                         <!-- Start Skill List Area  -->
                                         <div class="col-lg-6 col-md-12 col-12">
                                             <div class="content">
-                                                <!-- <span class="subtitle">2007 - 2010</span> -->
                                                 <h4 class="maintitle">Education Quality</h4>
                                                 <div class="experience-list">
 <?php
@@ -682,6 +687,7 @@
                                         <!-- Start Skill List Area 2nd  -->
                                         <div class="col-lg-6 col-md-12 col-12 mt_md--60 mt_sm--60">
                                             <div class="content">
+                                            <h4 class="maintitle" style="color: transparent">Job Experience</h4>
                                             <h4 class="maintitle"></h4>
                                                 <div class="experience-list">
 
@@ -737,58 +743,30 @@
                                         <div class="col-lg-6 col-md-6 col-12">
                                             <div class="progress-wrapper">
                                                 <div class="content">
-                                                    <span class="subtitle">Features</span>
+                                            
                                                     <h4 class="maintitle">Design Skill</h4>
+<?php
+    $query_sk = "select * from tbl_prof_skills where type='1'";
+    $getData = $db->select($query_sk);
+    if($getData)
+    {
+        $duration = 0.4;
+        $delay = 0.2;
+        while($result = $getData->fetch_assoc()) 
+        {
+            $duration = $duration+0.1;
+            $delay    = $delay+0.1;
+?>  
                                                     <!-- Start Single Progress Charts -->
                                                     <div class="progress-charts">
-                                                        <h6 class="heading heading-h6">PHOTOSHOT</h6>
+                                                        <h6 class="heading heading-h6"><?php echo $result['title']; ?></h6>
                                                         <div class="progress">
-                                                            <div class="progress-bar wow fadeInLeft" data-wow-duration="0.5s" data-wow-delay=".3s" role="progressbar" style="width: 100%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><span
-                                                            class="percent-label">100%</span></div>
+                                                            <div class="progress-bar wow fadeInLeft" data-wow-duration="<?php echo $duration;?>s" data-wow-delay="<?php echo $delay;?>s" role="progressbar" style="width: <?php echo $result['percentage']; ?>%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><span
+                                                            class="percent-label"><?php echo $result['percentage']; ?>%</span></div>
                                                         </div>
                                                     </div>
                                                     <!-- End Single Progress Charts -->
-
-                                                    <!-- Start Single Progress Charts -->
-                                                    <div class="progress-charts">
-                                                        <h6 class="heading heading-h6">FIGMA</h6>
-                                                        <div class="progress">
-                                                            <div class="progress-bar wow fadeInLeft" data-wow-duration="0.6s" data-wow-delay=".4s" role="progressbar" style="width: 95%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><span
-                                                            class="percent-label">95%</span></div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Single Progress Charts -->
-
-                                                    <!-- Start Single Progress Charts -->
-                                                    <div class="progress-charts">
-                                                        <h6 class="heading heading-h6">ADOBE XD</h6>
-                                                        <div class="progress">
-                                                            <div class="progress-bar wow fadeInLeft" data-wow-duration="0.7s" data-wow-delay=".5s" role="progressbar" style="width: 60%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><span
-                                                            class="percent-label">60%</span></div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Single Progress Charts -->
-
-                                                    <!-- Start Single Progress Charts -->
-                                                    <div class="progress-charts">
-                                                        <h6 class="heading heading-h6">ADOBE ILLUSTRATOR</h6>
-                                                        <div class="progress">
-                                                            <div class="progress-bar wow fadeInLeft" data-wow-duration="0.8s" data-wow-delay=".6s" role="progressbar" style="width: 70%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><span
-                                                            class="percent-label">70%</span></div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Single Progress Charts -->
-
-                                                    <!-- Start Single Progress Charts -->
-                                                    <div class="progress-charts">
-                                                        <h6 class="heading heading-h6">DESIGN</h6>
-                                                        <div class="progress">
-                                                            <div class="progress-bar wow fadeInLeft" data-wow-duration="0.9s" data-wow-delay=".7s" role="progressbar" style="width: 90%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><span
-                                                            class="percent-label">90%</span></div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Single Progress Charts -->
-
+<?php } } ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -798,58 +776,30 @@
                                         <div class="col-lg-6 col-md-6 col-12 mt_sm--60">
                                             <div class="progress-wrapper">
                                                 <div class="content">
-                                                    <span class="subtitle">Features</span>
+                                         
                                                     <h4 class="maintitle">Development Skill</h4>
+<?php
+    $query_sk = "select * from tbl_prof_skills where type='2'";
+    $getData = $db->select($query_sk);
+    if($getData)
+    {
+        $duration = 0.4;
+        $delay = 0.2;
+        while($result = $getData->fetch_assoc()) 
+        {
+            $duration = $duration+0.1;
+            $delay    = $delay+0.1;
+?>  
                                                     <!-- Start Single Progress Charts -->
                                                     <div class="progress-charts">
-                                                        <h6 class="heading heading-h6">HTML</h6>
+                                                        <h6 class="heading heading-h6"><?php echo $result['title']; ?></h6>
                                                         <div class="progress">
-                                                            <div class="progress-bar wow fadeInLeft" data-wow-duration="0.5s" data-wow-delay=".3s" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><span
-                                                            class="percent-label">85%</span></div>
+                                                            <div class="progress-bar wow fadeInLeft" data-wow-duration="<?php echo $duration;?>s" data-wow-delay="<?php echo $delay;?>s" role="progressbar" style="width: <?php echo $result['percentage']; ?>%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><span
+                                                            class="percent-label"><?php echo $result['percentage']; ?>%</span></div>
                                                         </div>
                                                     </div>
                                                     <!-- End Single Progress Charts -->
-
-                                                    <!-- Start Single Progress Charts -->
-                                                    <div class="progress-charts">
-                                                        <h6 class="heading heading-h6">CSS</h6>
-                                                        <div class="progress">
-                                                            <div class="progress-bar wow fadeInLeft" data-wow-duration="0.6s" data-wow-delay=".4s" role="progressbar" style="width: 80%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><span
-                                                            class="percent-label">80%</span></div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Single Progress Charts -->
-
-                                                    <!-- Start Single Progress Charts -->
-                                                    <div class="progress-charts">
-                                                        <h6 class="heading heading-h6">JAVASCRIPT</h6>
-                                                        <div class="progress">
-                                                            <div class="progress-bar wow fadeInLeft" data-wow-duration="0.7s" data-wow-delay=".5s" role="progressbar" style="width: 90%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><span
-                                                            class="percent-label">90%</span></div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Single Progress Charts -->
-
-                                                    <!-- Start Single Progress Charts -->
-                                                    <div class="progress-charts">
-                                                        <h6 class="heading heading-h6">SOFTWARE</h6>
-                                                        <div class="progress">
-                                                            <div class="progress-bar wow fadeInLeft" data-wow-duration="0.8s" data-wow-delay=".6s" role="progressbar" style="width: 75%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><span
-                                                            class="percent-label">75%</span></div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Single Progress Charts -->
-
-                                                    <!-- Start Single Progress Charts -->
-                                                    <div class="progress-charts">
-                                                        <h6 class="heading heading-h6">PLUGIN</h6>
-                                                        <div class="progress">
-                                                            <div class="progress-bar wow fadeInLeft" data-wow-duration="0.9s" data-wow-delay=".7s" role="progressbar" style="width: 70%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><span
-                                                            class="percent-label">70%</span></div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Single Progress Charts -->
-
+<?php } } ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -864,73 +814,57 @@
                             <div class="tab-pane fade" id="experience" role="tabpanel" aria-labelledby="experience-tab">
                                 <div class="personal-experience-inner mt--40">
                                     <div class="row">
+<?php
+    $query_edu = "select max(countt) as countt from tbl_job_exp";
+    $getData = $db->select($query_edu);
+    if($getData)
+    {
+        while($result = $getData->fetch_assoc()) 
+        {
+            $num = $result['countt'];
+        }
+    }
+?>
                                         <!-- Start Skill List Area  -->
                                         <div class="col-lg-6 col-md-12 col-12">
                                             <div class="content">
-                                                <span class="subtitle">2007 - 2010</span>
-                                                <h4 class="maintitle">Education Quality</h4>
+                                                <h4 class="maintitle">Job Experience</h4>
                                                 <div class="experience-list">
-
+<?php
+    if($num%2==0){
+        $num1 = $num/2;
+        $num2 = $num1;
+    }
+    else{
+        $num1 = intval($num/2) + 1;
+        $num2 = $num-$num1;
+    }
+    $query1 = "select * from tbl_job_exp limit $num1";
+    $getData1 = $db->select($query1);
+    if($getData1)
+    {
+        while($result1 = $getData1->fetch_assoc()) 
+        {
+            $year_out = $result1['year_out'];
+            if($year_out==0){
+                $year_out = "Present";
+            }
+?>    
                                                     <!-- Start Single List  -->
                                                     <div class="resume-single-list">
                                                         <div class="inner">
                                                             <div class="heading">
                                                                 <div class="title">
-                                                                    <h4>Personal Portfolio April Fools</h4>
-                                                                    <span>University of DVI (1997 - 2001)</span>
+                                                                    <h4><?php echo $result1['designation']; ?></h4>
+                                                                    <span><?php echo $result1['company']; ?> (<?php echo $result1['year_in']; ?> - <?php echo $year_out; ?>)</span>
                                                                 </div>
-                                                                <div class="date-of-time">
-                                                                    <span>4.30/5</span>
-                                                                </div>
+                                                             
                                                             </div>
-                                                            <p class="description">The education should be very
-                                                                interactual. Ut tincidunt est ac dolor aliquam sodales.
-                                                                Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                                mauris hendrerit ante.</p>
+                                                            <p class="description"><?php echo $result1['responsibility']; ?></p>
                                                         </div>
                                                     </div>
                                                     <!-- End Single List  -->
-
-                                                    <!-- Start Single List  -->
-                                                    <div class="resume-single-list">
-                                                        <div class="inner">
-                                                            <div class="heading">
-                                                                <div class="title">
-                                                                    <h4> Examples Of Personal Portfolio</h4>
-                                                                    <span>College of Studies (2000 - 2002)</span>
-                                                                </div>
-                                                                <div class="date-of-time">
-                                                                    <span>4.50/5</span>
-                                                                </div>
-                                                            </div>
-                                                            <p class="description">Maecenas finibus nec sem ut
-                                                                imperdiet. Ut tincidunt est ac dolor aliquam sodales.
-                                                                Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                                mauris hendrerit ante.</p>
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Single List  -->
-
-                                                    <!-- Start Single List  -->
-                                                    <div class="resume-single-list">
-                                                        <div class="inner">
-                                                            <div class="heading">
-                                                                <div class="title">
-                                                                    <h4>Tips For Personal Portfolio</h4>
-                                                                    <span>University of Studies (1997 - 2001)</span>
-                                                                </div>
-                                                                <div class="date-of-time">
-                                                                    <span>4.80/5</span>
-                                                                </div>
-                                                            </div>
-                                                            <p class="description"> If you are going to use a passage.
-                                                                Ut tincidunt est ac dolor aliquam sodales.
-                                                                Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                                mauris hendrerit ante.</p>
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Single List  -->
-
+<?php } } ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -939,71 +873,35 @@
                                         <!-- Start Skill List Area 2nd  -->
                                         <div class="col-lg-6 col-md-12 col-12 mt_md--60 mt_sm--60">
                                             <div class="content">
-                                                <span class="subtitle">2007 - 2010</span>
-                                                <h4 class="maintitle">Job Experience</h4>
+                                            <h4 class="maintitle" style="color: transparent">Job Experience</h4>
                                                 <div class="experience-list">
-
+<?php
+    $query1 = "select * from tbl_job_exp where countt>$num1 limit $num2";
+    $getData1 = $db->select($query1);
+    if($getData1)
+    {
+        while($result1 = $getData1->fetch_assoc()) 
+        {
+            $year_out = $result1['year_out'];
+            if($year_out==0){
+                $year_out = "Present";
+            }
+?>  
                                                     <!-- Start Single List  -->
                                                     <div class="resume-single-list">
                                                         <div class="inner">
                                                             <div class="heading">
                                                                 <div class="title">
-                                                                    <h4>Diploma in Web Development</h4>
-                                                                    <span>BSE In CSE (2004 - 2008)</span>
+                                                                    <h4><?php echo $result1['designation']; ?></h4>
+                                                                    <span><?php echo $result1['company']; ?> (<?php echo $result1['year_in']; ?> - <?php echo $year_out; ?>)</span>
                                                                 </div>
-                                                                <div class="date-of-time">
-                                                                    <span>4.70/5</span>
-                                                                </div>
+                                                             
                                                             </div>
-                                                            <p class="description">Contrary to popular belief. Ut
-                                                                tincidunt est ac dolor aliquam sodales.
-                                                                Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                                mauris hendrerit ante.</p>
+                                                            <p class="description"><?php echo $result1['responsibility']; ?></p>
                                                         </div>
                                                     </div>
                                                     <!-- End Single List  -->
-
-                                                    <!-- Start Single List  -->
-                                                    <div class="resume-single-list">
-                                                        <div class="inner">
-                                                            <div class="heading">
-                                                                <div class="title">
-                                                                    <h4>The Personal Portfolio Mystery</h4>
-                                                                    <span>Job at Rainbow-Themes (2008 - 2016)</span>
-                                                                </div>
-                                                                <div class="date-of-time">
-                                                                    <span>4.95/5</span>
-                                                                </div>
-                                                            </div>
-                                                            <p class="description">Generate Lorem Ipsum which looks. Ut
-                                                                tincidunt est ac dolor aliquam sodales.
-                                                                Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                                mauris hendrerit ante.</p>
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Single List  -->
-
-                                                    <!-- Start Single List  -->
-                                                    <div class="resume-single-list">
-                                                        <div class="inner">
-                                                            <div class="heading">
-                                                                <div class="title">
-                                                                    <h4>Diploma in Computer Science</h4>
-                                                                    <span>Works at Plugin Development (2016 -
-                                                                2020)</span>
-                                                                </div>
-                                                                <div class="date-of-time">
-                                                                    <span>5.00/5</span>
-                                                                </div>
-                                                            </div>
-                                                            <p class="description">Maecenas finibus nec sem ut
-                                                                imperdiet. Ut tincidunt est ac dolor aliquam sodales.
-                                                                Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                                mauris hendrerit ante.</p>
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Single List  -->
-
+<?php } } ?>
                                                 </div>
                                             </div>
                                         </div>

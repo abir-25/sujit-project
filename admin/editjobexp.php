@@ -4,17 +4,17 @@
           <!-- Page Header-->
           <header class="page-header">
             <div class="container-fluid">
-              <h2 class="no-margin-bottom">Edit Education</h2>
+              <h2 class="no-margin-bottom">Edit Job Experience</h2>
             </div>
           </header>
 <?php
-	if(!isset($_GET['educationId']) || $_GET['educationId'] == NULL)
+	if(!isset($_GET['jobId']) || $_GET['jobId'] == NULL)
 	{
-		echo "<script>window.location = 'educationlist.php'; </script>";
+		echo "<script>window.location = 'jobexplist.php'; </script>";
 	}
 	else
 	{
-		$educationId = $_GET['educationId'];
+		$jobId = $_GET['jobId'];
 	}
 ?>
           <!-- Breadcrumb-->
@@ -22,7 +22,7 @@
             <ul class="breadcrumb">
               <li class="breadcrumb-item"><a href="index.php">Home</a></li>
               <li class="breadcrumb-item active">Resume Option</li>  
-              <li class="breadcrumb-item active">Edit Education</li>
+              <li class="breadcrumb-item active">Edit Job Experience</li>
             </ul>
           </div>
           <!-- Forms Section-->
@@ -46,18 +46,10 @@
 <?php
 	if($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
-        $title  = mysqli_real_escape_string($db->link1, $_POST['title']);
-		$degree  = mysqli_real_escape_string($db->link1, $_POST['degree']);
-		$achievement  = mysqli_real_escape_string($db->link1, $_POST['achievement']);
-		if(!isset($_POST['gpa_check'])){
-      $gpa  = mysqli_real_escape_string($db->link1, $_POST['gpa']);
-    }
-    else{
-      $gpa  = "";
-    }
-		$gpa_outof  = mysqli_real_escape_string($db->link1, $_POST['gpa_outof']);
-    $year_in  = mysqli_real_escape_string($db->link1, $_POST['year_in']);
-    
+    $designation  = mysqli_real_escape_string($db->link1, $_POST['designation']);
+		$company  = mysqli_real_escape_string($db->link1, $_POST['company']);
+		$responsibility  = mysqli_real_escape_string($db->link1, $_POST['responsibility']);
+	  $year_in  = mysqli_real_escape_string($db->link1, $_POST['year_in']);
     if(!isset($_POST['year_out_check'])){
       $year_out  = mysqli_real_escape_string($db->link1, $_POST['year_out']);
     }
@@ -65,16 +57,14 @@
       $year_out  = 0;
     }
 	
-		$query = "UPDATE tbl_education
+		$query = "UPDATE tbl_job_exp
                     SET 
-                    title = '$title',
-                    degree = '$degree',
-                    achievement = '$achievement',
-                    gpa = '$gpa',
-                    gpa_outof = '$gpa_outof',
+                    designation = '$designation',
+                    company = '$company',
+                    responsibility = '$responsibility',
                     year_in = '$year_in',
                     year_out = '$year_out'
-                    where id='$educationId'";
+                    where id='$jobId'";
         
         $updated_rows = $db->update($query);
         if ($updated_rows) 
@@ -89,7 +79,7 @@
 	}
 ?>
 <?php
-	$query1 = "select * from tbl_education where id='$educationId'";
+	$query1 = "select * from tbl_job_exp where id='$jobId'";
 	    $getpost = $db->select($query1);
       if($getpost)
       {
@@ -97,45 +87,24 @@
 	      {
 ?>
                         <div class="form-group row">
-                          <label class="col-sm-3 form-control-label">Institution Name</label>
+                          <label class="col-sm-3 form-control-label">Designation</label>
                           <div class="col-sm-9">
-                            <input type="text" name="title" class="form-control" required value="<?php echo $postresult['title'];?>">
+                            <input type="text" name="designation" class="form-control" required value="<?php echo $postresult['designation'];?>">
                           </div>
                         </div>
                         <div class="line"></div>
                         <div class="form-group row">
-                          <label class="col-sm-3 form-control-label">Degree</label>
+                          <label class="col-sm-3 form-control-label">Company</label>
                           <div class="col-sm-9">
-                            <input type="text" name="degree" class="form-control" required value="<?php echo $postresult['degree'];?>">
+                            <input type="text" name="company" class="form-control" required value="<?php echo $postresult['company'];?>">
                           </div>
                         </div>
                         <div class="line"></div>
                         <div class="form-group row">
-                          <label class="col-sm-3 form-control-label">Achievement</label>
+                          <label class="col-sm-3 form-control-label">Responsibilities</label>
                           <div class="col-sm-9">
-                          <textarea name="achievement" required class="form-control" style="height:100px"><?php echo $postresult['achievement'];?>
+                          <textarea name="responsibility" required class="form-control" style="height:100px"><?php echo $postresult['responsibility'];?>
                             </textarea>
-                          </div>
-                        </div>
-						<div class="line"></div>
-						<div class="form-group row">
-                          <label class="col-sm-3 form-control-label">GPA</label>
-                          <div class="col-sm-9">
-                            <input type="text" id="gpa_field" name="gpa" class="form-control"  value="<?php echo $postresult['gpa'];?>">
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <label class="col-sm-3 form-control-label"></label>
-                          <div class="col-sm-9">
-                            <input type="checkbox" id="gpa_field_ck" name="gpa_check" 
-                            value="gpa" onclick="disableTextfield1()" <?php if($postresult['gpa']==""){ echo "checked"; }?>> Result has not been published yet
-                          </div>
-                        </div>
-                        <div class="line"></div>
-						<div class="form-group row">
-                          <label class="col-sm-3 form-control-label">GPA Out Of</label>
-                          <div class="col-sm-9">
-                            <input type="text" name="gpa_outof" class="form-control" required value="<?php echo $postresult['gpa_outof'];?>">
                           </div>
                         </div>
                         <div class="line"></div>
@@ -198,11 +167,6 @@
       if(yearOutCk.checked){
         document.getElementById("yearOut").disabled = true;
       }
-      var gpa_field_ck =  document.getElementById("gpa_field_ck");
-      if(gpa_field_ck.checked){
-        document.getElementById("gpa_field").disabled = true;
-      }
-
       function disableTextfield() {
         var yearOut = document.getElementById("yearOut");
         var yearOut = document.getElementById("yearOut");
@@ -216,17 +180,6 @@
         }
       }
 
-      function disableTextfield1() {
-        var gpa_field = document.getElementById("gpa_field");
-        if(gpa_field.disabled)
-        {
-          gpa_field.disabled = false;
-        }
-        else{
-          gpa_field.value="";
-          gpa_field.disabled = true;
-        }
-      }
   </script>
 </body>
 
