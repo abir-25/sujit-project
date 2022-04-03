@@ -4,6 +4,7 @@
 <?php
 	$db = new Database();
 	$fm = new Format();
+
 ?>
 
 <!DOCTYPE html>
@@ -1047,40 +1048,40 @@
     {
         while($result1 = $getData1->fetch_assoc()) 
         {
+            $date = $fm->formatDate($result1['review_date']);
+            $point = $result1['point'];
 ?>    
                             <!-- Start Single testiminail -->
                             <div class="testimonial mt--50 mt_md--40 mt_sm--40">
                                 <div class="inner">
                                     <div class="card-info">
                                         <div class="card-thumbnail">
-                                            <img src="assets/images/testimonial/final-home--1st.png" alt="Testimonial-image">
+                                            <img src="admin/<?php echo $result1['image']; ?>" alt="Testimonial-image">
                                         </div>
                                         <div class="card-content">
-                                            <span class="subtitle mt--10">Rainbow-Themes</span>
-                                            <h3 class="title">Nevine Acotanza</h3>
-                                            <span class="designation">Chief Operating Officer</span>
+                                            <span class="subtitle mt--10"><?php echo $result1['company']; ?></span>
+                                            <h3 class="title"><?php echo $result1['name']; ?></h3>
+                                            <span class="designation"><?php echo $result1['designation']; ?></span>
                                         </div>
                                     </div>
                                     <div class="card-description">
                                         <div class="title-area">
                                             <div class="title-info">
-                                                <h3 class="title">Android App Development</h3>
-                                                <span class="date">via Upwork - Mar 4, 2015 - Aug 30, 2021</span>
+                                                <h3 class="title"><?php echo $result1['subject']; ?></h3>
+                                                <span class="date">via <?php echo $result1['market']; ?> - <?php echo $date; ?></span>
                                             </div>
                                             <div class="rating">
+<?php
+    for($j=1; $j>=$point ; $j++)
+    {
+?>
                                                 <img src="assets/images/icons/rating.png" alt="rating-image">
-                                                <img src="assets/images/icons/rating.png" alt="rating-image">
-                                                <img src="assets/images/icons/rating.png" alt="rating-image">
-                                                <img src="assets/images/icons/rating.png" alt="rating-image">
-                                                <img src="assets/images/icons/rating.png" alt="rating-image">
+<?php } ?>
                                             </div>
                                         </div>
                                         <div class="seperator"></div>
                                         <p class="discription">
-                                            Maecenas finibus nec sem ut imperdiet. Ut tincidunt est ac dolor aliquam
-                                            sodales. Phasellus sed mauris hendrerit, laoreet sem in, lobortis mauris
-                                            hendrerit ante. Ut tincidunt est ac dolor aliquam sodales phasellus smauris
-                                            .
+                                            <?php echo $result1['description']; ?>
                                         </p>
                                     </div>
                                 </div>
@@ -1119,34 +1120,53 @@
                         <div class="d-flex flex-wrap align-content-start h-100">
                             <div class="position-sticky clients-wrapper sticky-top rbt-sticky-top-adjust">
                                 <ul class="nav tab-navigation-button flex-column nav-pills me-3" id="v-pills-tab" role="tablist">
+<?php
+    $query1 = "select topic_id from tbl_client GROUP BY topic_id limit 1";
+    $getData1 = $db->select($query1);
+    if($getData1)
+    {
+        while($result1 = $getData1->fetch_assoc()) 
+        {
+            $topic_id = $result1['topic_id'];
 
+            $query2 = "select * from tbl_topic where id='$topic_id'";
+            $getData2 = $db->select($query2);
+            if($getData2)
+            {
+                while($result2 = $getData2->fetch_assoc()) 
+                {
+                    $topic = $result2['title'];
+                }
+            }
+?>  
                                     <li class="nav-item">
-                                        <a class="nav-link" id="v-pills-home-tab" data-toggle="tab" href="#v-pills-Javascript" role="tab" aria-selected="true">JavaScript</a>
+                                        <a class="nav-link active" id="v-pills-<?php echo $topic_id; ?>-tab" data-toggle="tab" href="#v-pills-<?php echo $topic_id; ?>" role="tab" aria-selected="true"><?php echo $topic; ?></a>
                                     </li>
+<?php } } ?>
 
+<?php
+    $query3 = "select topic_id from tbl_client where topic_id!='$topic_id' GROUP BY topic_id";
+    $getData3 = $db->select($query3);
+    if($getData3)
+    {
+        while($result3 = $getData3->fetch_assoc()) 
+        {
+            $topic_id2 = $result3['topic_id'];
 
+            $query4 = "select * from tbl_topic where id='$topic_id2'";
+            $getData4 = $db->select($query4);
+            if($getData4)
+            {
+                while($result4 = $getData4->fetch_assoc()) 
+                {
+                    $topic1 = $result4['title'];
+                }
+            }
+?>  
                                     <li class="nav-item">
-                                        <a class="nav-link active" id="v-pills-profile-tab" data-toggle="tab" href="#v-pills-Design" role="tab" aria-selected="true">Product Design</a>
+                                        <a class="nav-link" id="v-pills-<?php echo $topic_id2; ?>-tab" data-toggle="tab" href="#v-pills-<?php echo $topic_id2; ?>" role="tab" aria-selected="true"><?php echo $topic1; ?></a>
                                     </li>
-
-
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="v-pills-wordpress-tab" data-toggle="tab" href="#v-pills-Wordpress" role="tab" aria-selected="true">Wordpress</a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="v-pills-settings-tabs" data-toggle="tab" href="#v-pills-settings" role="tab" aria-selected="true">HTML to React</a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="v-pills-laravel-tabs" data-toggle="tab" href="#v-pills-laravel" role="tab" aria-selected="true">React
-                                            To Laravel</a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="v-pills-python-tabs" data-toggle="tab" href="#v-pills-python" role="tab" aria-selected="true">Python</a>
-                                    </li>
-
+ <?php } } ?>
 
                                 </ul>
                             </div>
@@ -1157,979 +1177,79 @@
                         <div class="tab-area">
                             <div class="d-flex align-items-start">
                                 <div class="tab-content" id="v-pills-tabContent">
+<?php
+    $query5 = "select topic_id from tbl_client GROUP BY topic_id limit 1";
+    $getData5 = $db->select($query5);
+    if($getData5)
+    {
+        while($result5 = $getData5->fetch_assoc()) 
+        {
+            $topic_id3 = $result5['topic_id'];
+?>  
+                                    <div class="tab-pane fade show active" id="v-pills-<?php echo $topic_id3; ?>" role="tabpanel" aria-labelledby="v-pills-<?php echo $topic_id3; ?>-tab">
+                                        <div class="client-card">
+<?php
+    $query6 = "select * from tbl_client where topic_id='$topic_id3'";
+    $getData6 = $db->select($query6);
+    if($getData6)
+    {
+        while($result6 = $getData6->fetch_assoc()) 
+        { 
+?>
+                                            <!-- Start Single Brand  -->
+                                            <div class="main-content">
+                                                <div class="inner text-center">
+                                                    <div class="thumbnail">
+                                                        <a href="#"><img src="admin/<?php echo $result6['logo']; ?>" alt="Client-image"></a>
+                                                    </div>
+                                                    <div class="seperator"></div>
+                                                    <div class="client-name"><span><a href="#"><?php echo $result6['name']; ?></a></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End Single Brand  -->
+<?php } } ?>
+                                        </div>
+                                    </div>
+<?php } } ?>
 
-                                    <div class="tab-pane fade" id="v-pills-Javascript" role="tabpanel" aria-labelledby="v-pills-home-tab">
+<?php
+    $query7 = "select topic_id from tbl_client where topic_id!='$topic_id3' GROUP BY topic_id";
+    $getData7 = $db->select($query7);
+    if($getData7)
+    {
+        while($result7 = $getData7->fetch_assoc()) 
+        {
+            $topic_id4 = $result7['topic_id'];
+?>  
+                                    <div class="tab-pane fade" id="v-pills-<?php echo $topic_id4; ?>" role="tabpanel" aria-labelledby="v-pills-<?php echo $topic_id4; ?>-tab">
                                         <div class="client-card">
 
+<?php
+    $query8 = "select * from tbl_client where topic_id='$topic_id4'";
+    $getData8 = $db->select($query8);
+    if($getData8)
+    {
+        while($result8 = $getData8->fetch_assoc()) 
+        {
+?>
                                             <!-- Start Single Brand  -->
                                             <div class="main-content">
                                                 <div class="inner text-center">
                                                     <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client1.png" alt="Client-image"></a>
+                                                        <a href="#"><img src="admin/<?php echo $result8['logo']; ?>" alt="Client-image"></a>
                                                     </div>
                                                     <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">John Due</a></span>
+                                                    <div class="client-name"><span><a href="#"><?php echo $result8['name']; ?></a></span>
                                                     </div>
                                                 </div>
                                             </div>
                                             <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client2.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Smiths Marth</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client3.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Add Dev</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client4.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Jone Due</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client1.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">John Due</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client5.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Adon Smith</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client1.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Smitha Mila</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client2.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Sultana Mila</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client1.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Jannat</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client5.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Mila Dus</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client1.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Marth Smiths</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client3.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Marth Smiths</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
+<?php } } ?>
                                         </div>
                                     </div>
 
-                                    <div class="tab-pane fade show active" id="v-pills-Design" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                                        <div class="client-card">
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client1.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">John Due</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client2.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Smiths Marth</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client3.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Add Dev</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client4.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Jone Due</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client1.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">John Due</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client5.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Adon Smith</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client1.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Smitha Mila</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client2.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Sultana Mila</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client1.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Jannat</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client5.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Mila Dus</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client1.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Marth Smiths</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client3.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Marth Smiths</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                        </div>
-                                    </div>
-
-                                    <div class="tab-pane fade" id="v-pills-Wordpress" role="tabpanel" aria-labelledby="v-pills-wordpress-tab">
-                                        <div class="client-card">
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client1.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">John Due</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client2.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Smiths Marth</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client3.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Add Dev</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client4.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Jone Due</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client1.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">John Due</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client5.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Adon Smith</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client1.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Smitha Mila</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client2.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Sultana Mila</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client1.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Jannat</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client5.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Mila Dus</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client1.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Marth Smiths</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client3.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Marth Smiths</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                        </div>
-                                    </div>
-
-                                    <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tabs">
-                                        <div class="client-card">
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client1.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">John Due</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client2.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Smiths Marth</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client3.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Add Dev</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client4.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Jone Due</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client1.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">John Due</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client5.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Adon Smith</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client1.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Smitha Mila</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client2.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Sultana Mila</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client1.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Jannat</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client5.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Mila Dus</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client1.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Marth Smiths</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client3.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Marth Smiths</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                        </div>
-                                    </div>
-
-                                    <div class="tab-pane fade" id="v-pills-laravel" role="tabpanel" aria-labelledby="v-pills-laravel-tabs">
-                                        <div class="client-card">
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client1.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">John Due</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client2.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Smiths Marth</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client3.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Add Dev</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client4.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Jone Due</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client1.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">John Due</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client5.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Adon Smith</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client1.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Smitha Mila</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client2.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Sultana Mila</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client1.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Jannat</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client5.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Mila Dus</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client1.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Marth Smiths</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client3.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Marth Smiths</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                        </div>
-                                    </div>
-
-                                    <div class="tab-pane fade" id="v-pills-python" role="tabpanel" aria-labelledby="v-pills-python-tabs">
-                                        <div class="client-card">
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client1.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">John Due</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client2.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Smiths Marth</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client3.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Add Dev</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client4.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Jone Due</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client1.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">John Due</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client5.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Adon Smith</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client1.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Smitha Mila</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client2.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Sultana Mila</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client1.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Jannat</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client5.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Mila Dus</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client1.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Marth Smiths</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client3.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Marth Smiths</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                        </div>
-                                    </div>
-
+<?php } } ?>
                                 </div>
                             </div>
                         </div>

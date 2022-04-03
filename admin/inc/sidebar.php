@@ -75,6 +75,8 @@
                     </li>
 					<li><a href="#exampledropdownDropdown7" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-users"></i>Client Option</a>
                         <ul id="exampledropdownDropdown7" class="collapse list-unstyled ">
+                            <li><a href="addtopic.php">Add Client Topic </a></li>
+                            <li><a href="topiclist.php">Client Topic List</a></li> 
                             <li><a href="addclient.php">Add Client </a></li>
                             <li><a href="clientlist.php">Client List</a></li>            
                         </ul>

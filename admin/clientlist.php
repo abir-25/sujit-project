@@ -4,15 +4,15 @@
                 <!-- Page Header-->
                 <header class="page-header">
                     <div class="container-fluid">
-                        <h2 class="no-margin-bottom">Professional Skills List</h2>
+                        <h2 class="no-margin-bottom">Client List</h2>
                     </div>
                 </header>
                 <!-- Breadcrumb-->
                 <div class="breadcrumb-holder container-fluid">
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                        <li class="breadcrumb-item active">Resume Option</li>
-                        <li class="breadcrumb-item active">Professional Skills List</li>
+                        <li class="breadcrumb-item active">Client Option</li>
+                        <li class="breadcrumb-item active">Client List</li>
                     </ul>
                 </div>
 
@@ -28,16 +28,27 @@
                                         </div>
                                     </div>
                                     <div class="card-header d-flex align-items-center">
-                                        <h3 class="h4">Professional Skills List</h3>
+                                        <h3 class="h4">Client List</h3>
                                     </div>
                                     <div class="card-body">
 <?php
 
-	if(isset($_GET['delProfSkillid']))
+	if(isset($_GET['delclientid']))
 	{
-		$delProfSkillid = $_GET['delProfSkillid'];
+		$delclientid = $_GET['delclientid'];
+		$query = "select * from tbl_client where id='$delclientid'"; 
+		$getdata = $db->select($query);
 		
-		$delquery = "delete from tbl_prof_skills where id = '$delProfSkillid'";
+		if($getdata)
+		{
+			while($delimg = $getdata->fetch_assoc())
+			{
+				$dellink = $delimg['logo'];
+				unlink($dellink);
+			}
+		}
+		
+		$delquery = "delete from tbl_client where id = '$delclientid'";
 		$deldata = $db->deletedata($delquery);
 		
 		if($deldata)
@@ -54,16 +65,16 @@
                                         <table class="table">
                                             <thead>
                                                 <tr>
-                                                    <th width="15%">No.</th>
-                                                    <th width="20%">Skill Type</th>
-                                                    <th width="30%">Skill Name</th>
-                                                    <th width="15%">Percentage</th>
+                                                    <th width="12%">No.</th>
+                                                    <th width="28%">Client Name</th>
+                                                    <th width="20%">Type</th>
+                                                    <th width="20%">Client Logo</th>
                                                     <th width="20%">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-<?php
-	$query = "select * from tbl_prof_skills order by id asc";
+                                            <?php
+	$query = "select * from tbl_client order by id asc";
     $i = 0;	
 	$post = $db->select($query);				
 	if($post)
@@ -71,29 +82,29 @@
 		while($result = $post->fetch_assoc())
 		{
 			$i++;
-            $skill_type_id = $result["type"];
-            $query1 = "select * from tbl_skill_type order by id asc";				
+            $topic_id = $result["topic_id"];
+            $query1 = "select * from tbl_topic order by id asc";				
             $post1 = $db->select($query1);				
             if($post1)
             {
                 while($result1 = $post1->fetch_assoc())
                 {
-                    if($skill_type_id == $result1["id"])
-                        $skill_type = $result1["title"];
+                    if($topic_id == $result1["id"])
+                        $topic = $result1["title"];
                 }
             }
 ?>
                                                 <tr>
                                                     <th scope="row" style="vertical-align:middle"><?php echo $i; ?></th>
                                                     
-                                                    <td scope="row" style="vertical-align:middle"><?php echo $skill_type; ?></td>
+                                                    <td scope="row" style="vertical-align:middle"><?php echo $result['name']; ?></td>
 
-                                                    <td scope="row" style="vertical-align:middle"><?php echo $result['title']; ?></td>
+                                                    <td scope="row" style="vertical-align:middle"><?php echo $topic; ?></td>
 
-                                                    <td scope="row" style="vertical-align:middle"><?php echo $result['percentage']; ?></td>
+                                                    <td style="vertical-align:middle"><img class="skill-list" src="<?php echo $result['logo']; ?>" alt="" /></td>
 													
-							
-                                                    <td style="vertical-align:middle"><a class="actionLink" href="editprofsKills.php?profSkillId=<?php echo $result['id']; ?>">Update</a>  || <a class="actionLink" onclick= "return confirm('Are you sure to Delete This Professional Skill?');" href="?delProfSkillid=<?php echo $result['id'];?>">Delete</a></td>
+													
+                                                    <td style="vertical-align:middle"><a class="actionLink" href="editclient.php?clientId=<?php echo $result['id']; ?>">Update</a>  || <a class="actionLink" onclick= "return confirm('Are you sure to Delete This Client?');" href="?delclientid=<?php echo $result['id'];?>">Delete</a></td>
                                                 </tr>
 <?php } } ?>
 											</tbody>
@@ -101,7 +112,7 @@
 <?php if($i==0) { ?>
                                         <p class="text-center py-4">No data Available</p>
 <?php } ?>
-                                        <a href="addprofskills.php" class="btn btn-primary">Add</a>
+                                        <a href="addclient.php" class="btn btn-primary">Add</a>
                                     </div>
                                 </div>
                             </div>
