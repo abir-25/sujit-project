@@ -15032,7 +15032,7 @@ div#featured-project-carousel {
   display: block;
 }
 .client-card .main-content .thumbnail a img {
-  max-height: 90px;
+  /* max-height: 90px; */
 }
 .client-card .main-content .seperator {
   position: relative;
