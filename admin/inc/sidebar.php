@@ -83,6 +83,8 @@
                     </li>
 					<li><a href="#exampledropdownDropdown8" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-money"></i>Pricing Option</a>
                         <ul id="exampledropdownDropdown8" class="collapse list-unstyled ">
+                            <li><a href="addpricingpoint.php">Add Pricing Point</a></li>
+                            <li><a href="pricingpointlist.php"> Pricing Point List</a></li>
                             <li><a href="addpricing.php">Add Pricing </a></li>
                             <li><a href="pricinglist.php"> Pricing List</a></li>            
                         </ul>

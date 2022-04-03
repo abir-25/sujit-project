@@ -5,3 +5,15 @@
   width: 50px !important;
   height: 50px !important;
 }
+.point-checkbox {
+  margin-right: 25px;
+  display: inline-flex;
+  align-items: center;
+}
+.point-checkbox input[type="checkbox"] {
+  cursor: pointer;
+}
+.point-checkbox span {
+  font-size: 14px !important;
+  margin-left: 5px;
+}
