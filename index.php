@@ -1019,7 +1019,7 @@
         </div>
         <!-- End Resume Area -->
         <!-- Start Testimonia Area  -->
-        <div class="rn-testimonial-area rn-section-gap section-separator" id="testimonial">
+        <div class="rn-testimonial-area rn-section-gap add-review-gap section-separator" id="testimonial">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -1072,7 +1072,7 @@
                                             </div>
                                             <div class="rating">
 <?php
-    for($j=1; $j>=$point ; $j++)
+    for($j=1; $j<=$point ; $j++)
     {
 ?>
                                                 <img src="assets/images/icons/rating.png" alt="rating-image">
@@ -1084,15 +1084,89 @@
                                             <?php echo $result1['description']; ?>
                                         </p>
                                     </div>
+                                    
                                 </div>
                             </div>
                             <!--End Single testiminail -->
 <?php } } ?>
+
+
+                        
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="add-review-div">
+            <a href="" data-toggle="modal" data-target="#review_modal">Add Review</a>  
+        </div>
+
+        <!-- Start Review Form Modal -->
+        <div class="modal fade" id="review_modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i data-feather="x"></i></span>
+                            </button>
+                    
+                    </div>
+                    <div class="modal-body">
+                        <form action="">
+                        <div class="row">
+                            <div class="col-lg-6 px-4">
+                                <div class="input-field">
+                                    <input type="text" name="name" id="" placeholder="Enter Your Name">
+                                    
+                                    <div class="file-upload">
+                                        <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Image</button>
+
+                                        <div class="image-upload-wrap">
+                                            <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+                                            <div class="drag-text">
+                                            <h3>Drag and drop a file or select add Image</h3>
+                                            </div>
+                                        </div>
+                                        <div class="file-upload-content">
+                                            <img class="file-upload-image" src="#" alt="your image" />
+                                            <div class="image-title-wrap">
+                                            <button type="button" onclick="removeUpload()" class="remove-image"><span class="remove-span">Remove</span>  <span class="image-title">Uploaded Image</span></button>
+                                            </div>
+                                        </div>
+                                        </div>
+
+                                    <!-- <input type="file" name="image" id="file" class="inputFile"> -->
+                                    <input type="text" name="company" id="" placeholder="Enter Your Company Name">
+                                    <input type="text" name="designation" id="" placeholder="Enter Your Designation">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 px-4">
+                                <div class="input-field">
+                                    <input type="text" name="subject" id="" placeholder="Enter Review Topic">
+                                    <input type="text" name="market" id="" placeholder="Enter Marketplace Name. e.g.Fiberr, Upwork">
+                                    <textarea name="description" id="" cols="30" rows="10" placeholder="Enter Your Review"></textarea>
+                                    <input type="text" name="point" id="" placeholder="Enter Rating Point (1-5)">
+                                </div>
+                                <div class="button-group mt--15">
+                                    <button type="submit" class="rn-btn submit-button">
+                                        <span>Submit Review</span>
+                                    </button>        
+                                </div>
+                                <!-- End of .text-content -->
+                            </div>
+                        </form>
+                        </div>
+                        <!-- End of .row Body-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Review Form Modal -->
+
+
         <!-- End Testimonia Area  -->
         <!-- Start Client Area -->
         <div class="rn-client-area rn-section-gap section-separator" id="clients">
@@ -2704,6 +2778,41 @@
     <script src="assets/js/vendor/particles.js"></script>
     <!-- main JS -->
     <script src="assets/js/main.js"></script>
+    <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                $('.image-upload-wrap').hide();
+
+                $('.file-upload-image').attr('src', e.target.result);
+                $('.file-upload-content').show();
+
+                $('.image-title').html(input.files[0].name);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+
+            } else {
+                removeUpload();
+            }
+        }
+
+            function removeUpload() {
+            $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+            $('.file-upload-content').hide();
+            $('.image-upload-wrap').show();
+            }
+            $('.image-upload-wrap').bind('dragover', function () {
+                $('.image-upload-wrap').addClass('image-dropping');
+            });
+            $('.image-upload-wrap').bind('dragleave', function () {
+                $('.image-upload-wrap').removeClass('image-dropping');
+            });
+    </script>
 </body>
 
 </html>
