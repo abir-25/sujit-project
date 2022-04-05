@@ -51,7 +51,7 @@
             <div class="col-lg-3 col-8">
                 <div class="header-left">
                     <div class="logo">
-                        <a href="index.html">
+                        <a href="index.php">
 <?php
     $query = "select * from tbl_basic_info";
     $getData = $db->select($query);
@@ -79,6 +79,7 @@
                             <li class="nav-item"><a class="nav-link smoth-animation" href="#features">Features</a></li>
                             <li class="nav-item"><a class="nav-link smoth-animation" href="#portfolio">Portfolio</a></li>
                             <li class="nav-item"><a class="nav-link smoth-animation" href="#resume">Resume</a></li>
+                            <li class="nav-item"><a class="nav-link smoth-animation" href="#testimonial">Testimonial</a></li>
                             <li class="nav-item"><a class="nav-link smoth-animation" href="#clients">Clients</a></li>
                             <li class="nav-item"><a class="nav-link smoth-animation" href="#pricing">Pricing</a></li>
                             <li class="nav-item"><a class="nav-link smoth-animation" href="#blog">blog</a></li>
@@ -88,7 +89,7 @@
                     </nav>
                     <!-- Start Header Right  -->
                     <div class="header-right">
-                        <a class="rn-btn" target="_blank" href="https://themeforest.net/checkout/from_item/33188244?license=regular"><span>BUY NOW</span></a>
+                        <!-- <a class="rn-btn" target="_blank" href="https://themeforest.net/checkout/from_item/33188244?license=regular"><span>BUY NOW</span></a> -->
                         <div class="hamberger-menu d-block d-xl-none">
                             <i id="menuBtn" class="feather-menu humberger-menu"></i>
                         </div>
@@ -119,7 +120,7 @@
         while($result = $getData->fetch_assoc()) 
         {
 ?>
-                    <a class="logo" href="index.html">
+                    <a class="logo" href="index.php">
                         <img src="admin/<?php echo $result['logo'];?>" alt="Personal Portfolio">
                         <span><?php echo $result['name'];?></span>
                     </a>
@@ -136,6 +137,7 @@
                     <li class="nav-item"><a class="nav-link smoth-animation" href="#features">Features</a></li>
                     <li class="nav-item"><a class="nav-link smoth-animation" href="#portfolio">Portfolio</a></li>
                     <li class="nav-item"><a class="nav-link smoth-animation" href="#resume">Resume</a></li>
+                    <li class="nav-item"><a class="nav-link smoth-animation" href="#testimonial">Testimonial</a></li>
                     <li class="nav-item"><a class="nav-link smoth-animation" href="#clients">Clients</a></li>
                     <li class="nav-item"><a class="nav-link smoth-animation" href="#pricing">Pricing</a></li>
                     <li class="nav-item"><a class="nav-link smoth-animation" href="#blog">blog</a></li>
@@ -1040,9 +1042,15 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
+<?php
+    $query1 = "select * from tbl_testimonial where status=1";
+    $getData1 = $db->num_rows($query1);
+    if($getData1)
+    {
+?>    
                         <div class="testimonial-activation testimonial-pb mb--30">
 <?php
-    $query1 = "select * from tbl_testimonial";
+    $query1 = "select * from tbl_testimonial where status=1";
     $getData1 = $db->select($query1);
     if($getData1)
     {
@@ -1056,7 +1064,7 @@
                                 <div class="inner">
                                     <div class="card-info">
                                         <div class="card-thumbnail">
-                                            <img src="admin/<?php echo $result1['image']; ?>" alt="Testimonial-image">
+                                            <img src="<?php echo $result1['image']; ?>" alt="Testimonial-image">
                                         </div>
                                         <div class="card-content">
                                             <span class="subtitle mt--10"><?php echo $result1['company']; ?></span>
@@ -1089,11 +1097,8 @@
                             </div>
                             <!--End Single testiminail -->
 <?php } } ?>
-
-
-                        
-
                         </div>
+<?php } ?>
                     </div>
                 </div>
             </div>
@@ -1111,10 +1116,52 @@
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true"><i data-feather="x"></i></span>
                             </button>
-                    
+                   
                     </div>
-                    <div class="modal-body">
-                        <form action="">
+ <?php
+	if($_SERVER['REQUEST_METHOD'] == 'POST')
+	{
+		$name  = mysqli_real_escape_string($db->link1, $_POST['name']);
+        $company  = mysqli_real_escape_string($db->link1, $_POST['company']);
+		$designation  = mysqli_real_escape_string($db->link1, $_POST['designation']);
+		$subject  = mysqli_real_escape_string($db->link1, $_POST['subject']);
+        $point  = mysqli_real_escape_string($db->link1, $_POST['point']);
+        $market  = mysqli_real_escape_string($db->link1, $_POST['market']);
+        $description  = mysqli_real_escape_string($db->link1, $_POST['description']);
+
+		$permitted  = array('jpg', 'jpeg', 'png', 'gif');
+		$file_name = $_FILES['image']['name'];
+		$file_size = $_FILES['image']['size'];
+		$file_temp = $_FILES['image']['tmp_name'];
+
+		$div = explode('.', $file_name);
+		$file_ext = strtolower(end($div));
+		$unique_image = substr(md5(time()), 0, 10).'.'.$file_ext;
+		$uploaded_image = "admin/upload/testimonial/".$unique_image;	
+
+        if (in_array($file_ext, $permitted) === false) 
+        {
+            echo "<span class='error'>You can upload only:-".implode(', ', $permitted)."</span>";
+        } 
+        else
+        {	
+            move_uploaded_file($file_temp, $uploaded_image);
+
+            $query = "INSERT INTO tbl_testimonial(name, company, designation, subject, point, market, image, description) VALUES('$name','$company','$designation', '$subject', '$point', '$market', '$uploaded_image', '$description')";
+
+            $inserted_rows = $db->insert($query);
+            if (!$inserted_rows) 
+            {
+                echo "<span class='error'>Data Not Inserted !!</span>";
+            }
+            else{
+		        echo "<script>window.location = 'index.php'; </script>"; 
+            }
+
+        }
+	}
+?>
+                        <form action="" method="post" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-lg-6 px-4">
                                 <div class="input-field">
@@ -1124,7 +1171,7 @@
                                         <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Image</button>
 
                                         <div class="image-upload-wrap">
-                                            <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+                                            <input class="file-upload-input" type='file' name="image" onchange="readURL(this);" accept="image/*" />
                                             <div class="drag-text">
                                             <h3>Drag and drop a file or select add Image</h3>
                                             </div>
@@ -1150,7 +1197,10 @@
                                     <textarea name="description" id="" cols="30" rows="10" placeholder="Enter Your Review"></textarea>
                                     <input type="text" name="point" id="" placeholder="Enter Rating Point (1-5)">
                                 </div>
-                                <div class="button-group mt--15">
+                                
+                                <div class="button-group mt--15 button-area">
+
+                                   
                                     <button type="submit" class="rn-btn submit-button">
                                         <span>Submit Review</span>
                                     </button>        
@@ -1361,34 +1411,56 @@
                         <div class="navigation-wrapper">
                             <ul class="nav " id="myTab" role="tablist">
                                 <li class="nav-item ">
-                                    <a class="nav-style" id="test-tab" data-toggle="tab" href="#test" role="tab" aria-controls="test" aria-selected="false">Static</a>
+                                    <a class="nav-style" id="static-tab" data-toggle="tab" href="#static" role="tab" aria-controls="static" aria-selected="false">Static</a>
                                 </li>
 
                                 <li class="nav-item  recommended">
-                                    <a class="nav-style active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Standard</a>
+                                    <a class="nav-style active" id="standard-tab" data-toggle="tab" href="#standard" role="tab" aria-controls="standard" aria-selected="true">Standard</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-style" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Premium</a>
+                                    <a class="nav-style" id="premium-tab" data-toggle="tab" href="#premium" role="tab" aria-controls="premium" aria-selected="false">Premium</a>
                                 </li>
                             </ul>
                             <div class="tab-content" id="myTabContent">
-
-                                <div class="tab-pane fade " id="test" role="tabpanel" aria-labelledby="test-tab">
+<?php
+    $query1 = "select * from tbl_pricing where type='1'";
+    $getData1 = $db->select($query1);
+    if($getData1)
+    {
+        while($result1 = $getData1->fetch_assoc()) 
+        {
+?>     
+                                <div class="tab-pane fade " id="static" role="tabpanel" aria-labelledby="static-tab">
                                     <!-- Pricing Start -->
                                     <div class="rn-pricing">
                                         <div class="pricing-header">
                                             <div class="header-left">
-                                                <h2 class="title">Make Your Single Page</h2>
-                                                <span>Elementor</span>
+                                                <h2 class="title"><?php echo $result1['title']; ?></h2>
+                                                <span><?php echo $result1['subtitle']; ?></span>
                                             </div>
+ <?php
+    $query2 = "select * from tbl_price_format";
+    $getData2 = $db->select($query2);
+    if($getData2)
+    {
+        while($result2 = $getData2->fetch_assoc()) 
+        {
+            if($result2['price']==1)
+                $price_format = "৳";
+            else
+                $price_format = "$";
+        }
+    }
+?>                                              
                                             <div class="header-right">
-                                                <span>$30.00</span>
+                                                <span>
+                                                    <?php echo $price_format.$result1['price']; ?></span>
                                             </div>
+
                                         </div>
                                         <div class="pricing-body">
                                             <p class="description">
-                                                All the Lorem Ipsum generators on the Internet tend to repeat predefined
-                                                chunks as necessary
+                                            <?php echo $result1['description']; ?>
                                             </p>
                                             <div class="check-wrapper">
                                                 <div class="left-area">
@@ -1464,8 +1536,8 @@
                                     </div>
                                     <!-- End -->
                                 </div>
-
-                                <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+<?php } } ?>
+                                <div class="tab-pane fade show active" id="standard" role="tabpanel" aria-labelledby="standard-tab">
                                     <!-- Pricing Start -->
                                     <div class="rn-pricing">
                                         <div class="pricing-header">
@@ -1557,7 +1629,7 @@
                                     <!-- End -->
                                 </div>
 
-                                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                                <div class="tab-pane fade" id="premium" role="tabpanel" aria-labelledby="premium-tab">
                                     <!-- Pricing Start -->
                                     <div class="rn-pricing">
                                         <div class="pricing-header">
@@ -2094,7 +2166,7 @@
                                         <div class="single-demo">
                                             <div class="inner">
                                                 <div class="thumbnail">
-                                                    <a href="index.html">
+                                                    <a href="index.php">
                                                         <img class="w-100" src="assets/images/demo/main-demo.png" alt="Personal Portfolio">
                                                         <span class="overlay-content">
                                                     <span class="overlay-text">View Demo <i
@@ -2103,7 +2175,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="inner">
-                                                    <h3 class="title"><a href="index.html">Main Demo</a></h3>
+                                                    <h3 class="title"><a href="index.php">Main Demo</a></h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -2115,7 +2187,7 @@
                                         <div class="single-demo">
                                             <div class="inner badge-2">
                                                 <div class="thumbnail">
-                                                    <a href="index-technician.html">
+                                                    <a href="index-technician.php">
                                                         <img class="w-100" src="assets/images/demo/index-technician.png" alt="Personal Portfolio">
                                                         <span class="overlay-content">
                                                     <span class="overlay-text">View Demo <i
@@ -2124,7 +2196,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="inner">
-                                                    <h3 class="title"><a href="index-technician.html">Technician</a></h3>
+                                                    <h3 class="title"><a href="index-technician.php">Technician</a></h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -2136,7 +2208,7 @@
                                         <div class="single-demo">
                                             <div class="inner badge-2">
                                                 <div class="thumbnail">
-                                                    <a href="index-model.html">
+                                                    <a href="index-model.php">
                                                         <img class="w-100" src="assets/images/demo/home-model-v2.png" alt="Personal Portfolio">
                                                         <span class="overlay-content">
                                                     <span class="overlay-text">View Demo <i
@@ -2145,7 +2217,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="inner">
-                                                    <h3 class="title"><a href="index-model.html">Model</a></h3>
+                                                    <h3 class="title"><a href="index-model.php">Model</a></h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -2157,7 +2229,7 @@
                                         <div class="single-demo">
                                             <div class="inner badge-1">
                                                 <div class="thumbnail">
-                                                    <a href="home-consulting.html">
+                                                    <a href="home-consulting.php">
                                                         <img class="w-100" src="assets/images/demo/home-consulting.png" alt="Personal Portfolio">
                                                         <span class="overlay-content">
                                                     <span class="overlay-text">View Demo <i
@@ -2166,7 +2238,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="inner">
-                                                    <h3 class="title"><a href="home-consulting.html">Consulting</a></h3>
+                                                    <h3 class="title"><a href="home-consulting.php">Consulting</a></h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -2178,7 +2250,7 @@
                                         <div class="single-demo">
                                             <div class="inner badge-1">
                                                 <div class="thumbnail">
-                                                    <a href="fashion-designer.html">
+                                                    <a href="fashion-designer.php">
                                                         <img class="w-100" src="assets/images/demo/fashion-designer.png" alt="Personal Portfolio">
                                                         <span class="overlay-content">
                                                     <span class="overlay-text">View Demo <i
@@ -2187,7 +2259,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="inner">
-                                                    <h3 class="title"><a href="fashion-designer.html">Fashion Designer</a></h3>
+                                                    <h3 class="title"><a href="fashion-designer.php">Fashion Designer</a></h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -2199,7 +2271,7 @@
                                         <div class="single-demo">
                                             <div class="inner">
                                                 <div class="thumbnail">
-                                                    <a href="index-developer.html">
+                                                    <a href="index-developer.php">
                                                         <img class="w-100" src="assets/images/demo/developer.png" alt="Personal Portfolio">
                                                         <span class="overlay-content">
                                                     <span class="overlay-text">View Demo <i
@@ -2208,7 +2280,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="inner">
-                                                    <h3 class="title"><a href="index-developer.html">Developer</a></h3>
+                                                    <h3 class="title"><a href="index-developer.php">Developer</a></h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -2220,7 +2292,7 @@
                                         <div class="single-demo">
                                             <div class="inner">
                                                 <div class="thumbnail">
-                                                    <a href="instructor-fitness.html">
+                                                    <a href="instructor-fitness.php">
                                                         <img class="w-100" src="assets/images/demo/instructor-fitness.png" alt="Personal Portfolio">
                                                         <span class="overlay-content">
                                                     <span class="overlay-text">View Demo <i
@@ -2229,7 +2301,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="inner">
-                                                    <h3 class="title"><a href="instructor-fitness.html">Fitness Instructor</a></h3>
+                                                    <h3 class="title"><a href="instructor-fitness.php">Fitness Instructor</a></h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -2240,7 +2312,7 @@
                                         <div class="single-demo">
                                             <div class="inner badge-1">
                                                 <div class="thumbnail">
-                                                    <a href="home-web-Developer.html">
+                                                    <a href="home-web-Developer.php">
                                                         <img class="w-100" src="assets/images/demo/home-model.png" alt="Personal Portfolio">
                                                         <span class="overlay-content">
                                                     <span class="overlay-text">View Demo <i
@@ -2249,7 +2321,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="inner">
-                                                    <h3 class="title"><a href="home-web-Developer.html">Web Developer</a></h3>
+                                                    <h3 class="title"><a href="home-web-Developer.php">Web Developer</a></h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -2261,7 +2333,7 @@
                                         <div class="single-demo">
                                             <div class="inner">
                                                 <div class="thumbnail">
-                                                    <a href="home-designer.html">
+                                                    <a href="home-designer.php">
                                                         <img class="w-100" src="assets/images/demo/home-video.png" alt="Personal Portfolio">
                                                         <span class="overlay-content">
                                                     <span class="overlay-text">View Demo <i
@@ -2270,7 +2342,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="inner">
-                                                    <h3 class="title"><a href="home-designer.html">Designer</a></h3>
+                                                    <h3 class="title"><a href="home-designer.php">Designer</a></h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -2282,7 +2354,7 @@
                                         <div class="single-demo">
                                             <div class="inner">
                                                 <div class="thumbnail">
-                                                    <a href="home-content-writer.html">
+                                                    <a href="home-content-writer.php">
                                                         <img class="w-100" src="assets/images/demo/text-rotet.png" alt="Personal Portfolio">
                                                         <span class="overlay-content">
                                                     <span class="overlay-text">View Demo <i
@@ -2291,7 +2363,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="inner">
-                                                    <h3 class="title"><a href="home-content-writer.html">Content Writter</a></h3>
+                                                    <h3 class="title"><a href="home-content-writer.php">Content Writter</a></h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -2303,7 +2375,7 @@
                                         <div class="single-demo">
                                             <div class="inner">
                                                 <div class="thumbnail">
-                                                    <a href="home-instructor.html">
+                                                    <a href="home-instructor.php">
                                                         <img class="w-100" src="assets/images/demo/index-boxed.png" alt="Personal Portfolio">
                                                         <span class="overlay-content">
                                                     <span class="overlay-text">View Demo <i
@@ -2312,7 +2384,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="inner">
-                                                    <h3 class="title"><a href="home-instructor.html">Instructor</a></h3>
+                                                    <h3 class="title"><a href="home-instructor.php">Instructor</a></h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -2324,7 +2396,7 @@
                                         <div class="single-demo">
                                             <div class="inner">
                                                 <div class="thumbnail">
-                                                    <a href="home-freelancer.html">
+                                                    <a href="home-freelancer.php">
                                                         <img class="w-100" src="assets/images/demo/home-sticky.png" alt="Personal Portfolio">
                                                         <span class="overlay-content">
                                                     <span class="overlay-text">View Demo <i
@@ -2333,7 +2405,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="inner">
-                                                    <h3 class="title"><a href="home-freelancer.html">Freelancer</a></h3>
+                                                    <h3 class="title"><a href="home-freelancer.php">Freelancer</a></h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -2345,7 +2417,7 @@
                                         <div class="single-demo">
                                             <div class="inner">
                                                 <div class="thumbnail">
-                                                    <a href="home-photographer.html">
+                                                    <a href="home-photographer.php">
                                                         <img class="w-100" src="assets/images/demo/index-bg-image.png" alt="Personal Portfolio">
                                                         <span class="overlay-content">
                                                     <span class="overlay-text">View Demo <i
@@ -2354,7 +2426,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="inner">
-                                                    <h3 class="title"><a href="home-photographer.html">Photographer</a>
+                                                    <h3 class="title"><a href="home-photographer.php">Photographer</a>
                                                     </h3>
                                                 </div>
                                             </div>
@@ -2367,7 +2439,7 @@
                                         <div class="single-demo">
                                             <div class="inner">
                                                 <div class="thumbnail">
-                                                    <a href="index-politician.html">
+                                                    <a href="index-politician.php">
                                                         <img class="w-100" src="assets/images/demo/front-end.png" alt="Personal Portfolio">
                                                         <span class="overlay-content">
                                                     <span class="overlay-text">View Demo <i
@@ -2376,7 +2448,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="inner">
-                                                    <h3 class="title"><a href="index-politician.html">Politician</a></h3>
+                                                    <h3 class="title"><a href="index-politician.php">Politician</a></h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -2414,7 +2486,7 @@
                                         <div class="single-demo">
                                             <div class="inner">
                                                 <div class="thumbnail">
-                                                    <a href="index-white-version.html">
+                                                    <a href="index-white-version.php">
                                                         <img class="w-100" src="assets/images/demo/main-demo-white-version.png" alt="Personal Portfolio">
                                                         <span class="overlay-content">
                                                     <span class="overlay-text">View Demo <i
@@ -2423,7 +2495,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="inner">
-                                                    <h3 class="title"><a href="index-white-version.html">Main Demo</a></h3>
+                                                    <h3 class="title"><a href="index-white-version.php">Main Demo</a></h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -2435,7 +2507,7 @@
                                         <div class="single-demo">
                                             <div class="inner badge-2">
                                                 <div class="thumbnail">
-                                                    <a href="index-technician-white-version.html">
+                                                    <a href="index-technician-white-version.php">
                                                         <img class="w-100" src="assets/images/demo/index-technician-white-version.png" alt="Personal Portfolio">
                                                         <span class="overlay-content">
                                                     <span class="overlay-text">View Demo <i
@@ -2444,7 +2516,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="inner">
-                                                    <h3 class="title"><a href="index-technician-white-version.html">Technician</a></h3>
+                                                    <h3 class="title"><a href="index-technician-white-version.php">Technician</a></h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -2456,7 +2528,7 @@
                                         <div class="single-demo">
                                             <div class="inner badge-2">
                                                 <div class="thumbnail">
-                                                    <a href="index-model-white-version.html">
+                                                    <a href="index-model-white-version.php">
                                                         <img class="w-100" src="assets/images/demo/home-model-v2-white.png" alt="Personal Portfolio">
                                                         <span class="overlay-content">
                                                     <span class="overlay-text">View Demo <i
@@ -2465,7 +2537,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="inner">
-                                                    <h3 class="title"><a href="index-model-white-version.html">Model</a></h3>
+                                                    <h3 class="title"><a href="index-model-white-version.php">Model</a></h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -2477,7 +2549,7 @@
                                         <div class="single-demo">
                                             <div class="inner badge-1">
                                                 <div class="thumbnail">
-                                                    <a href="home-consulting-white-version.html">
+                                                    <a href="home-consulting-white-version.php">
                                                         <img class="w-100" src="assets/images/demo/home-consulting-white-version.png" alt="Personal Portfolio">
                                                         <span class="overlay-content">
                                                     <span class="overlay-text">View Demo <i
@@ -2486,7 +2558,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="inner">
-                                                    <h3 class="title"><a href="home-consulting-white-version.html">Consulting</a>
+                                                    <h3 class="title"><a href="home-consulting-white-version.php">Consulting</a>
                                                     </h3>
                                                 </div>
                                             </div>
@@ -2499,7 +2571,7 @@
                                         <div class="single-demo">
                                             <div class="inner badge-1">
                                                 <div class="thumbnail">
-                                                    <a href="fashion-designer-white-version.html">
+                                                    <a href="fashion-designer-white-version.php">
                                                         <img class="w-100" src="assets/images/demo/fashion-designer-white-version.png" alt="Personal Portfolio">
                                                         <span class="overlay-content">
                                                     <span class="overlay-text">View Demo <i
@@ -2508,7 +2580,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="inner">
-                                                    <h3 class="title"><a href="fashion-designer-white-version.html">Fashion Designer</a>
+                                                    <h3 class="title"><a href="fashion-designer-white-version.php">Fashion Designer</a>
                                                     </h3>
                                                 </div>
                                             </div>
@@ -2521,7 +2593,7 @@
                                         <div class="single-demo">
                                             <div class="inner">
                                                 <div class="thumbnail">
-                                                    <a href="index-developer-white-version.html">
+                                                    <a href="index-developer-white-version.php">
                                                         <img class="w-100" src="assets/images/demo/developer-white-version.png" alt="Personal Portfolio">
                                                         <span class="overlay-content">
                                                     <span class="overlay-text">View Demo <i
@@ -2530,7 +2602,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="inner">
-                                                    <h3 class="title"><a href="index-developer-white-version.html">Developer</a>
+                                                    <h3 class="title"><a href="index-developer-white-version.php">Developer</a>
                                                     </h3>
                                                 </div>
                                             </div>
@@ -2542,7 +2614,7 @@
                                         <div class="single-demo">
                                             <div class="inner">
                                                 <div class="thumbnail">
-                                                    <a href="instructor-fitness-white-version.html">
+                                                    <a href="instructor-fitness-white-version.php">
                                                         <img class="w-100" src="assets/images/demo/instructor-fitness-white-version.png" alt="Personal Portfolio">
                                                         <span class="overlay-content">
                                                     <span class="overlay-text">View Demo <i
@@ -2551,7 +2623,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="inner">
-                                                    <h3 class="title"><a href="instructor-fitness-white-version.html">Fitness Instructor</a>
+                                                    <h3 class="title"><a href="instructor-fitness-white-version.php">Fitness Instructor</a>
                                                     </h3>
                                                 </div>
                                             </div>
@@ -2563,7 +2635,7 @@
                                         <div class="single-demo">
                                             <div class="inner badge-1">
                                                 <div class="thumbnail">
-                                                    <a href="home-web-developer-white-version.html">
+                                                    <a href="home-web-developer-white-version.php">
                                                         <img class="w-100" src="assets/images/demo/home-model-white-version.png" alt="Personal Portfolio">
                                                         <span class="overlay-content">
                                                     <span class="overlay-text">View Demo <i
@@ -2572,7 +2644,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="inner">
-                                                    <h3 class="title"><a href="home-web-developer-white-version.html">Web Developer</a>
+                                                    <h3 class="title"><a href="home-web-developer-white-version.php">Web Developer</a>
                                                     </h3>
                                                 </div>
                                             </div>
@@ -2585,7 +2657,7 @@
                                         <div class="single-demo">
                                             <div class="inner">
                                                 <div class="thumbnail">
-                                                    <a href="home-designer-white-version.html">
+                                                    <a href="home-designer-white-version.php">
                                                         <img class="w-100" src="assets/images/demo/home-video-white-version.png" alt="Personal Portfolio">
                                                         <span class="overlay-content">
                                                     <span class="overlay-text">View Demo <i
@@ -2594,7 +2666,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="inner">
-                                                    <h3 class="title"><a href="home-designer-white-version.html">Designer</a>
+                                                    <h3 class="title"><a href="home-designer-white-version.php">Designer</a>
                                                     </h3>
                                                 </div>
                                             </div>
@@ -2607,7 +2679,7 @@
                                         <div class="single-demo">
                                             <div class="inner">
                                                 <div class="thumbnail">
-                                                    <a href="home-content-writer-white-version.html">
+                                                    <a href="home-content-writer-white-version.php">
                                                         <img class="w-100" src="assets/images/demo/text-rotet-white-version.png" alt="Personal Portfolio">
                                                         <span class="overlay-content">
                                                     <span class="overlay-text">View Demo <i
@@ -2616,7 +2688,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="inner">
-                                                    <h3 class="title"><a href="home-content-writer-white-version.html">Content
+                                                    <h3 class="title"><a href="home-content-writer-white-version.php">Content
                                                             Writter</a></h3>
                                                 </div>
                                             </div>
@@ -2629,7 +2701,7 @@
                                         <div class="single-demo">
                                             <div class="inner">
                                                 <div class="thumbnail">
-                                                    <a href="home-instructor-white-version.html">
+                                                    <a href="home-instructor-white-version.php">
                                                         <img class="w-100" src="assets/images/demo/index-boxed-white-version.png" alt="Personal Portfolio">
                                                         <span class="overlay-content">
                                                     <span class="overlay-text">View Demo <i
@@ -2638,7 +2710,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="inner">
-                                                    <h3 class="title"><a href="home-instructor-white-version.html">Instructor</a></h3>
+                                                    <h3 class="title"><a href="home-instructor-white-version.php">Instructor</a></h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -2650,7 +2722,7 @@
                                         <div class="single-demo">
                                             <div class="inner">
                                                 <div class="thumbnail">
-                                                    <a href="home-freelancer-white-version.html">
+                                                    <a href="home-freelancer-white-version.php">
                                                         <img class="w-100" src="assets/images/demo/home-sticky-white-version.png" alt="Personal Portfolio">
                                                         <span class="overlay-content">
                                                     <span class="overlay-text">View Demo <i
@@ -2659,7 +2731,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="inner">
-                                                    <h3 class="title"><a href="home-freelancer-white-version.html">Freelancer</a></h3>
+                                                    <h3 class="title"><a href="home-freelancer-white-version.php">Freelancer</a></h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -2671,7 +2743,7 @@
                                         <div class="single-demo">
                                             <div class="inner">
                                                 <div class="thumbnail">
-                                                    <a href="home-photographer-white-version.html">
+                                                    <a href="home-photographer-white-version.php">
                                                         <img class="w-100" src="assets/images/demo/index-bg-image-white-version.png" alt="Personal Portfolio">
                                                         <span class="overlay-content">
                                                     <span class="overlay-text">View Demo <i
@@ -2680,7 +2752,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="inner">
-                                                    <h3 class="title"><a href="home-photographer-white-version.html">Photographer</a></h3>
+                                                    <h3 class="title"><a href="home-photographer-white-version.php">Photographer</a></h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -2692,7 +2764,7 @@
                                         <div class="single-demo">
                                             <div class="inner">
                                                 <div class="thumbnail">
-                                                    <a href="index-politician-white-version.html">
+                                                    <a href="index-politician-white-version.php">
                                                         <img class="w-100" src="assets/images/demo/front-end-white-version.png" alt="Personal Portfolio">
                                                         <span class="overlay-content">
                                                     <span class="overlay-text">View Demo <i
@@ -2701,7 +2773,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="inner">
-                                                    <h3 class="title"><a href="index-politician-white-version.html">Politician</a></h3>
+                                                    <h3 class="title"><a href="index-politician-white-version.php">Politician</a></h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -2751,7 +2823,7 @@
         {
 ?>
                         <div class="logo footer-logo">
-                            <a href="index.html" class="footer-logo-link">
+                            <a href="index.php" class="footer-logo-link">
                                 <img src="admin/<?php echo $result['logo'];?>" alt="logo">
                                 <span><?php echo $result['name'];?></span>
                             </a>
@@ -2791,7 +2863,7 @@
                 $('.file-upload-image').attr('src', e.target.result);
                 $('.file-upload-content').show();
 
-                $('.image-title').html(input.files[0].name);
+                $('.image-title').php(input.files[0].name);
                 };
 
                 reader.readAsDataURL(input.files[0]);

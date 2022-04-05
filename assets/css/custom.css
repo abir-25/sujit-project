@@ -209,8 +209,29 @@ textarea {
   border: 0;
   transition: all 0.2s ease;
 }
+.button-area {
+  display: flex;
+  flex-direction: column;
+  margin-left: 0px;
+}
+.button-area span {
+  margin-bottom: 10px;
+}
 .submit-button {
   width: 200px;
   font-size: 18px !important;
-  margin-left: 12px;
+}
+.success {
+  font-size: 18px;
+  color: green;
+}
+.error {
+  font-size: 18px;
+  color: red;
+}
+@media only screen and (max-width: 425px) {
+  .duration-div {
+    width: 30%;
+    text-align: center;
+  }
 }

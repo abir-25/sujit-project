@@ -10,8 +10,12 @@
   display: inline-flex;
   align-items: center;
 }
-.point-checkbox input[type="checkbox"] {
+.point-checkbox input[type="checkbox"],
+.point-checkbox input[type="radio"] {
   cursor: pointer;
+}
+input[type="radio"] {
+  cursor: pointer !important;
 }
 .point-checkbox span {
   font-size: 14px !important;

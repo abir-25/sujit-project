@@ -69,7 +69,6 @@
                     </li>
 					<li><a href="#exampledropdownDropdown6" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-star-o"></i>Testimonial Option</a>
                         <ul id="exampledropdownDropdown6" class="collapse list-unstyled ">
-                            <li><a href="addtestimonial.php">Add Testimonial </a></li>
                             <li><a href="testimoniallist.php">Testimonial List</a></li>            
                         </ul>
                     </li>
@@ -83,6 +82,7 @@
                     </li>
 					<li><a href="#exampledropdownDropdown8" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-money"></i>Pricing Option</a>
                         <ul id="exampledropdownDropdown8" class="collapse list-unstyled ">
+                            <li><a href="updatepriceformat.php">Update Price Format</a></li>            
                             <li><a href="addpricingpoint.php">Add Pricing Point</a></li>
                             <li><a href="pricingpointlist.php"> Pricing Point List</a></li>
                             <li><a href="addpricing.php">Add Pricing </a></li>
