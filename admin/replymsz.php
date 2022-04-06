@@ -50,7 +50,7 @@
 		$to      = $fm->validation($_POST['to']);
 		$from    = $fm->validation($_POST['from']);
 		$subject = $fm->validation($_POST['subject']);
-		$message = mysqli_real_escape_string($_POST['message']);
+		$message = $fm->validation($_POST['message']);
 		$sendmail = mail($to, $subject, $message, $from);
 		
 		if($sendmail)

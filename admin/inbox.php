@@ -38,7 +38,8 @@
 		
 		if($deldata)
 		{
-			echo "<span class='success'>Message Deleted Successfully !!</span>";
+		    echo "<script>window.location = 'inbox.php'; </script>";
+			// echo "<span class='success'>Message Deleted Successfully !!</span>";
 		}
 		else
 		{
@@ -55,7 +56,8 @@
 		$update_row = $db->update($query);
 		if($update_row)
 		{
-			echo "<span class='success'>Message Sent in the Seen Box Successfully !!</span>";
+		    echo "<script>window.location = 'inbox.php'; </script>";
+			// echo "<span class='success'>Message Sent in the Seen Box Successfully !!</span>";
 		}
 		else
 		{
@@ -75,7 +77,8 @@
 		$update_row = $db->update($query);
 		if($update_row)
 		{
-			echo "<span class='success'>Message Unseen Successfully !!</span>";
+		    echo "<script>window.location = 'inbox.php'; </script>";
+			// echo "<span class='success'>Message Unseen Successfully !!</span>";
 		}
 		else
 		{

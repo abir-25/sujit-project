@@ -1445,7 +1445,7 @@
     {
         while($result2 = $getData2->fetch_assoc()) 
         {
-            if($result2['price']==1)
+            if($result2['type']==1)
                 $price_format = "৳";
             else
                 $price_format = "$";
@@ -1462,58 +1462,57 @@
                                             <p class="description">
                                             <?php echo $result1['description']; ?>
                                             </p>
+<?php
+    $query_price = "select count(id) as count_id from tbl_pricing_point where type_1='1'";
+    $getData = $db->select($query_price);
+    if($getData)
+    {
+        while($result = $getData->fetch_assoc()) 
+        {
+            $num = $result['count_id'];
+        }
+    }
+?>
                                             <div class="check-wrapper">
                                                 <div class="left-area">
+<?php
+    if($num%2==0){
+        $num1 = $num/2;
+        $num2 = $num1;
+    }
+    else{
+        $num1 = intval($num/2) + 1;
+        $num2 = $num-$num1;
+    }
+    $query3 = "select * from tbl_pricing_point where type_1='1' limit $num1";
+    $getData3 = $db->select($query3);
+    if($getData3)
+    {
+        while($result3 = $getData3->fetch_assoc()) 
+        {
+            $point_id = $result3['id'];
+?>        
                                                     <div class="check d-flex">
                                                         <i data-feather="check"></i>
-                                                        <p>1 Page with Elementor</p>
+                                                        <p><?php echo $result3['title']; ?></p>
                                                     </div>
-                                                    <div class="check d-flex">
-                                                        <i data-feather="check"></i>
-                                                        <p>Design Customization</p>
-                                                    </div>
-                                                    <div class="check d-flex">
-                                                        <i data-feather="check"></i>
-                                                        <p>Responsive Design</p>
-                                                    </div>
-                                                    <div class="check d-flex">
-                                                        <i data-feather="check"></i>
-                                                        <p>Content Upload</p>
-                                                    </div>
-                                                    <div class="check d-flex">
-                                                        <i data-feather="check"></i>
-                                                        <p>Design Customization</p>
-                                                    </div>
-                                                    <div class="check d-flex">
-                                                        <i data-feather="check"></i>
-                                                        <p>2 Plugins/Extensions</p>
-                                                    </div>
+<?php } } ?>
                                                 </div>
                                                 <div class="right-area">
+<?php
+    $query4 = "select * from tbl_pricing_point where type_1='1' and id>$point_id limit $num2";
+    $getData4 = $db->select($query4);
+    if($getData4)
+    {
+        while($result4 = $getData4->fetch_assoc()) 
+        {
+
+?>  
                                                     <div class="check d-flex">
                                                         <i data-feather="check"></i>
-                                                        <p>multipage Elementor</p>
+                                                        <p><?php echo $result4['title']; ?></p>
                                                     </div>
-                                                    <div class="check d-flex">
-                                                        <i data-feather="check"></i>
-                                                        <p>Design Figma</p>
-                                                    </div>
-                                                    <div class="check d-flex">
-                                                        <i data-feather="check"></i>
-                                                        <p>MAintaine Design</p>
-                                                    </div>
-                                                    <div class="check d-flex">
-                                                        <i data-feather="check"></i>
-                                                        <p>Content Upload</p>
-                                                    </div>
-                                                    <div class="check d-flex">
-                                                        <i data-feather="check"></i>
-                                                        <p>Design With XD</p>
-                                                    </div>
-                                                    <div class="check d-flex">
-                                                        <i data-feather="check"></i>
-                                                        <p>8 Plugins/Extensions</p>
-                                                    </div>
+<?php } } ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -1525,11 +1524,11 @@
                                             <div class="time-line">
                                                 <div class="single-cmt d-flex">
                                                     <i data-feather="clock"></i>
-                                                    <span>2 Days Delivery</span>
+                                                    <span><?php echo $result1['duration']; ?> Days Delivery</span>
                                                 </div>
                                                 <div class="single-cmt d-flex">
                                                     <i data-feather="activity"></i>
-                                                    <span>Unlimited Revission</span>
+                                                    <span>Unlimited Revision</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -1539,73 +1538,79 @@
 <?php } } ?>
                                 <div class="tab-pane fade show active" id="standard" role="tabpanel" aria-labelledby="standard-tab">
                                     <!-- Pricing Start -->
+<?php
+    $query1 = "select * from tbl_pricing where type='2'";
+    $getData1 = $db->select($query1);
+    if($getData1)
+    {
+        while($result1 = $getData1->fetch_assoc()) 
+        {
+?>     
                                     <div class="rn-pricing">
                                         <div class="pricing-header">
                                             <div class="header-left">
-                                                <h2 class="title">Design Make this Page</h2>
-                                                <span>Elementor</span>
+                                                <h2 class="title"><?php echo $result1['title']; ?></h2>
+                                                <span><?php echo $result1['subtitle']; ?></span>
                                             </div>
                                             <div class="header-right">
-                                                <span>$50.00</span>
+                                                <span><?php echo $price_format.$result1['price']; ?></span>
                                             </div>
                                         </div>
                                         <div class="pricing-body">
                                             <p class="description">
-                                                Making this the first true generator on the Internet. It uses a
-                                                dictionary & plugin Development.
+                                                <?php echo $result1['description']; ?>
                                             </p>
+<?php
+    $query_price = "select count(id) as count_id from tbl_pricing_point where type_2='1'";
+    $getData = $db->select($query_price);
+    if($getData)
+    {
+        while($result = $getData->fetch_assoc()) 
+        {
+            $num = $result['count_id'];
+        }
+    }
+?>
                                             <div class="check-wrapper">
                                                 <div class="left-area">
+<?php
+    if($num%2==0){
+        $num1 = $num/2;
+        $num2 = $num1;
+    }
+    else{
+        $num1 = intval($num/2) + 1;
+        $num2 = $num-$num1;
+    }
+    $query3 = "select * from tbl_pricing_point where type_2='1' limit $num1";
+    $getData3 = $db->select($query3);
+    if($getData3)
+    {
+        while($result3 = $getData3->fetch_assoc()) 
+        {
+            $point_id = $result3['id'];
+?>                                                           
                                                     <div class="check d-flex">
                                                         <i data-feather="check"></i>
-                                                        <p>1 Page with Elementor</p>
-                                                    </div>
-                                                    <div class="check d-flex">
-                                                        <i data-feather="check"></i>
-                                                        <p>Design Customization</p>
-                                                    </div>
-                                                    <div class="check d-flex">
-                                                        <i data-feather="check"></i>
-                                                        <p>Responsive Design</p>
-                                                    </div>
-                                                    <div class="check d-flex">
-                                                        <i data-feather="check"></i>
-                                                        <p>Content Upload</p>
-                                                    </div>
-                                                    <div class="check d-flex">
-                                                        <i data-feather="check"></i>
-                                                        <p>Design Customization</p>
-                                                    </div>
-                                                    <div class="check d-flex">
-                                                        <i data-feather="check"></i>
-                                                        <p>2 Plugins/Extensions</p>
-                                                    </div>
+                                                        <p><?php echo $result3['title']; ?></p>
+                                              </div>
+<?php } } ?>  
                                                 </div>
                                                 <div class="right-area">
+<?php
+    $query4 = "select * from tbl_pricing_point where type_2='1' and id>$point_id limit $num2";
+    $getData4 = $db->select($query4);
+    if($getData4)
+    {
+        while($result4 = $getData4->fetch_assoc()) 
+        {
+
+?>  
                                                     <div class="check d-flex">
                                                         <i data-feather="check"></i>
-                                                        <p>multipage Elementor</p>
+                                                        <p><?php echo $result4['title']; ?></p>
                                                     </div>
-                                                    <div class="check d-flex">
-                                                        <i data-feather="check"></i>
-                                                        <p>Design Figma</p>
-                                                    </div>
-                                                    <div class="check d-flex">
-                                                        <i data-feather="check"></i>
-                                                        <p>MAintaine Design</p>
-                                                    </div>
-                                                    <div class="check d-flex">
-                                                        <i data-feather="check"></i>
-                                                        <p>Content Upload</p>
-                                                    </div>
-                                                    <div class="check d-flex">
-                                                        <i data-feather="check"></i>
-                                                        <p>Design With XD</p>
-                                                    </div>
-                                                    <div class="check d-flex">
-                                                        <i data-feather="check"></i>
-                                                        <p>8 Plugins/Extensions</p>
-                                                    </div>
+<?php } } ?> 
                                                 </div>
                                             </div>
                                         </div>
@@ -1617,87 +1622,94 @@
                                             <div class="time-line d-flex">
                                                 <div class="single-cmt d-flex">
                                                     <i data-feather="clock"></i>
-                                                    <span>2 Days Delivery</span>
+                                                    <span><?php echo $result1['duration']; ?> Days Delivery</span>
                                                 </div>
                                                 <div class="single-cmt d-flex">
                                                     <i data-feather="activity"></i>
-                                                    <span>Unlimited Revission</span>
+                                                    <span>Unlimited Revision</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <!-- End -->
+<?php } } ?>
                                 </div>
 
                                 <div class="tab-pane fade" id="premium" role="tabpanel" aria-labelledby="premium-tab">
                                     <!-- Pricing Start -->
+<?php
+    $query1 = "select * from tbl_pricing where type='3'";
+    $getData1 = $db->select($query1);
+    if($getData1)
+    {
+        while($result1 = $getData1->fetch_assoc()) 
+        {
+?>     
                                     <div class="rn-pricing">
                                         <div class="pricing-header">
                                             <div class="header-left">
-                                                <h2 class="title">Customize Your Single Page</h2>
-                                                <span>Elementor</span>
+                                                <h2 class="title"><?php echo $result1['title']; ?></h2>
+                                                <span><?php echo $result1['subtitle']; ?></span>
                                             </div>
                                             <div class="header-right">
-                                                <span>$90.00</span>
+                                                <span><?php echo $price_format.$result1['price']; ?></span>
                                             </div>
                                         </div>
                                         <div class="pricing-body">
                                             <p class="description">
-                                                I will install your desire theme and made like Theme demo and customize
-                                                your single page( homepage)
+                                                <?php echo $result1['description']; ?>
                                             </p>
+<?php
+    $query_price = "select count(id) as count_id from tbl_pricing_point where type_3='1'";
+    $getData = $db->select($query_price);
+    if($getData)
+    {
+        while($result = $getData->fetch_assoc()) 
+        {
+            $num = $result['count_id'];
+        }
+    }
+?>
                                             <div class="check-wrapper">
                                                 <div class="left-area">
+<?php
+    if($num%2==0){
+        $num1 = $num/2;
+        $num2 = $num1;
+    }
+    else{
+        $num1 = intval($num/2) + 1;
+        $num2 = $num-$num1;
+    }
+    $query3 = "select * from tbl_pricing_point where type_3='1' limit $num1";
+    $getData3 = $db->select($query3);
+    if($getData3)
+    {
+        while($result3 = $getData3->fetch_assoc()) 
+        {
+            $point_id = $result3['id'];
+?>        
                                                     <div class="check d-flex">
                                                         <i data-feather="check"></i>
-                                                        <p>1 Page with Elementor</p>
+                                                        <p><?php echo $result3['title']; ?></p>
                                                     </div>
-                                                    <div class="check d-flex">
-                                                        <i data-feather="check"></i>
-                                                        <p>Design Customization</p>
-                                                    </div>
-                                                    <div class="check d-flex">
-                                                        <i data-feather="check"></i>
-                                                        <p>Responsive Design</p>
-                                                    </div>
-                                                    <div class="check d-flex">
-                                                        <i data-feather="check"></i>
-                                                        <p>Content Upload</p>
-                                                    </div>
-                                                    <div class="check d-flex">
-                                                        <i data-feather="check"></i>
-                                                        <p>Design Customization</p>
-                                                    </div>
-                                                    <div class="check d-flex">
-                                                        <i data-feather="check"></i>
-                                                        <p>2 Plugins/Extensions</p>
-                                                    </div>
+<?php } } ?>
                                                 </div>
                                                 <div class="right-area">
+<?php
+    $query4 = "select * from tbl_pricing_point where type_3='1' and id>$point_id limit $num2";
+    $getData4 = $db->select($query4);
+    if($getData4)
+    {
+        while($result4 = $getData4->fetch_assoc()) 
+        {
+
+?>      
                                                     <div class="check d-flex">
                                                         <i data-feather="check"></i>
-                                                        <p>multipage Elementor</p>
+                                                        <p><?php echo $result4['title']; ?></p>
                                                     </div>
-                                                    <div class="check d-flex">
-                                                        <i data-feather="check"></i>
-                                                        <p>Design Figma</p>
-                                                    </div>
-                                                    <div class="check d-flex">
-                                                        <i data-feather="check"></i>
-                                                        <p>MAintaine Design</p>
-                                                    </div>
-                                                    <div class="check d-flex">
-                                                        <i data-feather="check"></i>
-                                                        <p>Content Upload</p>
-                                                    </div>
-                                                    <div class="check d-flex">
-                                                        <i data-feather="check"></i>
-                                                        <p>Design With XD</p>
-                                                    </div>
-                                                    <div class="check d-flex">
-                                                        <i data-feather="check"></i>
-                                                        <p>8 Plugins/Extensions</p>
-                                                    </div>
+<?php } } ?>       
                                                 </div>
                                             </div>
                                         </div>
@@ -1709,16 +1721,17 @@
                                             <div class="time-line d-flex">
                                                 <div class="single-cmt d-flex">
                                                     <i data-feather="clock"></i>
-                                                    <span>2 Days Delivery</span>
+                                                    <span><?php echo $result1['duration']; ?> Days Delivery</span>
                                                 </div>
                                                 <div class="single-cmt d-flex">
                                                     <i data-feather="activity"></i>
-                                                    <span>Unlimited Revission</span>
+                                                    <span>Unlimited Revision</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <!-- End -->
+<?php } } ?>
                                 </div>
                             </div>
                         </div>
@@ -1958,30 +1971,31 @@
                             </div>
                         </div>
                     </div>
+                   
                     <div data-aos-delay="600" class="col-lg-7 contact-input">
                         <div class="contact-form-wrapper">
                             <div class="introduce">
 
-                                <form class="rnt-contact-form rwt-dynamic-form row" id="contact-form" method="POST" action="mail.php">
+                                <form class="row" method="POST" action="contact.php">
 
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="contact-name">Your Name</label>
-                                            <input class="form-control form-control-lg" name="contact-name" id="contact-name" type="text">
+                                            <input class="form-control form-control-lg" name="name" id="contact-name" type="text">
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="contact-phone">Phone Number</label>
-                                            <input class="form-control" name="contact-phone" id="contact-phone" type="text">
+                                            <input class="form-control" name="phone" id="contact-phone" type="text">
                                         </div>
                                     </div>
 
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label for="contact-email">Email</label>
-                                            <input class="form-control form-control-sm" id="contact-email" name="contact-email" type="email">
+                                            <input class="form-control form-control-sm" id="contact-email" name="email" type="email">
                                         </div>
                                     </div>
 
@@ -1995,14 +2009,13 @@
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label for="contact-message">Your Message</label>
-                                            <textarea name="contact-message" id="contact-message" cols="30" rows="10"></textarea>
+                                            <textarea name="message" id="contact-message" cols="30" rows="10"></textarea>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-12">
-                                        <button name="submit" type="submit" id="submit" class="rn-btn">
-                                            <span>SEND MESSAGE</span>
-                                            <i data-feather="arrow-right"></i>
+                                        <button name="submit" type="submit" class="rn-btn">
+                                        SEND MESSAGE
                                         </button>
                                     </div>
                                 </form>

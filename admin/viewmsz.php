@@ -4,7 +4,7 @@
           <!-- Page Header-->
           <header class="page-header">
             <div class="container-fluid">
-              <h2 class="no-margin-bottom">Forms</h2>
+              <h2 class="no-margin-bottom">View Message</h2>
             </div>
           </header>
 <?php
@@ -22,7 +22,7 @@
           <div class="breadcrumb-holder container-fluid">
             <ul class="breadcrumb">
               <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-              <li class="breadcrumb-item active">Forms            </li>
+              <li class="breadcrumb-item active">View Message            </li>
             </ul>
           </div>
           <!-- Forms Section-->
