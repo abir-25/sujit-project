@@ -4,15 +4,15 @@
                 <!-- Page Header-->
                 <header class="page-header">
                     <div class="container-fluid">
-                        <h2 class="no-margin-bottom">Client Topic List</h2>
+                        <h2 class="no-margin-bottom">Category List</h2>
                     </div>
                 </header>
                 <!-- Breadcrumb-->
                 <div class="breadcrumb-holder container-fluid">
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                        <li class="breadcrumb-item active">Client Option</li>
-                        <li class="breadcrumb-item active">Client Topic List</li>
+                        <li class="breadcrumb-item active">Blog Option</li>
+                        <li class="breadcrumb-item active">Category List</li>
                     </ul>
                 </div>
 
@@ -28,7 +28,7 @@
                                         </div>
                                     </div>
                                     <div class="card-header d-flex align-items-center">
-                                        <h3 class="h4">Client Topic List</h3>
+                                        <h3 class="h4">Category List</h3>
                                     </div>
                                     <div class="card-body">
 <?php
@@ -37,7 +37,7 @@
 	{
 		$deltopcid = $_GET['deltopcid'];
 		
-		$delquery = "delete from tbl_topic where id = '$deltopcid'";
+		$delquery = "delete from tbl_category where id = '$deltopcid'";
 		$deldata = $db->deletedata($delquery);
 		
 		if($deldata)
@@ -55,13 +55,13 @@
                                             <thead>
                                                 <tr>
                                                     <th width="20%">No.</th>
-                                                    <th width="50%">Client Topic Title</th>
+                                                    <th width="50%">Blog Category</th>
                                                     <th width="30%">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
 <?php
-	$query = "select * from tbl_topic order by id asc";
+	$query = "select * from tbl_category order by id asc";
     $i = 0;	
 	$post = $db->select($query);				
 	if($post)
@@ -76,7 +76,7 @@
 
                                                     <td scope="row" style="vertical-align:middle"><?php echo $result['title']; ?></td>
 
-                                                    <td style="vertical-align:middle"><a class="actionLink" href="edittopic.php?topicId=<?php echo $result['id']; ?>">Update</a>  || <a class="actionLink" onclick= "return confirm('Are you sure to Delete This Topic?');" href="?deltopcid=<?php echo $result['id'];?>">Delete</a></td>
+                                                    <td style="vertical-align:middle"><a class="actionLink" href="editblogtopic.php?topicId=<?php echo $result['id']; ?>">Update</a>  || <a class="actionLink" onclick= "return confirm('Are you sure to Delete This Blog Category?');" href="?deltopcid=<?php echo $result['id'];?>">Delete</a></td>
                                                 </tr>
 <?php } } ?>
 											</tbody>
@@ -84,7 +84,7 @@
 <?php if($i==0) { ?>
                                         <p class="text-center py-4">No data Available</p>
 <?php } ?>
-                                        <a href="addtopic.php" class="btn btn-primary">Add</a>
+                                        <a href="addblogtopic.php" class="btn btn-primary">Add</a>
                                     </div>
                                 </div>
                             </div>

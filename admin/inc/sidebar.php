@@ -91,9 +91,11 @@
                     </li>
                     <li><a href="#exampledropdownDropdown9" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-edit"></i>Blog Option</a>
                         <ul id="exampledropdownDropdown9" class="collapse list-unstyled ">
-                            <li><a href="addpricing.php">Add Blog </a></li>
-                            <li><a href="pricinglist.php">Blog List</a></li>  
-                            <li><a href="pricinglist.php"> Comment List</a></li>              
+                            <li><a href="addblogtopic.php">Add Category</a></li>
+                            <li><a href="blogtopiclist.php">Category List</a></li>  
+                            <li><a href="addblog.php">Add Post </a></li>
+                            <li><a href="bloglist.php">Post List</a></li>  
+                            <li><a href="commentlist.php"> Comment List</a></li>              
                         </ul>
                     </li>
                 </ul>

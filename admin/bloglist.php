@@ -4,15 +4,15 @@
                 <!-- Page Header-->
                 <header class="page-header">
                     <div class="container-fluid">
-                        <h2 class="no-margin-bottom">Client Topic List</h2>
+                        <h2 class="no-margin-bottom">Post List</h2>
                     </div>
                 </header>
                 <!-- Breadcrumb-->
                 <div class="breadcrumb-holder container-fluid">
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                        <li class="breadcrumb-item active">Client Option</li>
-                        <li class="breadcrumb-item active">Client Topic List</li>
+                        <li class="breadcrumb-item active">Blog Option</li>
+                        <li class="breadcrumb-item active">Post List</li>
                     </ul>
                 </div>
 
@@ -28,16 +28,27 @@
                                         </div>
                                     </div>
                                     <div class="card-header d-flex align-items-center">
-                                        <h3 class="h4">Client Topic List</h3>
+                                        <h3 class="h4">Post List</h3>
                                     </div>
                                     <div class="card-body">
 <?php
 
-	if(isset($_GET['deltopcid']))
+	if(isset($_GET['delpostid']))
 	{
-		$deltopcid = $_GET['deltopcid'];
+		$delpostid = $_GET['delpostid'];
+		$query = "select * from tbl_blog where id='$delpostid'"; 
+		$getdata = $db->select($query);
 		
-		$delquery = "delete from tbl_topic where id = '$deltopcid'";
+		if($getdata)
+		{
+			while($delimg = $getdata->fetch_assoc())
+			{
+				$dellink = $delimg['image'];
+				unlink($dellink);
+			}
+		}
+		
+		$delquery = "delete from tbl_blog where id = '$delpostid'";
 		$deldata = $db->deletedata($delquery);
 		
 		if($deldata)
@@ -54,14 +65,17 @@
                                         <table class="table">
                                             <thead>
                                                 <tr>
-                                                    <th width="20%">No.</th>
-                                                    <th width="50%">Client Topic Title</th>
-                                                    <th width="30%">Action</th>
+                                                    <th width="7%">No.</th>
+                                                    <th width="12%">Category</th>
+                                                    <th width="15%">Title</th>
+                                                    <th width="34%">Description</th>
+                                                    <th width="12%">Image</th>
+                                                    <th width="20%">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-<?php
-	$query = "select * from tbl_topic order by id asc";
+                                            <?php
+	$query = "select * from tbl_blog order by id desc";
     $i = 0;	
 	$post = $db->select($query);				
 	if($post)
@@ -69,14 +83,31 @@
 		while($result = $post->fetch_assoc())
 		{
 			$i++;
+            $cat_id = $result["cat_id"];
+            $query1 = "select * from tbl_category order by id asc";				
+            $post1 = $db->select($query1);				
+            if($post1)
+            {
+                while($result1 = $post1->fetch_assoc())
+                {
+                    if($cat_id == $result1["id"])
+                        $cat = $result1["title"];
+                }
+            }
 ?>
                                                 <tr>
                                                     <th scope="row" style="vertical-align:middle"><?php echo $i; ?></th>
-                                          
+                                                    
+                                                    <td scope="row" style="vertical-align:middle"><?php echo $cat; ?></td>
 
                                                     <td scope="row" style="vertical-align:middle"><?php echo $result['title']; ?></td>
 
-                                                    <td style="vertical-align:middle"><a class="actionLink" href="edittopic.php?topicId=<?php echo $result['id']; ?>">Update</a>  || <a class="actionLink" onclick= "return confirm('Are you sure to Delete This Topic?');" href="?deltopcid=<?php echo $result['id'];?>">Delete</a></td>
+                                                    <td scope="row" style="vertical-align:middle"><?php echo $result['description']; ?></td>
+
+                                                    <td style="vertical-align:middle"><img class="post-image" src="<?php echo $result['image']; ?>" alt="" /></td>
+													
+													
+                                                    <td style="vertical-align:middle"><a class="actionLink" href="editblog.php?postId=<?php echo $result['id']; ?>">Update</a>  || <a class="actionLink" onclick= "return confirm('Are you sure to Delete This Post?');" href="?delpostid=<?php echo $result['id'];?>">Delete</a></td>
                                                 </tr>
 <?php } } ?>
 											</tbody>
@@ -84,7 +115,7 @@
 <?php if($i==0) { ?>
                                         <p class="text-center py-4">No data Available</p>
 <?php } ?>
-                                        <a href="addtopic.php" class="btn btn-primary">Add</a>
+                                        <a href="addblog.php" class="btn btn-primary">Add</a>
                                     </div>
                                 </div>
                             </div>
