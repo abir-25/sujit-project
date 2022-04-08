@@ -84,6 +84,7 @@
 		{
 			$i++;
             $cat_id = $result["cat_id"];
+
             $query1 = "select * from tbl_category order by id asc";				
             $post1 = $db->select($query1);				
             if($post1)
@@ -129,6 +130,26 @@
     </div>
     <!-- Javascript files-->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="vendor/tinymce/tinymce.min.js"></script>
+    <script>
+	tinymce.init({
+	  selector: 'textarea#editor',  //Change this value according to your HTML
+	  auto_focus: 'element1',
+	  height: "200"
+	});
+	
+	$( document ).ready(function() {
+	
+		$('#buttonpost').on("click", function(){
+			tinyMCE.triggerSave();
+			var value = $("textarea#editor").val();		
+			$("#display-post").html(value);
+			$(".texteditor-container").hide();
+			return false;
+		});
+	
+	});   
+    </script>
     <script src="vendor/popper.js/umd/popper.min.js">
 
 

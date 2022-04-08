@@ -98,7 +98,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 form-control-label">Topic Title</label>
                           <div class="col-sm-9">
-                            <input type="text" name="title" class="form-control" required placeholder="Enter Blog Topic Title">
+                            <input type="text" name="title" class="form-control" required placeholder="Enter Post Topic Title">
                           </div>
                         </div>
                         <div class="line"></div>
@@ -119,7 +119,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 form-control-label">Keyword</label>
                           <div class="col-sm-9">
-                            <input type="text" name="keyword" class="form-control" required placeholder="Enter Blog Keyword">
+                            <input type="text" name="keyword" class="form-control" required placeholder="Enter Post Keyword">
                           </div>
                         </div>
 						<div class="line"></div>
@@ -127,6 +127,7 @@
                           <label class="col-sm-3 form-control-label">Upload Blog image</label>
                           <div class="col-sm-9" style="text-align:center">
                             <input type="file" name="image" class="form-control" required>
+                            <span class="instruction">Upload Landscape Image and keep all post images are same size to get the better view</span>
                           </div>
                         </div>  
 						

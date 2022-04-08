@@ -1764,84 +1764,54 @@
                 </div>
                 <div class="row row--25 mt--30 mt_md--10 mt_sm--10">
 
+<?php
+    $query1 = "select * from tbl_blog order by id desc limit 3";
+    $getData1 = $db->select($query1);
+    if($getData1)
+    {
+        $delay = 200;
+        while($result1 = $getData1->fetch_assoc()) 
+        {
+            $delay = $delay+200;
+            $cat_id = $result1["cat_id"];
+
+            $query2 = "select * from tbl_category order by id asc";				
+            $post1 = $db->select($query2);				
+            if($post1)
+            {
+                while($result2 = $post1->fetch_assoc())
+                {
+                    if($cat_id == $result2["id"])
+                        $cat = $result2["title"];
+                }
+            }
+?>    
                     <!-- Start Single blog -->
-                    <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="400" data-aos-once="true" class="col-lg-6 col-xl-4 mt--30 col-md-6 col-sm-12 col-12 mt--30">
+                    <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="<?php echo $delay; ?>" data-aos-once="true" class="col-lg-6 col-xl-4 mt--30 col-md-6 col-sm-12 col-12 mt--30">
                         <div class="rn-blog" data-toggle="modal" data-target="#exampleModalCenters">
                             <div class="inner">
                                 <div class="thumbnail">
                                     <a href="javascript:void(0)">
-                                        <img src="assets/images/blog/blog-01.jpg" alt="Personal Portfolio Images">
+                                        <img src="admin/<?php echo $result1['image']; ?>" alt="Personal Portfolio Images">
                                     </a>
                                 </div>
                                 <div class="content">
                                     <div class="category-info">
                                         <div class="category-list">
-                                            <a href="javascript:void(0)">Canada</a>
+                                            <a href="javascript:void(0)"><?php echo $cat; ?></a>
                                         </div>
                                         <div class="meta">
-                                            <span><i class="feather-clock"></i> 2 min read</span>
+                                            <span><i class="feather-clock"></i> <?php echo $result1['read_time']; ?> read</span>
                                         </div>
                                     </div>
-                                    <h4 class="title"><a href="javascript:void(0)">T-shirt design is the part of design
+                                    <h4 class="title"><a href="javascript:void(0)"><?php echo $result1['title']; ?>
                                             <i class="feather-arrow-up-right"></i></a></h4>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- End Single blog -->
-
-                    <!-- Start Single blog -->
-                    <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="600" data-aos-once="true" class="col-lg-6 col-xl-4 mt--30 col-md-6 col-sm-12 col-12 mt--30">
-                        <div class="rn-blog" data-toggle="modal" data-target="#exampleModalCenters">
-                            <div class="inner">
-                                <div class="thumbnail">
-                                    <a href="javascript:void(0)">
-                                        <img src="assets/images/blog/blog-02.jpg" alt="Personal Portfolio Images">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <div class="category-info">
-                                        <div class="category-list">
-                                            <a href="javascript:void(0)">Development</a>
-                                        </div>
-                                        <div class="meta">
-                                            <span><i class="feather-clock"></i> 2 hour read</span>
-                                        </div>
-                                    </div>
-                                    <h4 class="title"><a href="javascript:void(0)">The services provide for design <i
-                                        class="feather-arrow-up-right"></i></a></h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single blog -->
-
-                    <!-- Start Single blog -->
-                    <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="800" data-aos-once="true" class="col-lg-6 col-xl-4 mt--30 col-md-6 col-sm-12 col-12 mt--30">
-                        <div class="rn-blog" data-toggle="modal" data-target="#exampleModalCenters">
-                            <div class="inner">
-                                <div class="thumbnail">
-                                    <a href="javascript:void(0)">
-                                        <img src="assets/images/blog/blog-03.jpg" alt="Personal Portfolio Images">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <div class="category-info">
-                                        <div class="category-list">
-                                            <a href="javascript:void(0)">Application</a>
-                                        </div>
-                                        <div class="meta">
-                                            <span><i class="feather-clock"></i> 5 min read</span>
-                                        </div>
-                                    </div>
-                                    <h4 class="title"><a href="javascript:void(0)">Mobile app landing design & app
-                                            maintain<i class="feather-arrow-up-right"></i></a></h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single blog -->
-
+<?php } } ?>
                 </div>
             </div>
         </div>
