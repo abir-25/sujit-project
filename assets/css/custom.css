@@ -229,6 +229,30 @@ textarea {
   font-size: 18px;
   color: red;
 }
+.bio-icon-div {
+  display: inline-flex;
+  justify-content: start;
+  align-items: center;
+  margin-top: 10px;
+  margin-right: 40px;
+}
+.bio-icon {
+  border: 1px solid #eee;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 5px;
+}
+.phone-icon {
+  transform: rotate(180deg);
+  font-size: 14px;
+}
+.email-icon {
+  font-size: 14px;
+}
 @media only screen and (max-width: 425px) {
   .duration-div {
     width: 30%;

@@ -39,7 +39,9 @@
 	{
 		$name  = mysqli_real_escape_string($db->link1, $_POST['name']);
 		$intro  = mysqli_real_escape_string($db->link1, $_POST['intro']);
-		 
+		$phone  = mysqli_real_escape_string($db->link1, $_POST['phone']);
+		$email  = mysqli_real_escape_string($db->link1, $_POST['email']);
+		  
 		$permitted  = array('jpg', 'jpeg', 'png', 'gif');
 		$file_name = $_FILES['image']['name'];
 		$file_size = $_FILES['image']['size'];
@@ -61,7 +63,7 @@
 			}
 			else{
 				
-				$query = "INSERT INTO tbl_bio(name, image, intro) VALUES('$name','$uploaded_image','$intro')";
+				$query = "INSERT INTO tbl_bio(name, image, intro, phone, email) VALUES('$name','$uploaded_image','$intro','$phone','$email')";
 				$inserted_rows = $db->insert($query);
 				if ($inserted_rows) 
 				{
@@ -91,7 +93,9 @@
 							  SET 
 							  name = '$name',
 							  image = '$uploaded_image',
-							  intro = '$intro'";
+							  intro = '$intro',
+							  phone = '$phone',
+							  email = '$email'";
 					
 					$updated_rows = $db->update($query);
 					if ($updated_rows) 
@@ -109,7 +113,9 @@
 				$query = "UPDATE tbl_bio 
 							  SET 
 							  name = '$name',
-							  intro = '$intro'";
+							  intro = '$intro',
+							  phone = '$phone',
+							  email = '$email'";
 					
 					$updated_rows = $db->update($query);
 					if ($updated_rows) 
@@ -145,6 +151,20 @@
                         </div>
 						<div class="line"></div>
 						<div class="form-group row">
+                          <label class="col-sm-3 form-control-label">Phone No.</label>
+                          <div class="col-sm-9">
+                            <input type="text" name="phone" class="form-control" required value="<?php echo $postresult['phone'];?>">
+                          </div>
+                        </div>
+						<div class="line"></div>
+						<div class="form-group row">
+                          <label class="col-sm-3 form-control-label">Email Id</label>
+                          <div class="col-sm-9">
+                            <input type="text" name="email" class="form-control" required value="<?php echo $postresult['email'];?>">
+                          </div>
+                        </div>
+						<div class="line"></div>
+						<div class="form-group row">
                           <label class="col-sm-3 form-control-label">Upload Image</label>
                           <div class="col-sm-9" style="text-align:center">
 						  <img src="<?php echo $postresult['image'];?>" width="200px"/><br/>
@@ -155,7 +175,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 form-control-label">Intro</label>
                           <div class="col-sm-9">
-							<textarea name="description" class="form-control" style="height:200px"><?php echo $postresult['intro']; ?></textarea>
+							<textarea name="intro" class="form-control" style="height:200px"><?php echo $postresult['intro']; ?></textarea>
                           </div>
                         </div>
 						<div class="form-group row">
@@ -168,6 +188,20 @@
                           <label class="col-sm-3 form-control-label">Name</label>
                           <div class="col-sm-9">
                             <input type="text" name="name" class="form-control" required placeholder="Enter Your Name">
+                          </div>
+                        </div>
+						<div class="line"></div>
+						<div class="form-group row">
+                          <label class="col-sm-3 form-control-label">Phone No.</label>
+                          <div class="col-sm-9">
+                            <input type="text" name="phone" class="form-control" required placeholder="Enter Your Phone No.">
+                          </div>
+                        </div>
+						<div class="line"></div>
+						<div class="form-group row">
+                          <label class="col-sm-3 form-control-label">Email Id</label>
+                          <div class="col-sm-9">
+                            <input type="text" name="email" class="form-control" required placeholder="Enter Your Email Id">
                           </div>
                         </div>
 						<div class="line"></div>

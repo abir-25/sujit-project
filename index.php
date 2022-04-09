@@ -260,6 +260,9 @@
             $bio_name = $result['name'];
             $bio_intro = $result['intro'];
             $bio_image = $result['image'];
+            $bio_phone = $result['phone'];
+            $bio_email = $result['email'];
+
 ?> 
                                     <h1 class="title">Hi, I’m <span><?php echo $bio_name?></span><br>
 <?php } } ?>
@@ -292,6 +295,18 @@
 
                                     <div>
                                         <p class="description"><?php echo $bio_intro?></p>
+                                    </div>
+                                    <div class="bio-icon-div">
+                                        <span class="bio-icon">
+                                            <i class="fas fa-phone phone-icon"></i>
+                                        </span>                    
+                                        <span><?php echo $bio_phone?></span>
+                                    </div>
+                                    <div class="bio-icon-div">
+                                        <span class="bio-icon">
+                                            <i class="fas fa-envelope email-icon"></i>
+                                        </span>                    
+                                        <span><?php echo $bio_email?></span>
                                     </div>
                                 </div>
 
