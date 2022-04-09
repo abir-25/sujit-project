@@ -1854,20 +1854,29 @@
                 </div>
                 <div class="row mt--50 mt_md--40 mt_sm--40 mt-contact-sm">
                     <div class="col-lg-5">
+<?php
+    $query1 = "select * from tbl_bio";
+    $getData1 = $db->select($query1);
+    if($getData1)
+    {
+        while($result1 = $getData1->fetch_assoc()) 
+        {
+?>  
                         <div class="contact-about-area">
                             <div class="thumbnail">
                                 <img src="assets/images/contact/contact1.png" alt="contact-img">
                             </div>
                             <div class="title-area">
-                                <h4 class="title">Nevine Acotanza</h4>
-                                <span>Chief Operating Officer</span>
+                                <h4 class="title"><?php echo $result1['name']; ?></h4>
+                                
                             </div>
                             <div class="description">
                                 <p>I am available for freelance work. Connect with me via and call in to my account.
                                 </p>
-                                <span class="phone">Phone: <a href="tel:01941043264">+01234567890</a></span>
-                                <span class="mail">Email: <a href="mailto:admin@example.com">admin@example.com</a></span>
+                                <span class="phone">Phone: <a href="tel:<?php echo $result1['phone']; ?>"><?php echo $result1['phone']; ?></a></span>
+                                <span class="mail">Email: <a href="mailto:<?php echo $result1['email']; ?>"><?php echo $result1['email']; ?></a></span>
                             </div>
+<?php } } ?>
                             <div class="social-area">
                                 <div class="name">FIND WITH ME</div>
                                 <div class="social-icone">

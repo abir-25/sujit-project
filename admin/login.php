@@ -25,7 +25,7 @@
       {
 ?>
     <title><?php echo $result['nickname'];?>-Admin</title>
-    <link rel="shortcut icon" href="../<?php echo $result['favicon'];?>">
+    <link rel="shortcut icon" href="<?php echo $result['favicon'];?>">
 <?php } } ?>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
