@@ -75,15 +75,15 @@
                     <nav id="sideNav" class="mainmenu-nav navbar-example2 d-none d-xl-block">
                         <!-- Start Mainmanu Nav -->
                         <ul class="primary-menu nav nav-pills">
-                            <li class="nav-item"><a class="nav-link smoth-animation" href="index.php">Home</a></li>
-                            <li class="nav-item"><a class="nav-link smoth-animation" href="index.php#features">Features</a></li>
-                            <li class="nav-item"><a class="nav-link smoth-animation" href="index.php#portfolio">Portfolio</a></li>
-                            <li class="nav-item"><a class="nav-link smoth-animation" href="index.php#resume">Resume</a></li>
-                            <li class="nav-item"><a class="nav-link smoth-animation" href="index.php#testimonial">Testimonial</a></li>
-                            <li class="nav-item"><a class="nav-link smoth-animation" href="index.php#clients">Clients</a></li>
-                            <li class="nav-item"><a class="nav-link smoth-animation" href="index.php#pricing">Pricing</a></li>
-                            <li class="nav-item"><a class="nav-link smoth-animation active" href="blog.php">blog</a></li>
-                            <li class="nav-item"><a class="nav-link smoth-animation" href="index.php#contacts">Contact</a></li>
+                            <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="index.php#features">Features</a></li>
+                            <li class="nav-item"><a class="nav-link" href="index.php#portfolio">Portfolio</a></li>
+                            <li class="nav-item"><a class="nav-link" href="index.php#resume">Resume</a></li>
+                            <li class="nav-item"><a class="nav-link" href="index.php#testimonial">Testimonial</a></li>
+                            <li class="nav-item"><a class="nav-link" href="index.php#clients">Clients</a></li>
+                            <li class="nav-item"><a class="nav-link" href="index.php#pricing">Pricing</a></li>
+                            <li class="nav-item"><a class="nav-link active" href="blog.php">blog</a></li>
+                            <li class="nav-item"><a class="nav-link" href="index.php#contacts">Contact</a></li>
                         </ul>
                         <!-- End Mainmanu Nav -->
                     </nav>
@@ -133,15 +133,15 @@
             </div>
             <div class="content">
                 <ul class="primary-menu nav nav-pills">
-                    <li class="nav-item"><a class="nav-link smoth-animation" href="index.php">Home</a></li>
-                    <li class="nav-item"><a class="nav-link smoth-animation" href="index.php#features">Features</a></li>
-                    <li class="nav-item"><a class="nav-link smoth-animation" href="index.php#portfolio">Portfolio</a></li>
-                    <li class="nav-item"><a class="nav-link smoth-animation" href="index.php#resume">Resume</a></li>
-                    <li class="nav-item"><a class="nav-link smoth-animation" href="index.php#testimonial">Testimonial</a></li>
-                    <li class="nav-item"><a class="nav-link smoth-animation" href="index.php#clients">Clients</a></li>
-                    <li class="nav-item"><a class="nav-link smoth-animation" href="index.php#pricing">Pricing</a></li>
-                    <li class="nav-item"><a class="nav-link smoth-animation active" href="blog.php">blog</a></li>
-                    <li class="nav-item"><a class="nav-link smoth-animation" href="index.php#contacts">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.php#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.php#portfolio">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.php#resume">Resume</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.php#testimonial">Testimonial</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.php#clients">Clients</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.php#pricing">Pricing</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="blog.php">blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.php#contacts">Contact</a></li>
                 </ul>
                 <!-- social Media area -->
                 <div class="social-share-style-1 mt--40">
@@ -239,6 +239,171 @@
 
 
     <main class="main-page-wrapper">
+
+            <!-- Start Client Area -->
+            <div class="rn-client-area rn-section-gap section-separator mt-5" id="clients">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-title text-center">
+<?php
+    $query1 = "select * from tbl_section_title where id='7'";
+    $getData1 = $db->select($query1);
+    if($getData1)
+    {
+        while($result1 = $getData1->fetch_assoc()) 
+        {
+?>        
+                            <span class="subtitle"><?php echo $result1['subtitle']; ?></span>
+                            <h2 class="title"><?php echo $result1['title']; ?></h2>
+<?php } }?>                               
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row row--25 mt--50 mt_md--40 mt_sm--40">
+                    <div class="col-lg-4">
+                        <div class="d-flex flex-wrap align-content-start h-100">
+                            <div class="position-sticky clients-wrapper sticky-top rbt-sticky-top-adjust">
+                                <ul class="nav tab-navigation-button flex-column nav-pills me-3" id="v-pills-tab" role="tablist">
+<?php
+    $query1 = "select cat_id from tbl_blog GROUP BY cat_id limit 1";
+    $getData1 = $db->select($query1);
+    if($getData1)
+    {
+        while($result1 = $getData1->fetch_assoc()) 
+        {
+            $cat_id = $result1['cat_id'];
+
+            $query2 = "select * from tbl_category where id='$cat_id'";
+            $getData2 = $db->select($query2);
+            if($getData2)
+            {
+                while($result2 = $getData2->fetch_assoc()) 
+                {
+                    $cat = $result2['title'];
+                }
+            }
+?>  
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="v-pills-<?php echo $cat_id; ?>-tab" data-toggle="tab" href="#v-pills-<?php echo $cat_id; ?>" role="tab" aria-selected="true"><?php echo $cat; ?></a>
+                                    </li>
+<?php } } ?>
+
+<?php
+    $query3 = "select cat_id from tbl_blog where cat_id!='$cat_id' GROUP BY cat_id";
+    $getData3 = $db->select($query3);
+    if($getData3)
+    {
+        while($result3 = $getData3->fetch_assoc()) 
+        {
+            $cat_id2 = $result3['cat_id'];
+
+            $query4 = "select * from tbl_category where id='$cat_id2'";
+            $getData4 = $db->select($query4);
+            if($getData4)
+            {
+                while($result4 = $getData4->fetch_assoc()) 
+                {
+                    $cat1 = $result4['title'];
+                }
+            }
+?>  
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="v-pills-<?php echo $cat_id2; ?>-tab" data-toggle="tab" href="#v-pills-<?php echo $cat_id2; ?>" role="tab" aria-selected="true"><?php echo $cat1; ?></a>
+                                    </li>
+ <?php } } ?>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-8">
+                        <div class="tab-area">
+                            <div class="d-flex align-items-start">
+                                <div class="tab-content" id="v-pills-tabContent">
+<?php
+    $query5 = "select cat_id from tbl_blog GROUP BY cat_id limit 1";
+    $getData5 = $db->select($query5);
+    if($getData5)
+    {
+        while($result5 = $getData5->fetch_assoc()) 
+        {
+            $cat_id3 = $result5['cat_id'];
+?>  
+                                    <div class="tab-pane fade show active" id="v-pills-<?php echo $cat_id3; ?>" role="tabpanel" aria-labelledby="v-pills-<?php echo $cat_id3; ?>-tab">
+                                        <div class="client-card">
+<?php
+    $query6 = "select * from tbl_blog where cat_id='$cat_id3'";
+    $getData6 = $db->select($query6);
+    if($getData6)
+    {
+        while($result6 = $getData6->fetch_assoc()) 
+        { 
+?>
+                                            <!-- Start Single Brand  -->
+                                            <div class="main-content">
+                                                <div class="inner text-center">
+                                                    <div class="thumbnail">
+                                                        <a href="#"><img src="admin/<?php echo $result6['image']; ?>" alt="Client-image"></a>
+                                                    </div>
+                                                    <div class="seperator"></div>
+                                                    <div class="client-name"><span><a href="#"><?php echo $result6['title']; ?></a></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End Single Brand  -->
+<?php } } ?>
+                                        </div>
+                                    </div>
+<?php } } ?>
+
+<?php
+    $query7 = "select cat_id from tbl_blog where cat_id!='$cat_id3' GROUP BY cat_id";
+    $getData7 = $db->select($query7);
+    if($getData7)
+    {
+        while($result7 = $getData7->fetch_assoc()) 
+        {
+            $cat_id4 = $result7['cat_id'];
+?>  
+                                    <div class="tab-pane fade" id="v-pills-<?php echo $cat_id4; ?>" role="tabpanel" aria-labelledby="v-pills-<?php echo $cat_id4; ?>-tab">
+                                        <div class="client-card">
+
+<?php
+    $query8 = "select * from tbl_blog where cat_id='$cat_id4'";
+    $getData8 = $db->select($query8);
+    if($getData8)
+    {
+        while($result8 = $getData8->fetch_assoc()) 
+        {
+?>
+                                            <!-- Start Single Brand  -->
+                                            <div class="main-content">
+                                                <div class="inner text-center">
+                                                    <div class="thumbnail">
+                                                        <a href="#"><img src="admin/<?php echo $result8['image']; ?>" alt="Client-image"></a>
+                                                    </div>
+                                                    <div class="seperator"></div>
+                                                    <div class="client-name"><span><a href="#"><?php echo $result8['title']; ?></a></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End Single Brand  -->
+<?php } } ?>
+                                        </div>
+                                    </div>
+
+<?php } } ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End client section -->
 
         <!-- Start News Area -->
         <div class="rn-blog-area rn-section-gap section-separator" id="blog">

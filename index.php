@@ -82,7 +82,7 @@
                             <li class="nav-item"><a class="nav-link smoth-animation" href="#testimonial">Testimonial</a></li>
                             <li class="nav-item"><a class="nav-link smoth-animation" href="#clients">Clients</a></li>
                             <li class="nav-item"><a class="nav-link smoth-animation" href="#pricing">Pricing</a></li>
-                            <li class="nav-item"><a class="nav-link smoth-animation" href="#blog">blog</a></li>
+                            <li class="nav-item"><a class="nav-link" href="blog.php">blog</a></li>
                             <li class="nav-item"><a class="nav-link smoth-animation" href="#contacts">Contact</a></li>
                         </ul>
                         <!-- End Mainmanu Nav -->
@@ -140,7 +140,7 @@
                     <li class="nav-item"><a class="nav-link smoth-animation" href="#testimonial">Testimonial</a></li>
                     <li class="nav-item"><a class="nav-link smoth-animation" href="#clients">Clients</a></li>
                     <li class="nav-item"><a class="nav-link smoth-animation" href="#pricing">Pricing</a></li>
-                    <li class="nav-item"><a class="nav-link smoth-animation" href="#blog">blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.php">blog</a></li>
                     <li class="nav-item"><a class="nav-link smoth-animation" href="#contacts">Contact</a></li>
                 </ul>
                 <!-- social Media area -->
