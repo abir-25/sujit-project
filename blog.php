@@ -333,7 +333,7 @@
             $cat_id3 = $result5['cat_id'];
 ?>  
                                     <div class="tab-pane fade show active" id="v-pills-<?php echo $cat_id3; ?>" role="tabpanel" aria-labelledby="v-pills-<?php echo $cat_id3; ?>-tab">
-                                        <div class="client-card">
+                                        <div class="client-card blog-card">
 <?php
     $query6 = "select * from tbl_blog where cat_id='$cat_id3'";
     $getData6 = $db->select($query6);
@@ -341,22 +341,88 @@
     {
         while($result6 = $getData6->fetch_assoc()) 
         { 
+            $post_id = $result6['id'];
+            $post_date = $fm->formatDate($result6['post_date']);
 ?>
                                             <!-- Start Single Brand  -->
-                                            <div class="main-content">
+                                            <div class="main-content" data-toggle="modal" data-target="#blog_modal<?php echo $post_id; ?>">
                                                 <div class="inner text-center">
                                                     <div class="thumbnail">
                                                         <a href="#"><img src="admin/<?php echo $result6['image']; ?>" alt="Client-image"></a>
                                                     </div>
                                                     <div class="seperator"></div>
+                                                     <!-- <div class="category-info">
+                                                    <div class="category-list">
+                                                        <a href="javascript:void(0)"><?php // echo $cat; ?></a>
+                                                    </div>
+                                                    <div class="meta">
+                                                        <span><i class="feather-clock"></i> <?php //echo $result1['read_time']; ?> read</span>
+                                                    </div>
+                                                </div> -->
                                                     <div class="client-name"><span><a href="#"><?php echo $result6['title']; ?></a></span>
                                                     </div>
                                                 </div>
                                             </div>
                                             <!-- End Single Brand  -->
+        <!-- Modal Blog Body area Start -->
+        <div class="modal fade" id="blog_modal<?php echo $post_id; ?>" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-news" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i data-feather="x"></i></span>
+                        </button>
+                    </div>
+
+                    <!-- End of .modal-header -->
+
+                    <div class="modal-body">
+                        <img src="admin/<?php echo $result6['image']; ?>" alt="news modal" class="img-fluid modal-feat-img">
+                        <div class="news-details">
+                            <span class="date"><?php echo $post_date; ?></span>
+                            <h2 class="title"><?php echo $result6['title']; ?></h2>
+                            <p><?php echo $result6['description']; ?></p>
+                        </div>
+
+                        <!-- Comment Section Area Start -->
+                        <div class="comment-inner">
+                            <h3 class="title mb--40 mt--50">Leave a Reply</h3>
+                            <form action="#">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12 col-12">
+                                        <div class="rnform-group"><input type="text" placeholder="Name">
+                                        </div>
+                                        <div class="rnform-group"><input type="email" placeholder="Email">
+                                        </div>
+                                        <div class="rnform-group"><input type="text" placeholder="Website">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 col-12">
+                                        <div class="rnform-group">
+                                            <textarea placeholder="Comment" class="blog_textarea"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <a class="rn-btn" href="#"><span>SUBMIT NOW</span></a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- Comment Section End -->
+                    </div>
+                    <!-- End of .modal-body -->
+                </div>
+            </div>
+        </div>
+        <!-- End Modal Blog area -->
+
 <?php } } ?>
                                         </div>
                                     </div>
+
+
+        
 <?php } } ?>
 
 <?php
@@ -369,7 +435,7 @@
             $cat_id4 = $result7['cat_id'];
 ?>  
                                     <div class="tab-pane fade" id="v-pills-<?php echo $cat_id4; ?>" role="tabpanel" aria-labelledby="v-pills-<?php echo $cat_id4; ?>-tab">
-                                        <div class="client-card">
+                                        <div class="client-card blog-card">
 
 <?php
     $query8 = "select * from tbl_blog where cat_id='$cat_id4'";
@@ -378,9 +444,11 @@
     {
         while($result8 = $getData8->fetch_assoc()) 
         {
+            $post_id1 = $result8['id'];
+            $post_date1 = $fm->formatDate($result8['post_date']);
 ?>
                                             <!-- Start Single Brand  -->
-                                            <div class="main-content">
+                                            <div class="main-content" data-toggle="modal" data-target="#blog_modal<?php echo $post_id1; ?>">
                                                 <div class="inner text-center">
                                                     <div class="thumbnail">
                                                         <a href="#"><img src="admin/<?php echo $result8['image']; ?>" alt="Client-image"></a>
@@ -391,6 +459,59 @@
                                                 </div>
                                             </div>
                                             <!-- End Single Brand  -->
+
+        <!-- Modal Blog Body area Start -->
+        <div class="modal fade" id="blog_modal<?php echo $post_id1; ?>" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-news" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i data-feather="x"></i></span>
+                        </button>
+                    </div>
+
+                    <!-- End of .modal-header -->
+
+                    <div class="modal-body">
+                        <img src="admin/<?php echo $result8['image']; ?>" alt="news modal" class="img-fluid modal-feat-img">
+                        <div class="news-details">
+                            <span class="date"><?php echo $post_date1; ?></span>
+                            <h2 class="title"><?php echo $result8['title']; ?></h2>
+                            <p><?php echo $result8['description']; ?></p>
+                        </div>
+
+                        <!-- Comment Section Area Start -->
+                        <div class="comment-inner">
+                            <h3 class="title mb--40 mt--50">Leave a Reply</h3>
+                            <form action="#">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12 col-12">
+                                        <div class="rnform-group"><input type="text" placeholder="Name">
+                                        </div>
+                                        <div class="rnform-group"><input type="email" placeholder="Email">
+                                        </div>
+                                        <div class="rnform-group"><input type="text" placeholder="Website">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 col-12">
+                                        <div class="rnform-group">
+                                            <textarea placeholder="Comment" class="blog_textarea"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <a class="rn-btn" href="#"><span>SUBMIT NOW</span></a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- Comment Section End -->
+                    </div>
+                    <!-- End of .modal-body -->
+                </div>
+            </div>
+        </div>
+        <!-- End Modal Blog area -->
 <?php } } ?>
                                         </div>
                                     </div>
@@ -404,6 +525,14 @@
             </div>
         </div>
         <!-- End client section -->
+
+
+
+
+
+
+
+
 
         <!-- Start News Area -->
         <div class="rn-blog-area rn-section-gap section-separator" id="blog">

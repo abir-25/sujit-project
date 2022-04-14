@@ -84,6 +84,9 @@ textarea {
   padding: 8px 15px;
   margin: 10px 0px;
 }
+.blog_textarea{
+  margin-top: 0;
+}
 .input-field textarea {
   height: 200px;
 }

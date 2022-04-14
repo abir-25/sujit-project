@@ -15028,6 +15028,14 @@ div#featured-project-carousel {
   justify-content: center;
   padding: 30px;
 }
+.blog-card .main-content .thumbnail {
+  height: auto;
+  padding: 10px;
+}
+.blog-card .main-content .client-name {
+  padding: 10px !important;
+  text-align: left;
+}
 .client-card .main-content .thumbnail a {
   display: block;
 }
