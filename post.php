@@ -285,7 +285,7 @@
 ?>  
                                     <li class="nav-item related-post">
                                         <img src="admin/<?php echo $result1['image']; ?>" alt="" class="related-img">
-                                        <a class="nav-link" id="v-pills-<?php echo $cat_id; ?>-tab" data-toggle="tab" href="?postId=<?php echo $result1['id']; ?>"aria-selected="true"><?php echo $result1['title']; ?></a>
+                                        <a class="nav-link" href="post.php?postId=<?php echo $result1['id']; ?>"aria-selected="true"><?php echo $result1['title']; ?></a>
                                     </li>
 <?php } } ?>
 
@@ -309,7 +309,7 @@
                                 <a href="#"><img src="admin/<?php echo $resultPost['image']; ?>" alt="Client-image" class="post-image"></a>
                             </div>
                             <div class="seperator"></div>
-                            <div class="client-name"><span><a href="#"><?php echo $resultPost['title']; ?></a></span><span><i class="feather-clock"></i> <?php echo $resultPost['read_time']; ?> read</span>
+                            <div class="client-name"><span><?php echo $resultPost['title']; ?></span><span><i class="feather-clock"></i> <?php echo $resultPost['read_time']; ?> read</span>
                             </div>
                             <div class="post-details">
                             <?php echo $resultPost['description']; ?>
