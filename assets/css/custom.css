@@ -84,7 +84,7 @@ textarea {
   padding: 8px 15px;
   margin: 10px 0px;
 }
-.blog_textarea{
+.blog_textarea {
   margin-top: 0;
 }
 .input-field textarea {
@@ -261,4 +261,47 @@ textarea {
     width: 30%;
     text-align: center;
   }
+}
+.post-content {
+}
+.post-content .inner {
+}
+.post-content .inner .thumbnail {
+}
+.post-image {
+  width: 100%;
+}
+.post-content .inner .client-name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+.post-content .inner .client-name span:first-of-type {
+  font-size: 25px;
+}
+.post-content .inner .client-name span:last-of-type {
+  font-size: 15px;
+  color: var(--color-primary);
+}
+.post-details p {
+  text-align: justify;
+  font-size: 15px !important;
+}
+.post-details {
+  text-align: left;
+  font-size: 15px !important;
+}
+.related-post {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+}
+.related-post a {
+  margin: 5px 0px !important;
+}
+.related-img {
+  width: 100%;
+  border-radius: 3px;
 }

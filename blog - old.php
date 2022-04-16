@@ -331,8 +331,7 @@
         {
             $cat_id3 = $result5['cat_id'];
 ?>  
-                                    <div class="tab-pane fade show active"
-                                  role="tabpanel" aria-labelledby="v-pills-<?php echo $cat_id3; ?>-tab">
+                                    <div class="tab-pane fade show active" id="v-pills-<?php echo $cat_id3; ?>" role="tabpanel" aria-labelledby="v-pills-<?php echo $cat_id3; ?>-tab">
                                         <div class="client-card blog-card">
 <?php
     $query6 = "select * from tbl_blog where cat_id='$cat_id3'";
@@ -348,10 +347,10 @@
                                             <div class="main-content" data-toggle="modal" data-target="#blog_modal<?php echo $post_id; ?>">
                                                 <div class="inner text-center">
                                                     <div class="thumbnail">
-                                                        <a href="post.php?postId=<?php echo $result6['id']; ?>"><img src="admin/<?php echo $result6['image']; ?>" alt="Client-image"></a>
+                                                        <a href="#"><img src="admin/<?php echo $result6['image']; ?>" alt="Client-image"></a>
                                                     </div>
                                                     <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="post.php?postId=<?php echo $result6['id']; ?>"><?php echo $result6['title']; ?></a></span>
+                                                    <div class="client-name"><span><a href="#"><?php echo $result6['title']; ?></a></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -454,10 +453,10 @@
                                             <div class="main-content" data-toggle="modal" data-target="#blog_modal<?php echo $post_id1; ?>">
                                                 <div class="inner text-center">
                                                     <div class="thumbnail">
-                                                        <a href="post.php?postId=<?php echo $result8['id']; ?>"><img src="admin/<?php echo $result8['image']; ?>" alt="Client-image"></a>
+                                                        <a href="#"><img src="admin/<?php echo $result8['image']; ?>" alt="Client-image"></a>
                                                     </div>
                                                     <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="post.php?postId=<?php echo $result8['id']; ?>"><?php echo $result8['title']; ?></a></span>
+                                                    <div class="client-name"><span><a href="#"><?php echo $result8['title']; ?></a></span>
                                                     </div>
                                                 </div>
                                             </div>

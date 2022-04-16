@@ -27,6 +27,7 @@
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta property="fb:app_id" content="{YOUR_APP_ID}" />
     <!-- Favicon -->
     
     <!-- CSS 
@@ -238,7 +239,16 @@
 
 
     <main class="main-page-wrapper">
-
+<?php
+	if(!isset($_GET['postId']) || $_GET['postId'] == NULL)
+	{
+		echo "<script>window.location = 'blog.php'; </script>";
+	}
+	else
+	{
+		$postId = $_GET['postId'];
+	}
+?>
             <!-- Start Client Area -->
             <div class="rn-client-area rn-section-gap mt-5" id="clients">
             <div class="container">
@@ -257,61 +267,27 @@
                             <h2 class="title"><?php echo $result1['title']; ?></h2>
 <?php } }?>            
 
+                        </div>
                     </div>
                 </div>
-
                 <div class="row row--25 mt--50 mt_md--40 mt_sm--40">
                     <div class="col-lg-3">
                         <div class="d-flex flex-wrap align-content-start h-100">
                             <div class="position-sticky clients-wrapper sticky-top rbt-sticky-top-adjust" style="padding-right: -17px; margin-right: 17px;">
-                                <ul class="nav tab-navigation-button flex-column nav-pills me-3" id="v-pills-tab" role="tablist">
+                                <ul class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist">
 <?php
-    $query1 = "select cat_id from tbl_blog GROUP BY cat_id limit 1";
+    $query1 = "select * from tbl_blog where id!='$postId' and cat_id = (select cat_id from tbl_blog where id='$postId') limit 5";
     $getData1 = $db->select($query1);
     if($getData1)
     {
         while($result1 = $getData1->fetch_assoc()) 
         {
-            $cat_id = $result1['cat_id'];
-
-            $query2 = "select * from tbl_category where id='$cat_id'";
-            $getData2 = $db->select($query2);
-            if($getData2)
-            {
-                while($result2 = $getData2->fetch_assoc()) 
-                {
-                    $cat = $result2['title'];
-                }
-            }
 ?>  
-                                    <li class="nav-item">
-                                        <a class="nav-link active" id="v-pills-<?php echo $cat_id; ?>-tab" data-toggle="tab" href="#v-pills-<?php echo $cat_id; ?>" role="tab" aria-selected="true"><?php echo $cat; ?></a>
+                                    <li class="nav-item related-post">
+                                        <img src="admin/<?php echo $result1['image']; ?>" alt="" class="related-img">
+                                        <a class="nav-link" id="v-pills-<?php echo $cat_id; ?>-tab" data-toggle="tab" href="?postId=<?php echo $result1['id']; ?>"aria-selected="true"><?php echo $result1['title']; ?></a>
                                     </li>
 <?php } } ?>
-
-<?php
-    $query3 = "select cat_id from tbl_blog where cat_id!='$cat_id' GROUP BY cat_id";
-    $getData3 = $db->select($query3);
-    if($getData3)
-    {
-        while($result3 = $getData3->fetch_assoc()) 
-        {
-            $cat_id2 = $result3['cat_id'];
-
-            $query4 = "select * from tbl_category where id='$cat_id2'";
-            $getData4 = $db->select($query4);
-            if($getData4)
-            {
-                while($result4 = $getData4->fetch_assoc()) 
-                {
-                    $cat1 = $result4['title'];
-                }
-            }
-?>  
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="v-pills-<?php echo $cat_id2; ?>-tab" data-toggle="tab" href="#v-pills-<?php echo $cat_id2; ?>" role="tab" aria-selected="true"><?php echo $cat1; ?></a>
-                                    </li>
- <?php } } ?>
 
                                 </ul>
                             </div>
@@ -319,220 +295,28 @@
                     </div>
 
                     <div class="col-lg-9">
-                        <div class="tab-area">
-                            <div class="d-flex align-items-start">
-                                <div class="tab-content" id="v-pills-tabContent">
-<?php
-    $query5 = "select cat_id from tbl_blog GROUP BY cat_id limit 1";
-    $getData5 = $db->select($query5);
-    if($getData5)
+ <?php
+    $queryPost = "select * from tbl_blog where id='$postId'";
+    $getDataPost = $db->select($queryPost);
+    if($getDataPost)
     {
-        while($result5 = $getData5->fetch_assoc()) 
+        while($resultPost = $getDataPost->fetch_assoc()) 
         {
-            $cat_id3 = $result5['cat_id'];
-?>  
-                                    <div class="tab-pane fade show active"
-                                  role="tabpanel" aria-labelledby="v-pills-<?php echo $cat_id3; ?>-tab">
-                                        <div class="client-card blog-card">
-<?php
-    $query6 = "select * from tbl_blog where cat_id='$cat_id3'";
-    $getData6 = $db->select($query6);
-    if($getData6)
-    {
-        while($result6 = $getData6->fetch_assoc()) 
-        { 
-            $post_id = $result6['id'];
-            $post_date = $fm->formatDate($result6['post_date']);
 ?>
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content" data-toggle="modal" data-target="#blog_modal<?php echo $post_id; ?>">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="post.php?postId=<?php echo $result6['id']; ?>"><img src="admin/<?php echo $result6['image']; ?>" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="post.php?postId=<?php echo $result6['id']; ?>"><?php echo $result6['title']; ?></a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-        <!-- Modal Blog Body area Start -->
-        <div class="modal fade" id="blog_modal<?php echo $post_id; ?>" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-news" role="document">
-                <div class="modal-content">
-
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true"><i data-feather="x"></i></span>
-                        </button>
-                    </div>
-
-                    <!-- End of .modal-header -->
-
-                    <div class="modal-body">
-                        <img src="admin/<?php echo $result6['image']; ?>" alt="news modal" class="img-fluid modal-feat-img">
-                        <div class="news-details">
-                            <span class="date"><?php echo $post_date; ?></span>
-                            <h2 class="title"><?php echo $result6['title']; ?></h2>
-                            <p><?php echo $result6['description']; ?></p>
-                        </div>
-
-                        <div id="disqus_thread"></div>
-                        <script>
-                            (function() { // DON'T EDIT BELOW THIS LINE
-                            var d = document, s = d.createElement('script');
-                            s.src = 'https://sujitbarua.disqus.com/embed.js';
-                            s.setAttribute('data-timestamp', +new Date());
-                            (d.head || d.body).appendChild(s);
-                            })();
-                        </script>
-                        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-                        <!-- <div id="disqus_thread"></div> -->
-                        <!-- Comment Section Area Start -->
-                        <!-- <div class="comment-inner">
-                            <h3 class="title mb--40 mt--50">Leave a Reply</h3>
-                            <form action="#">
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-12 col-12">
-                                        <div class="rnform-group"><input type="text" placeholder="Name">
-                                        </div>
-                                        <div class="rnform-group"><input type="email" placeholder="Email">
-                                        </div>
-                                        <div class="rnform-group"><input type="text" placeholder="Website">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-12 col-12">
-                                        <div class="rnform-group">
-                                            <textarea placeholder="Comment" class="blog_textarea"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <a class="rn-btn" href="#"><span>SUBMIT NOW</span></a>
-                                    </div>
-                                </div>
-                            </form>
-                        </div> -->
-                        <!-- Comment Section End -->
-                    </div>
-                    <!-- End of .modal-body -->
-                </div>
-            </div>
-        </div>
-        <!-- End Modal Blog area -->
-
-<?php } } ?>
-                                        </div>
-                                    </div>
-
-
-        
-<?php } } ?>
-
-<?php
-    $query7 = "select cat_id from tbl_blog where cat_id!='$cat_id3' GROUP BY cat_id";
-    $getData7 = $db->select($query7);
-    if($getData7)
-    {
-        while($result7 = $getData7->fetch_assoc()) 
-        {
-            $cat_id4 = $result7['cat_id'];
-?>  
-                                    <div class="tab-pane fade" id="v-pills-<?php echo $cat_id4; ?>" role="tabpanel" aria-labelledby="v-pills-<?php echo $cat_id4; ?>-tab">
-                                        <div class="client-card blog-card">
-
-<?php
-    $query8 = "select * from tbl_blog where cat_id='$cat_id4'";
-    $getData8 = $db->select($query8);
-    if($getData8)
-    {
-        while($result8 = $getData8->fetch_assoc()) 
-        {
-            $post_id1 = $result8['id'];
-            $post_date1 = $fm->formatDate($result8['post_date']);
-?>
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content" data-toggle="modal" data-target="#blog_modal<?php echo $post_id1; ?>">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="post.php?postId=<?php echo $result8['id']; ?>"><img src="admin/<?php echo $result8['image']; ?>" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="post.php?postId=<?php echo $result8['id']; ?>"><?php echo $result8['title']; ?></a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-        <!-- Modal Blog Body area Start -->
-        <div class="modal fade" id="blog_modal<?php echo $post_id1; ?>" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-news" role="document">
-                <div class="modal-content">
-
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true"><i data-feather="x"></i></span>
-                        </button>
-                    </div>
-
-                    <!-- End of .modal-header -->
-
-                    <div class="modal-body">
-                        <img src="admin/<?php echo $result8['image']; ?>" alt="news modal" class="img-fluid modal-feat-img">
-                        <div class="news-details">
-                            <span class="date"><?php echo $post_date1; ?></span>
-                            <h2 class="title"><?php echo $result8['title']; ?></h2>
-                            <p><?php echo $result8['description']; ?></p>
-                        </div>
-
-                        <div id="disqus_thread"></div>
-                        <script>
-                            (function() { // DON'T EDIT BELOW THIS LINE
-                            var d = document, s = d.createElement('script');
-                            s.src = 'https://sujitbarua.disqus.com/embed.js';
-                            s.setAttribute('data-timestamp', +new Date());
-                            (d.head || d.body).appendChild(s);
-                            })();
-                        </script>
-                        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-                        <!-- Comment Section Area Start -->
-                        <!-- <div class="comment-inner">
-                            <h3 class="title mb--40 mt--50">Leave a Reply</h3>
-                            <form action="#">
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-12 col-12">
-                                        <div class="rnform-group"><input type="text" placeholder="Name">
-                                        </div>
-                                        <div class="rnform-group"><input type="email" placeholder="Email">
-                                        </div>
-                                        <div class="rnform-group"><input type="text" placeholder="Website">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-12 col-12">
-                                        <div class="rnform-group">
-                                            <textarea placeholder="Comment" class="blog_textarea"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <a class="rn-btn" href="#"><span>SUBMIT NOW</span></a>
-                                    </div>
-                                </div>
-                            </form>
-                        </div> -->
-                        <!-- Comment Section End -->
-                    </div>
-                    <!-- End of .modal-body -->
-                </div>
-            </div>
-        </div>
-        <!-- End Modal Blog area -->
-<?php } } ?>
-                                        </div>
-                                    </div>
-
-<?php } } ?>
-                                </div>
+                    <div class="main-content post-content">
+                        <div class="inner text-center">
+                            <div class="thumbnail">
+                                <a href="#"><img src="admin/<?php echo $resultPost['image']; ?>" alt="Client-image" class="post-image"></a>
+                            </div>
+                            <div class="seperator"></div>
+                            <div class="client-name"><span><a href="#"><?php echo $resultPost['title']; ?></a></span><span><i class="feather-clock"></i> <?php echo $resultPost['read_time']; ?> read</span>
+                            </div>
+                            <div class="post-details">
+                            <?php echo $resultPost['description']; ?>
                             </div>
                         </div>
+                    </div>
+<?php } } ?>
                     </div>
                 </div>
             </div>
